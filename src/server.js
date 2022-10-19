@@ -6,7 +6,7 @@ import { routes } from "#Routes/api";
 import DB from "#Class/database";
 
 const app = express();
-
+app.use(express.json());
 routes(app);
 // let db = new DB();
 // db.Connect();
