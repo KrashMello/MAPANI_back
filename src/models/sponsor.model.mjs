@@ -2,7 +2,7 @@ import Model from "#Class/model";
 
 import dbpg from "#Class/database";
 
-export default class receptionAgenda extends Model {
+export default class Sponsor extends Model {
   //the constructor
   constructor() {
     super();
