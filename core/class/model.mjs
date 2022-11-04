@@ -62,10 +62,10 @@ export default class Model {
   }
 
   updated(_callback) {
-    this.routes("/:code", "update", "PUT", _callback);
+    this.routes("/", "update", "PUT", _callback);
   }
 
   delete(_callback) {
-    this.routes("/:code", "delete", "DELETE", _callback);
+    this.routes("/", "delete", "DELETE", _callback);
   }
 }

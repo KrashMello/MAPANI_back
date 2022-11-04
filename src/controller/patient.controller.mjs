@@ -15,7 +15,20 @@ model.get(async (_req, res) => {
   await DB.select("*", "apatient")
     .then((response) => {
       res.json(
-          response.rows
+          response.rows.map(value =>{
+            value.disabilityTypes = {
+            motor: value.motor,
+            visual: value.visual,
+            cognitive: value.cognitive,
+            auditive: value.auditive,
+        }
+        delete value.motor
+        delete value.visual
+        delete value.cognitive
+        delete value.auditive
+
+        return value
+        })
       );
     })
     .catch((error) => {
@@ -44,17 +57,18 @@ model.created(async (_req, res) => {
 
   let requestValues = _req.body.params;
   let queryOptions = [
-    "'" + requestValues.code + "'::character varying",
+    requestValues.code !== null ? "'" + requestValues.code + "'::character varying" : "NULL::character varying",
     "'" + requestValues.firstName + "'::character varying",
     "'" + requestValues.lastName + "'::character varying",
     "'" + requestValues.bornDate + "'::DATE",
     "'" + requestValues.genderCode + "'::character varying",
-    "'" + requestValues.birthCertificate + "'::boolean",
-    "'" + requestValues.disability + "'::boolean",
-    "'" + requestValues.disabilityTypes + "'::character varying[]",
+    requestValues.birthCertificate + "::boolean",
+    requestValues.disability + "::boolean",
+    requestValues.disabilityTypes.motor + "::boolean",
+    requestValues.disabilityTypes.visual + "::boolean",
+    requestValues.disabilityTypes.cognitive + "::boolean",
+    requestValues.disabilityTypes.auditive + "::boolean",
   ];
-  
-  // res.json(queryOptions)
   await DB.call("add_patient", queryOptions.toString())
     .then((response) => {
       res
@@ -75,7 +89,33 @@ model.created(async (_req, res) => {
  *
  */
 model.updated(async (_req, res) => {
-  await res.json("update an model");
+  let requestValues = _req.body.params;
+  let queryOptions = [
+    requestValues.code !== null ? "'" + requestValues.code + "'::character varying" : "NULL::character varying",
+    "'" + requestValues.firstName + "'::character varying",
+    "'" + requestValues.lastName + "'::character varying",
+    "'" + requestValues.bornDate + "'::DATE",
+    "'" + requestValues.genderCode + "'::character varying",
+    requestValues.birthCertificate + "::boolean",
+    requestValues.disability + "::boolean",
+    requestValues.disabilityTypes.motor + "::boolean",
+    requestValues.disabilityTypes.visual + "::boolean",
+    requestValues.disabilityTypes.cognitive + "::boolean",
+    requestValues.disabilityTypes.auditive + "::boolean",
+  ];
+  await DB.call("update_patient", queryOptions.toString())
+    .then((response) => {
+      res
+        .status(200)
+        .json({ status: "success", message: "paciente actualizado exitosamente" });
+    })
+    .catch((error) => {
+      console.log(error);
+      res
+        .status(401)
+        .json({ status: "error", message: "Ah ocurrido un error!! " });
+     });
+
 });
 
 /**
