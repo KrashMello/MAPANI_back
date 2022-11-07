@@ -56,7 +56,7 @@ user.created(async (_req, res) => {
     requestValues.advocacy,
     requestValues.socialPsychology,
     requestValues.clinicalPsychology,
-    requestValues.clinicHistroryCode === null ? "NULL::character varying" : "'" + requestValues.clinicHistroryCode + "'::character varying",
+    requestValues.clinicHistoryCode === null ? "NULL::character varying" : "'" + requestValues.clinicHistroryCode + "'::character varying",
     "'" + requestValues.representativeFirstName + "'::character varying",
     "'" + requestValues.representativeLastName + "'::character varying",
     "'" + requestValues.representativeNumberPhone + "'::character varying",
@@ -65,8 +65,8 @@ user.created(async (_req, res) => {
     "'" + requestValues.patientLastName + "'::character varying",
     "'" + requestValues.patientBornDate + "'::DATE",
   ];
-  
-  // res.json(queryOptions)
+  // console.log(requestValues)
+  // console.log(queryOptions)
   await DB.call("add_appointment", queryOptions.toString())
     .then((response) => {
       res
@@ -130,19 +130,19 @@ user.updated(async (_req, res) => {
     requestValues.status
   ];
   
-  // res.json(queryOptions)
-  await DB.call("update_appointment", queryOptions.toString())
-    .then((response) => {
-      res
-        .status(200)
-        .json({ status: "success", message: "Cita agregada exitosamente" });
-    })
-    .catch((error) => {
-      console.log(error);
-      res
-        .status(401)
-        .json({ status: "error", message: "Ah ocurrido un error!! " });
-    });
+  console.log(queryOptions)
+  // await DB.call("update_appointment", queryOptions.toString())
+  //   .then((response) => {
+  //     res
+  //       .status(200)
+  //       .json({ status: "success", message: "Cita agregada exitosamente" });
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //     res
+  //       .status(401)
+  //       .json({ status: "error", message: "Ah ocurrido un error!! " });
+  //   });
 
 });
 

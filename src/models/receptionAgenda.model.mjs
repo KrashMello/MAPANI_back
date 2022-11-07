@@ -7,7 +7,7 @@ export default class receptionAgenda extends Model {
   constructor() {
     super();
     this.DB = new dbpg();
-    this.middelwareExepction = ["get","create"];
+    this.middelwareExepction = ["get","create","update"];
   }
   
 }
