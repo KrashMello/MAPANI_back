@@ -11,8 +11,9 @@ const user = new receptionAgenga();
  *
  *
  */
+// , '"aggregateIn" = date (now())'
 user.get(async (_req, res) => {
-  await DB.select("*", "appointment", '"aggregateIn" = date (now())')
+  await DB.select("*", "appointment")
     .then((response) => {
       res.json(
           response.rows
@@ -111,7 +112,8 @@ user.updated(async (_req, res) => {
   let requestValues = _req.body.params;
   let queryOptions = [
     "'" + requestValues.code + "'::character varying",
-    "'" + requestValues.appointmentDate + "'::character varying",
+    "'" + requestValues.projectCode + "'::character varying",
+    "'" + requestValues.appointmentDate + "'::DATE",
     requestValues.pediatrics,
     requestValues.nutritionist,
     requestValues.psychiatry,
@@ -119,7 +121,7 @@ user.updated(async (_req, res) => {
     requestValues.advocacy,
     requestValues.socialPsychology,
     requestValues.clinicalPsychology,
-    requestValues.clinicHistroryCode === null ? "NULL::character varying" : "'" + requestValues.clinicHistroryCode + "'::character varying",
+    requestValues.clinicHistoryCode === null ? "NULL::character varying" : "'" + requestValues.clinicHistroryCode + "'::character varying",
     "'" + requestValues.representativeFirstName + "'::character varying",
     "'" + requestValues.representativeLastName + "'::character varying",
     "'" + requestValues.representativeNumberPhone + "'::character varying",
@@ -130,19 +132,19 @@ user.updated(async (_req, res) => {
     requestValues.status
   ];
   
-  console.log(queryOptions)
-  // await DB.call("update_appointment", queryOptions.toString())
-  //   .then((response) => {
-  //     res
-  //       .status(200)
-  //       .json({ status: "success", message: "Cita agregada exitosamente" });
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //     res
-  //       .status(401)
-  //       .json({ status: "error", message: "Ah ocurrido un error!! " });
-  //   });
+  // console.log(queryOptions)
+  await DB.call("update_appointment", queryOptions.toString())
+    .then((response) => {
+      res
+        .status(200)
+        .json({ status: "success", message: "Cita agregada exitosamente" });
+    })
+    .catch((error) => {
+      console.log(error);
+      res
+        .status(401)
+        .json({ status: "error", message: "Ah ocurrido un error!! " });
+    });
 
 });
 
