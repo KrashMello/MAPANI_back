@@ -7,7 +7,7 @@ export default class Users extends Model {
   constructor() {
     super();
     this.DB = new dbpg();
-    this.middelwareExepction = ["get"];
+    this.middelwareExepction = ["get","create","update"];
   }
   //method for search a user in the data base
   async findOne(username) {
