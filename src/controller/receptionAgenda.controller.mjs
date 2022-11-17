@@ -1,36 +1,44 @@
 import receptionAgenga from "#Models/receptionAgenda";
-// import { userRequestValidate } from "#Request/users";
+// import { modelRequestValidate } from "#Request/users";
 import dbpg from "#Class/database";
 // import bcrypt from "bcrypt";
 
 const DB = new dbpg();
-const user = new receptionAgenga();
+const model = new receptionAgenga();
 
 /**
  * metodo optener usuario
  *
  *
  */
-// , '"aggregateIn" = date (now())'
-user.get(async (_req, res) => {
-  await DB.select("*", "appointment")
-    .then((response) => {
-      res.json(
-          response.rows
-      );
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(401).json({ error: "Ah ocurrido un error!! " });
-    });
-});
+function socketRoutes(io,socket){
+  model.io(socket,async (socket)=>{
+    let searchOption = {
+      code : ''
+    }
+      socket.on("getAppointment",async (msj)=>{
+        let resp
+        resp = await DB.select("*", "view_appointment")
+        socket.emit('getAppointment',resp)
+      })
+      socket.on("searchAppointment",(data) =>{
+        searchOption = data
+      })
+      setInterval(async () => {
+        await DB.select("*", "view_appointment",`code like '%${searchOption.code}%'`).then(re =>{
+        io.to(socket.id).emit("getAppointment",re)
+      })
+      }, 10000);
+      
+  })
+}
 
 /**
  * metodo crear usuario
  *
  *
  */
-user.created(async (_req, res) => {
+model.created(async (_req, res) => {
 //   CALL public.add_appointment(
 // 	<_pediatrics boolean>, 
 // 	<_nutritionist boolean>, 
@@ -77,7 +85,7 @@ user.created(async (_req, res) => {
     .catch((error) => {
       console.log(error);
       res
-        .status(401)
+        .status(400)
         .json({ status: "error", message: "Ah ocurrido un error!! " });
     });
 });
@@ -87,7 +95,7 @@ user.created(async (_req, res) => {
  *
  *
  */
-user.updated(async (_req, res) => {
+model.updated(async (_req, res) => {
 //   CALL public.update_appointment(
 // 	<_code character varying>, 
 // 	<"_appointmentDate" date>, 
@@ -153,7 +161,12 @@ user.updated(async (_req, res) => {
  *
  *
  */
-user.delete(async (_req, res) => {
-  await res.json("delete an user");
+model.delete(async (_req, res) => {
+  await res.json("delete an model");
 });
-export default user.router();
+let apiRoutes = model.router()
+
+export {
+  apiRoutes,
+  socketRoutes
+}

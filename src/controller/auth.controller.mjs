@@ -6,9 +6,19 @@ import bcrypt from "bcrypt";
 
 const DB = new dbpg();
 const user = new Users();
-const auth = new Auth();
+const model = new Auth();
 
-auth.singIn(async (req, response) => {
+function socketRoutes(socket){
+  model.io(socket,(socket)=>{
+      socket.on("getMessage",async (msj)=>{
+        msj = await DB.select("*", "view_users")
+        socket.emit('getMessage',msj)
+      })
+  })
+}
+
+
+model.singIn(async (req, response) => {
   let validate = userRequestValidate.getResult(req.query);
   if (validate.status === "ok" && req.query.token) {
     let ip = req.header("x-forwarded-for") || req.ip;
@@ -40,4 +50,9 @@ auth.singIn(async (req, response) => {
   }
 });
 
-export default auth.router();
+let apiRoutes = model.router()
+
+export {
+  apiRoutes,
+  socketRoutes
+}

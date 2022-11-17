@@ -4,33 +4,29 @@ import dbpg from "#Class/database";
 import bcrypt from "bcrypt";
 
 const DB = new dbpg();
-const user = new Users();
+const model = new Users();
+
 
 /**
  * metodo optener usuario
  *
  *
- */
-user.get((_req, res) => {
-  await DB.select("*", "view_users")
-    .then((response) => {
-      res.json(
-          response.rows
-      );
+ */ 
+function socketRoutes(socket){
+  model.io(socket,(socket)=>{
+      socket.on("getMessage",async (msj)=>{
+        msj = await DB.select("*", "view_users")
+        socket.emit('getMessage',msj)
+      })
     })
-    .catch((error) => {
-      console.log(error);
-      res.status(401).json({ error: "Ah ocurrido un error!! " });
-    });
-
-});
+}
 
 /**
  * metodo mostrar detalles del usuario
  *
  *
  */
-user.showDetails((_req, res) => {
+model.showDetails((_req, res) => {
   res.type("json").json({ name: "joel", nickname: "krashmello" });
 });
 
@@ -39,7 +35,7 @@ user.showDetails((_req, res) => {
  *
  *
  */
-user.created(async (_req, response) => {
+model.created(async (_req, response) => {
 // CALL public.add_sponsor(
 // 	<_code character varying>, 
 // 	<_name character varying>, 
@@ -76,7 +72,7 @@ user.created(async (_req, response) => {
  *
  *
  */
-user.updated(async (_req, res) => {
+model.updated(async (_req, res) => {
   await res.json("update an user");
 });
 
@@ -85,7 +81,13 @@ user.updated(async (_req, res) => {
  *
  *
  */
-user.delete(async (_req, res) => {
+model.delete(async (_req, res) => {
   await res.json("delete an user");
 });
-export default user.router();
+
+let apiRoutes = model.router()
+
+export {
+  apiRoutes,
+  socketRoutes
+}

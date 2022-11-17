@@ -11,31 +11,40 @@ const model = new Patient();
  *
  *
  */
-model.get(async (_req, res) => {
-  await DB.select("*", "apatient")
-    .then((response) => {
-      res.json(
-          response.rows.map(value =>{
-            value.disabilityTypes = {
-            motor: value.motor,
-            visual: value.visual,
-            cognitive: value.cognitive,
-            auditive: value.auditive,
-        }
-        delete value.motor
-        delete value.visual
-        delete value.cognitive
-        delete value.auditive
+function socketRoutes(socket){
+  model.io(socket,(socket)=>{
+      socket.on("getMessage",async (msj)=>{
+        msj = await DB.select("*", "view_users")
+        socket.emit('getMessage',msj)
+      })
+  })
+}
 
-        return value
-        })
-      );
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(401).json({ error: "Ah ocurrido un error!! " });
-    });
-});
+// model.get(async (_req, res) => {
+//   await DB.select("*", "apatient")
+//     .then((response) => {
+//       res.json(
+//           response.rows.map(value =>{
+//             value.disabilityTypes = {
+//             motor: value.motor,
+//             visual: value.visual,
+//             cognitive: value.cognitive,
+//             auditive: value.auditive,
+//         }
+//         delete value.motor
+//         delete value.visual
+//         delete value.cognitive
+//         delete value.auditive
+
+//         return value
+//         })
+//       );
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       res.status(401).json({ error: "Ah ocurrido un error!! " });
+//     });
+// });
 
 /**
  * metodo crear usuario
@@ -126,4 +135,9 @@ model.updated(async (_req, res) => {
 model.delete(async (_req, res) => {
   await res.json("delete an model");
 });
-export default model.router();
+let apiRoutes = model.router()
+
+export {
+  apiRoutes,
+  socketRoutes
+}

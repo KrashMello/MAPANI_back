@@ -11,19 +11,14 @@ const model = new Project();
  *
  *
  */
-model.get(async (_req, res) => {
-  await DB.select("*", "aproject")
-    .then((response) => {
-      res.json(
-          response.rows
-      );
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(401).json({ error: "Ah ocurrido un error!! " });
-    });
-});
-
+function socketRoutes(socket){
+  model.io(socket,(socket)=>{
+      socket.on("getMessage",async (msj)=>{
+        msj = await DB.select("*", "view_users")
+        socket.emit('getMessage',msj)
+      })
+  })
+}
 /**
  * metodo crear usuario
  *
@@ -87,4 +82,9 @@ model.updated(async (_req, res) => {
 model.delete(async (_req, res) => {
   await res.json("delete an model");
 });
-export default model.router();
+let apiRoutes = model.router()
+
+export {
+  apiRoutes,
+  socketRoutes
+}

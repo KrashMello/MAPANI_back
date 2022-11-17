@@ -10,17 +10,31 @@ const model = new Gender();
  * metodo obtener generos
  *
  */
-model.get(async (_req, res) => {
-  await DB.select("*", "agender")
-    .then((response) => {
-      res.json(
-          response.rows
-      );
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(401).json({ error: "Ah ocurrido un error!! " });
-    });
-});
+function socketRoutes(socket){
+  user.io(socket,(socket)=>{
+      socket.on("getMessage",async (msj)=>{
+        msj = await DB.select("*", "view_users")
+        socket.emit('getMessage',msj)
+      })
+  })
+}
 
-export default model.router();
+// model.get(async (_req, res) => {
+//   await DB.select("*", "agender")
+//     .then((response) => {
+//       res.json(
+//           response.rows
+//       );
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       res.status(401).json({ error: "Ah ocurrido un error!! " });
+//     });
+// });
+
+let apiRoutes = model.router()
+
+export {
+  apiRoutes,
+  socketRoutes
+}

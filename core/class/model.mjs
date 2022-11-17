@@ -10,35 +10,35 @@ export default class Model {
   router() {
     return this.app;
   }
-  routes(url, routeName, method, _callback) {
+  routes(url, routeName, method, funct) {
     if (
       typeof url === "string" &&
       typeof routeName === "string" &&
       typeof method === "string" &&
-      typeof _callback === "function"
+      typeof funct === "function"
     ) {
       const HASMIDDELWARE = this.hasMiddelware(routeName);
-      let route = this.app.get("/", _callback);
+      let route = this.app.get("/", funct);
       switch (method) {
         case "GET":
           route = HASMIDDELWARE
-            ? this.app.get(url, this.verifyToken, _callback)
-            : this.app.get(url, _callback);
+            ? this.app.get(url, this.verifyToken, funct)
+            : this.app.get(url, funct);
           break;
         case "POST":
           route = HASMIDDELWARE
-            ? this.app.post(url, this.verifyToken, _callback)
-            : this.app.post(url, _callback);
+            ? this.app.post(url, this.verifyToken, funct)
+            : this.app.post(url, funct);
           break;
         case "PUT":
           route = HASMIDDELWARE
-            ? this.app.put(url, this.verifyToken, _callback)
-            : this.app.put(url, _callback);
+            ? this.app.put(url, this.verifyToken, funct)
+            : this.app.put(url, funct);
           break;
         case "DELETE":
           route = HASMIDDELWARE
-            ? this.app.delete(url, this.verifyToken, _callback)
-            : this.app.delete(url, _callback);
+            ? this.app.delete(url, this.verifyToken, funct)
+            : this.app.delete(url, funct);
           break;
       }
       return route;
@@ -46,26 +46,26 @@ export default class Model {
   }
 
   hasMiddelware(type) {
-    let result = true;
-    this.middelwareExepction.map((value) => {
-      result = value === type ? false : true;
-    });
-    return result;
+    return this.middelwareExepction.filter((value) => value === type).length > 0 ? false : true;
   }
 
-  get(_callback) {
-    this.routes("/", "get", "GET", _callback);
+  get(funct) {
+    this.routes("/", "get", "GET", funct);
   }
 
-  created(_callback) {
-    this.routes("/", "create", "POST", _callback);
+  created(funct) {
+    this.routes("/", "create", "POST", funct);
   }
 
-  updated(_callback) {
-    this.routes("/", "update", "PUT", _callback);
+  updated(funct) {
+    this.routes("/", "update", "PUT", funct);
   }
 
-  delete(_callback) {
-    this.routes("/", "delete", "DELETE", _callback);
+  delete(funct) {
+    this.routes("/", "delete", "DELETE", funct);
+  }
+
+  io(socket,callback){
+    callback(socket)
   }
 }
