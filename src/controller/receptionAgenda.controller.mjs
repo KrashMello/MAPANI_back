@@ -14,10 +14,14 @@ const model = new receptionAgenga();
 function socketRoutes(io,socket){
   model.io(socket,async (socket)=>{
     let searchOption = {
-      code : ''
+      code : '',
+      representativeFirstName: '',
+      representativeLastName : '',
+      patientFirstName: '',
+      patientLastName: '',
+      appointmentDate: '',
     }
-      socket.on("getAppointment",async (msj)=>{
-        let resp
+      socket.on("getAppointment",async (resp)=>{
         resp = await DB.select("*", "view_appointment")
         socket.emit('getAppointment',resp)
       })
@@ -25,7 +29,7 @@ function socketRoutes(io,socket){
         searchOption = data
       })
       setInterval(async () => {
-        await DB.select("*", "view_appointment",`code like '%${searchOption.code}%'`).then(re =>{
+        await DB.select("*", "view_appointment",`code like '%${searchOption.code}%' and "representativeFirstName" like '%${searchOption.representativeFirstName}%' and "representativeLastName" like '%${searchOption.representativeLastName}%' and "patientFirstName" like '%${searchOption.patientFirstName}%' and "patientLastName" like '%${searchOption.patientLastName}%' and "patientBornDate"::character varying like '%${searchOption.appointmentDate}%'`).then(re =>{
         io.to(socket.id).emit("getAppointment",re)
       })
       }, 10000);
