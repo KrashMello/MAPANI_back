@@ -30,7 +30,7 @@ function socketRoutes(io,socket){
       })
       setInterval(async () => {
         await DB.select("*", "view_appointment",`code like '%${searchOption.code}%' and "representativeFirstName" like '%${searchOption.representativeFirstName}%' and "representativeLastName" like '%${searchOption.representativeLastName}%' and "patientFirstName" like '%${searchOption.patientFirstName}%' and "patientLastName" like '%${searchOption.patientLastName}%' and "patientBornDate"::character varying like '%${searchOption.appointmentDate}%'`).then(re =>{
-        io.to(socket.id).emit("getAppointment",re)
+        io.to(socket.id).emit("getAppointments",re)
       })
       }, 10000);
       

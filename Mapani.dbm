@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.4" use-changelog="false" last-position="0,0" last-zoom="1" max-obj-count="57"
+<dbmodel pgmodeler-ver="0.9.4" use-changelog="false" last-position="0,0" last-zoom="1" max-obj-count="76"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -55,13 +55,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="character varying" length="30"/>
 	</column>
 	<column name="password">
-		<type name="character varying" length="60"/>
+		<type name="character varying" length="150"/>
 	</column>
 	<column name="email" not-null="true">
-		<type name="character varying" length="60"/>
+		<type name="character varying" length="150"/>
 	</column>
 	<column name="security_code">
-		<type name="character varying" length="50"/>
+		<type name="character varying" length="150"/>
 	</column>
 	<column name="recuperate_password_token">
 		<type name="character varying" length="50"/>
@@ -204,6 +204,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="role_module_permission_pk" type="pk-constr" table="public.role_module_permission">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
+	<constraint name="role_module_permission_uk" type="uq-constr" table="public.role_module_permission">
+		<columns names="role_code,module_code" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 <sequence name="role_module_permission_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1" sql-disabled="true">
@@ -223,13 +226,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="character varying" length="15"/>
 	</column>
 	<column name="name" not-null="true">
-		<type name="character varying" length="15"/>
+		<type name="character varying" length="50"/>
 	</column>
 	<column name="src">
 		<type name="character varying" length="50"/>
 	</column>
 	<column name="icon">
-		<type name="character varying" length="20"/>
+		<type name="character varying" length="50"/>
 	</column>
 	<column name="unabled" default-value="false">
 		<type name="boolean" length="0"/>
@@ -376,7 +379,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="krash"/>
 </sequence>
 
-<table name="document_type" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+<table name="document_type" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
 	<position x="1000" y="480"/>
@@ -395,6 +398,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<column name="update_at">
 		<type name="timestamp" length="0"/>
+	</column>
+	<column name="acronym" not-null="true">
+		<type name="character" length="1"/>
 	</column>
 	<constraint name="document_type_pk" type="pk-constr" table="public.document_type">
 		<columns names="id" ref-type="src-columns"/>
@@ -508,7 +514,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="krash"/>
 </sequence>
 
-<table name="stade" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+<table name="stade" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
 	<position x="460" y="1100"/>
@@ -528,6 +534,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="update_at">
 		<type name="timestamp" length="0"/>
 	</column>
+	<column name="region_code" not-null="true">
+		<type name="character varying" length="15"/>
+	</column>
 	<constraint name="stade_pk" type="pk-constr" table="public.stade">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
@@ -544,7 +553,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="municipality" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="880" y="1100"/>
+	<position x="900" y="1100"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -556,7 +565,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="character varying" length="15"/>
 	</column>
 	<column name="name" not-null="true">
-		<type name="character varying" length="15"/>
+		<type name="character varying" length="60"/>
 	</column>
 	<column name="create_at" default-value="now()">
 		<type name="timestamp" length="0"/>
@@ -580,7 +589,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="parrish" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1300" y="1100"/>
+	<position x="1320" y="1100"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -592,7 +601,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="character varying" length="15"/>
 	</column>
 	<column name="name" not-null="true">
-		<type name="character varying" length="20"/>
+		<type name="character varying" length="60"/>
 	</column>
 	<column name="create_at" default-value="now()">
 		<type name="timestamp" length="0"/>
@@ -616,7 +625,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="clinic_history" layers="0" collapse-mode="2" max-obj-count="18" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1760" y="1100"/>
+	<position x="1780" y="1100"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
 		<type name="bigint" length="0"/>
@@ -1523,39 +1532,65 @@ end;]]></definition>
 count_code integer := 0;
 BEGIN
 	if code = 'ra' then
+		--
 		select count(*) into count_code from public.reception_agenda;
         return concat('ra-' , substring('0000000',length(count_code::character varying) + 1, 7),count_code + 1);
     elsif code = 'prjt' then
+    	-- project
         select count(*) into count_code from public.project where acronym = _acronym;
         return concat(_acronym , count_code+1);
     elsif code = 'gndr' then
+    	-- gender
         select count(*) into count_code from public.gender;
         return concat('gndr-' , substring('00',length(count_code::character varying) + 1, 2),count_code + 1);
     ELSIF code = 'dsbltyType' then
+    	-- disability type
         select count(*) into count_code from public.disability_type;
         return concat('dsbltyT-' , substring('00',length(count_code::character varying) + 1, 2),count_code + 1);
     elsif code = 'ptnt' then
+    	--patient
         select count(*) into count_code from public.patient;
         return concat('MAPANI-' , substring('0000000',length(count_code::character varying) + 1, 7),count_code + 1);
     elsif code = 'spns' then
+    	-- sponsor
         select count(*) into count_code from public.sponsors;
         return concat('spns-', substring('0000',length(count_code::character varying) + 1, 7),count_code + 1);
     elsif code = 'usr' then
+    	-- users
     	select count(*) into count_code from public.users;
     	return concat('usr-', substring('000000',length(count_code::character varying) + 1,7),count_code + 1);
     elsif code = 'usrRole' then
+    	-- user role
     	select count(*) into count_code from users_role;
     	return concat('rol-', substring('0000',length(count_code::character varying) + 1, 4),count_code + 1);
     elsif code = 'usrStatus' then
+    	--user status
     	select count(*) into count_code from public.users_status;
     	return concat('stts-', substring('0000', length(count_code::character varying) + 1, 4), count_code + 1);
     elsif code = 'module' then
+    	-- modules
     	select count(*) into count_code from public."modules";
-    	return concat('modu-', substring('0000',length(count_code::character varying) + 1, 4), count_code + 1);
+    	return concat('MOD-', substring('0000',length(count_code::character varying) + 1, 4), count_code + 1);
     elsif code = 'upd' then
     	-- user personal data
     	select count(*) into count_code from public.user_personal_data;
     	return concat('upd-', substring('0000',length(count_code::character varying) + 1, 4), count_code + 1);
+    elsif code = 'Mstatus' then
+    	-- martial status
+    	select count(*) into count_code from public.martial_status;
+    	return concat('MSTTS-', substring('0000',length(count_code::character varying) + 1, 4), count_code + 1);
+    elsif code = 'DPTM' then
+    	-- departament
+    	select count(*) into count_code from public.departament;
+    	return concat('DPTMT-', substring('0000',length(count_code::character varying) + 1, 4), count_code + 1);
+    elsif code = 'JOBPOSI' then
+    	-- job position
+    	select count(*) into count_code from public.job_position;
+    	return concat('JBPST-', substring('0000',length(count_code::character varying) + 1, 4), count_code + 1);
+    elsif code = 'EMPL' then
+    	-- employed
+    	select count(*) into count_code from public.employed;
+    	return concat('JBPST-', substring('0000',length(count_code::character varying) + 1, 4), count_code + 1);
     else
         return 'codigo no existe';
 	end if;
@@ -2039,7 +2074,7 @@ end;]]></definition>
 		code_type character varying := 'module';
 	BEGIN
 		code := codegen(code_type);
-		insert into public."module" (
+		insert into public."modules" (
 			code,
 			name,
 			src,
@@ -2136,7 +2171,7 @@ end;]]></definition>
 <view name="view_gender" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1420" y="2560"/>
+	<position x="1480" y="3160"/>
 	<reference>
 		<expression><![CDATA[ SELECT gender.code,
     gender.name
@@ -2152,7 +2187,7 @@ end;]]></definition>
 </view>
 
 <relationship name="rel_view_gender_gender" type="reltv" layers="0"
-	 custom-color="#deb26a"
+	 custom-color="#886306"
 	 src-table="public.view_gender"
 	 dst-table="public.gender"
 	 src-required="false" dst-required="false"/>
@@ -2160,7 +2195,7 @@ end;]]></definition>
 <view name="view_patient" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1720" y="2560"/>
+	<position x="1800" y="3160"/>
 	<reference>
 		<expression><![CDATA[ SELECT patient.code,
     patient."firstName",
@@ -2221,19 +2256,19 @@ end;]]></definition>
 </view>
 
 <relationship name="rel_view_patient_patient" type="reltv" layers="0"
-	 custom-color="#01d8e5"
+	 custom-color="#94495b"
 	 src-table="public.view_patient"
 	 dst-table="public.patient"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_patient_gender" type="reltv" layers="0"
-	 custom-color="#815f42"
+	 custom-color="#7ad7df"
 	 src-table="public.view_patient"
 	 dst-table="public.gender"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_patient_patient_disability" type="reltv" layers="0"
-	 custom-color="#343f3a"
+	 custom-color="#3e9f96"
 	 src-table="public.view_patient"
 	 dst-table="public.patient_disability"
 	 src-required="false" dst-required="false"/>
@@ -2241,7 +2276,7 @@ end;]]></definition>
 <view name="view_appointment" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="60" y="3160"/>
+	<position x="60" y="3560"/>
 	<reference>
 		<expression><![CDATA[ SELECT reception_agenda.code,
     reception_agenda.project_code AS "projectCode",
@@ -2355,7 +2390,7 @@ end;]]></definition>
 </view>
 
 <relationship name="rel_view_appointment_reception_agenda" type="reltv" layers="0"
-	 custom-color="#4c9659"
+	 custom-color="#ecf988"
 	 src-table="public.view_appointment"
 	 dst-table="public.reception_agenda"
 	 src-required="false" dst-required="false"/>
@@ -2363,7 +2398,7 @@ end;]]></definition>
 <view name="view_project" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="520" y="3160"/>
+	<position x="520" y="3560"/>
 	<reference>
 		<expression><![CDATA[ SELECT project.code,
     project.name,
@@ -2411,7 +2446,7 @@ end;]]></definition>
 </view>
 
 <relationship name="rel_view_project_project" type="reltv" layers="0"
-	 custom-color="#ab5718"
+	 custom-color="#a6173a"
 	 src-table="public.view_project"
 	 dst-table="public.project"
 	 src-required="false" dst-required="false"/>
@@ -2419,7 +2454,7 @@ end;]]></definition>
 <view name="view_sponsor" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="880" y="3160"/>
+	<position x="880" y="3560"/>
 	<reference>
 		<expression><![CDATA[ SELECT sponsors.code,
     sponsors.name,
@@ -2443,7 +2478,7 @@ end;]]></definition>
 </view>
 
 <relationship name="rel_view_sponsor_sponsors" type="reltv" layers="0"
-	 custom-color="#435d97"
+	 custom-color="#f87782"
 	 src-table="public.view_sponsor"
 	 dst-table="public.sponsors"
 	 src-required="false" dst-required="false"/>
@@ -2451,7 +2486,7 @@ end;]]></definition>
 <view name="view_disability_type" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1240" y="3160"/>
+	<position x="1240" y="3560"/>
 	<reference>
 		<expression><![CDATA[ SELECT disability_type.code,
     disability_type.name
@@ -2467,7 +2502,7 @@ end;]]></definition>
 </view>
 
 <relationship name="rel_view_disability_type_disability_type" type="reltv" layers="0"
-	 custom-color="#4e3251"
+	 custom-color="#7e6a73"
 	 src-table="public.view_disability_type"
 	 dst-table="public.disability_type"
 	 src-required="false" dst-required="false"/>
@@ -2542,206 +2577,6 @@ end;]]></definition>
 		WHERE code=_code;
 	END;]]></definition>
 </procedure>
-
-<view name="view_users" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
-	<schema name="public"/>
-	<role name="krash"/>
-	<position x="1560" y="3160"/>
-	<reference>
-		<expression><![CDATA[ SELECT users.code,
-    users.username,
-    users.password,
-    users.email,
-    users.security_code AS "userSecurityCode",
-    users.recuperate_password_token AS "recuperatePasswordToken",
-    users.personal_data_code AS "personalDataCode",
-    upd.first_name AS "firstName",
-    upd.last_name AS "lastName",
-    upd.gender_code AS "genderCode",
-    g.name AS "genderName",
-    upd.document_type_code AS "documentTypeCode",
-    document_type.name AS "documentTypeName",
-    upd.dni,
-    upd.born_date AS "bornData",
-    upd.martial_status_code AS "martialStatusCode",
-    ms.name AS "martialStatusName",
-    upd.disability,
-    upd.disability_type_code AS "disabilityTypeCode",
-    dt.name AS "disabilityTypeName",
-    upd.ethnic_group AS "ethnicGroup",
-    upd.ethnic_description AS "ethnicDescription",
-    upd.parrish_code AS "parrishCode",
-    p.name AS "parrishName",
-    upd.direction,
-    upd.phone_number AS "phoneNumber",
-    users.status_code AS "statusCode",
-    us.name AS "statusName",
-    users.role_code AS "roleCode",
-    ur.name AS "roleName"
-   FROM ((((((((users
-     JOIN user_personal_data upd ON (((users.personal_data_code)::text = (upd.code)::text)))
-     JOIN gender g ON (((upd.gender_code)::text = (g.code)::text)))
-     JOIN document_type ON (((upd.document_type_code)::text = (document_type.code)::text)))
-     JOIN martial_status ms ON (((upd.martial_status_code)::text = (ms.code)::text)))
-     JOIN disability_type dt ON (((upd.disability_type_code)::text = (dt.code)::text)))
-     JOIN parrish p ON (((upd.parrish_code)::text = (p.code)::text)))
-     JOIN users_status us ON (((users.status_code)::text = (us.code)::text)))
-     JOIN users_role ur ON (((users.role_code)::text = (ur.code)::text)));]]></expression>
-	<column name="code">
-		<type name="character varying" length="15"/>
-	</column>
-	<column name="username">
-		<type name="character varying" length="30"/>
-	</column>
-	<column name="password">
-		<type name="character varying" length="60"/>
-	</column>
-	<column name="email">
-		<type name="character varying" length="60"/>
-	</column>
-	<column name="userSecurityCode">
-		<type name="character varying" length="50"/>
-	</column>
-	<column name="recuperatePasswordToken">
-		<type name="character varying" length="50"/>
-	</column>
-	<column name="personalDataCode">
-		<type name="character varying" length="15"/>
-	</column>
-	<column name="firstName">
-		<type name="character varying" length="50"/>
-	</column>
-	<column name="lastName">
-		<type name="character varying" length="50"/>
-	</column>
-	<column name="genderCode">
-		<type name="character varying" length="15"/>
-	</column>
-	<column name="genderName">
-		<type name="character varying" length="20"/>
-	</column>
-	<column name="documentTypeCode">
-		<type name="character varying" length="15"/>
-	</column>
-	<column name="documentTypeName">
-		<type name="character varying" length="20"/>
-	</column>
-	<column name="dni">
-		<type name="character varying" length="14"/>
-	</column>
-	<column name="bornData">
-		<type name="date" length="0"/>
-	</column>
-	<column name="martialStatusCode">
-		<type name="character varying" length="15"/>
-	</column>
-	<column name="martialStatusName">
-		<type name="character varying" length="20"/>
-	</column>
-	<column name="disability">
-		<type name="boolean" length="0"/>
-	</column>
-	<column name="disabilityTypeCode">
-		<type name="character varying" length="15"/>
-	</column>
-	<column name="disabilityTypeName">
-		<type name="character varying" length="20"/>
-	</column>
-	<column name="ethnicGroup">
-		<type name="boolean" length="0"/>
-	</column>
-	<column name="ethnicDescription">
-		<type name="character varying" length="60"/>
-	</column>
-	<column name="parrishCode">
-		<type name="character varying" length="15"/>
-	</column>
-	<column name="parrishName">
-		<type name="character varying" length="20"/>
-	</column>
-	<column name="direction">
-		<type name="character varying" length="150"/>
-	</column>
-	<column name="phoneNumber">
-		<type name="character varying" length="15"/>
-	</column>
-	<column name="statusCode">
-		<type name="character varying" length="15"/>
-	</column>
-	<column name="statusName">
-		<type name="character varying" length="50"/>
-	</column>
-	<column name="roleCode">
-		<type name="character varying" length="15"/>
-	</column>
-	<column name="roleName">
-		<type name="character varying" length="50"/>
-	</column>
-		<reftable name="public.users"/>
-		<reftable name="public.users_status"/>
-		<reftable name="public.users_role"/>
-		<reftable name="public.document_type"/>
-		<reftable name="public.gender"/>
-		<reftable name="public.martial_status"/>
-		<reftable name="public.disability_type"/>
-		<reftable name="public.parrish"/>
-		<reftable name="public.user_personal_data"/>
-	</reference>
-</view>
-
-<relationship name="rel_view_users_users" type="reltv" layers="0"
-	 custom-color="#d4654b"
-	 src-table="public.view_users"
-	 dst-table="public.users"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_view_users_users_status" type="reltv" layers="0"
-	 custom-color="#b8c040"
-	 src-table="public.view_users"
-	 dst-table="public.users_status"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_view_users_users_role" type="reltv" layers="0"
-	 custom-color="#f63b07"
-	 src-table="public.view_users"
-	 dst-table="public.users_role"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_view_users_document_type" type="reltv" layers="0"
-	 custom-color="#eb4162"
-	 src-table="public.view_users"
-	 dst-table="public.document_type"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_view_users_gender" type="reltv" layers="0"
-	 custom-color="#c0e045"
-	 src-table="public.view_users"
-	 dst-table="public.gender"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_view_users_martial_status" type="reltv" layers="0"
-	 custom-color="#c5ce85"
-	 src-table="public.view_users"
-	 dst-table="public.martial_status"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_view_users_disability_type" type="reltv" layers="0"
-	 custom-color="#527b8a"
-	 src-table="public.view_users"
-	 dst-table="public.disability_type"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_view_users_parrish" type="reltv" layers="0"
-	 custom-color="#fdbb17"
-	 src-table="public.view_users"
-	 dst-table="public.parrish"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_view_users_user_personal_data" type="reltv" layers="0"
-	 custom-color="#298fa2"
-	 src-table="public.view_users"
-	 dst-table="public.user_personal_data"
-	 src-required="false" dst-required="false"/>
 
 <procedure name="add_user" security-type="SECURITY INVOKER">
 	<schema name="public"/>
@@ -2852,7 +2687,7 @@ end;]]></definition>
 			_gender_code, 
 			_document_type_code,
 			_dni,
-			_born_date,
+			_born_date::date,
 			_martial_status_code,
 			_disability,
 			_disability_type_code,
@@ -2935,13 +2770,944 @@ end;]]></definition>
 			print,
 			report
 		) SELECT code , *  FROM 
-		unnest(_modules_code) AS "module",
+		unnest(_module_code) AS "module",
 		unnest(_show) AS "show",
 		unnest(_create) AS "create",
 		unnest(_update) AS "update",
 		unnest(_print) AS "print",
 		unnest(_report) AS "report"
+		group by "module", "show", "create", "update", "print", "report"
+		order by "module" asc
 		;
+	END;]]></definition>
+</procedure>
+
+<table name="employed" layers="0" collapse-mode="2" max-obj-count="10" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="1420" y="2560"/>
+	<column name="id" not-null="true"
+	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="user_personal_data_code" not-null="true">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="date_of_entry" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="date_of_discharge">
+		<type name="date" length="0"/>
+	</column>
+	<column name="departament_code" not-null="true">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="job_position_code" not-null="true">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="create_at" default-value="now()">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="update_at">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="employed_pk" type="pk-constr" table="public.employed">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="employed_uk" type="uq-constr" table="public.employed">
+		<columns names="code,user_personal_data_code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="employed_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1" sql-disabled="true">
+	<schema name="public"/>
+	<role name="krash"/>
+</sequence>
+
+<table name="job_position" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="1940" y="2560"/>
+	<column name="id" not-null="true"
+	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="create_at" default-value="now()">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="update_at">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="job_position_pk" type="pk-constr" table="public.job_position">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="job_position_uk" type="uq-constr" table="public.job_position">
+		<columns names="code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="job_position_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="32767" cache="1" sql-disabled="true">
+	<schema name="public"/>
+	<role name="krash"/>
+</sequence>
+
+<table name="departament" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="60" y="3160"/>
+	<column name="id" not-null="true"
+	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="create_at" default-value="now()">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="update_at">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="departament_pk" type="pk-constr" table="public.departament">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="departament_uk" type="uq-constr" table="public.departament">
+		<columns names="code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="departament_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="32767" cache="1" sql-disabled="true">
+	<schema name="public"/>
+	<role name="krash"/>
+</sequence>
+
+<table name="modules_by_job_position_departament" layers="0" collapse-mode="2" max-obj-count="13" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="460" y="3160"/>
+	<column name="id" not-null="true"
+	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="module_code" not-null="true">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="job_position_code" not-null="true">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="departament_code" not-null="true">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="show" not-null="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="create" not-null="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="update" not-null="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="print" not-null="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="report" not-null="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="create_at" default-value="now()">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="update_at">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="modules_by_job_position_departament_pk" type="pk-constr" table="public.modules_by_job_position_departament">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="modules_by_job_position_departament_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1" sql-disabled="true">
+	<schema name="public"/>
+	<role name="krash"/>
+</sequence>
+
+<procedure name="add_permission_modules_by_departament" security-type="SECURITY INVOKER">
+	<schema name="public"/>
+	<role name="krash"/>
+	<language name="plpgsql"/>
+	<parameter name="_modules_codes">
+		<type name="character varying" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="_job_position_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_departament_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_show">
+		<type name="boolean" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="_create">
+		<type name="boolean" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="_update">
+		<type name="boolean" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="_print">
+		<type name="boolean" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="_report">
+		<type name="boolean" length="0" dimension="1"/>
+	</parameter>
+	<definition><![CDATA[	BEGIN
+		insert into modules_by_job_position_departament (
+			job_position_code ,
+			departament_code ,
+			module_code,
+			show,
+			"create" ,
+			"update" ,
+			print ,
+			report 
+		) SELECT _job_position_code,_departament_code,  *  FROM 
+		unnest(_modules_codes::character varying[]) AS "module",
+		unnest(_show::boolean[]) AS "show",
+		unnest(_create::boolean[]) AS "create",
+		unnest(_update::boolean[]) AS "update",
+		unnest(_print::boolean[]) AS "print",
+		unnest(_report::boolean[]) AS "report"
+		group by "module", "show" , "create", "update", "print", "report"
+		order by "module" asc
+		;
+	END;]]></definition>
+</procedure>
+
+<procedure name="add_role_modules_permission" security-type="SECURITY INVOKER">
+	<schema name="public"/>
+	<role name="krash"/>
+	<language name="plpgsql"/>
+	<parameter name="_role_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_module_code">
+		<type name="character varying" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="_show">
+		<type name="boolean" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="_create">
+		<type name="boolean" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="_update">
+		<type name="boolean" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="_print">
+		<type name="boolean" length="0" dimension="1"/>
+	</parameter>
+	<parameter name="_report">
+		<type name="boolean" length="0" dimension="1"/>
+	</parameter>
+	<definition><![CDATA[	BEGIN
+		insert into public."role_module_permission" (
+			role_code,
+			module_code,
+			"show",
+			"create",
+			"update",
+			print,
+			report
+		) (SELECT _role_code , *  FROM 
+		unnest(_module_code) AS "module",
+		unnest(_show) AS "show",
+		unnest(_create) AS "create",
+		unnest(_update) AS "update",
+		unnest(_print) AS "print",
+		unnest(_report) AS "report"
+		group by "module", "show", "create", "update", "print", "report"
+		order by "module" asc)
+		ON CONFLICT (role_code,module_code) DO NOTHING
+		;
+	END;]]></definition>
+</procedure>
+
+<procedure name="add_document_type" security-type="SECURITY INVOKER">
+	<schema name="public"/>
+	<role name="krash"/>
+	<language name="plpgsql"/>
+	<parameter name="_acronym">
+		<type name="character" length="0"/>
+	</parameter>
+	<parameter name="_name">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<definition><![CDATA[	declare
+		code character varying;
+		code_type character varying := 'DType';
+	BEGIN
+		code := public.codegen(code_type);
+	
+		INSERT INTO public.document_type
+		(code, "acronym" ,"name")
+		VALUES(code, _acronym ,_name);
+	END;]]></definition>
+</procedure>
+
+<table name="region" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="1060" y="3160"/>
+	<column name="id" not-null="true"
+	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="create_at" default-value="now()">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="update_at">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="region_pk" type="pk-constr" table="public.region">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="region_uk" type="uq-constr" table="public.region">
+		<columns names="code" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="region_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="32767" cache="1" sql-disabled="true">
+	<schema name="public"/>
+	<role name="krash"/>
+</sequence>
+
+<procedure name="add_martial_status" security-type="SECURITY INVOKER">
+	<schema name="public"/>
+	<role name="krash"/>
+	<language name="plpgsql"/>
+	<parameter name="_name">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<definition><![CDATA[	declare 
+		code character varying;
+		code_type character varying := 'Mstatus';
+	BEGIN
+		code := codegen(code_type);
+		insert into public.martial_status (code, "name") values (code, _name);
+	END;]]></definition>
+</procedure>
+
+<procedure name="add_user" security-type="SECURITY INVOKER">
+	<schema name="public"/>
+	<role name="krash"/>
+	<language name="plpgsql"/>
+	<parameter name="_username">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_password">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_email">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_security_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_status_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_role_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_first_name">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_last_name">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_gender_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_document_type_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_dni">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_born_date">
+		<type name="date" length="0"/>
+	</parameter>
+	<parameter name="_martial_status_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_disability">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="_disability_type_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_ethnic_group">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="_ethnic_description">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_parrish_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_direction">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_phone_number">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<definition><![CDATA[	declare 
+		code character varying;
+		
+		code_type character varying := 'usr';
+	
+		upd_code character varying;
+	
+		upd_code_type character varying := 'upd';
+	
+		exist_upd int;
+		
+		
+	BEGIN
+		select count(*) into exist_upd from public.user_personal_data where dni = _dni;
+	
+		if exist_upd > 0 then
+			raise exception 'cedula regristrada' USING HINT = 'EXCEPTION is raised here and transaction aborted';
+		end if;
+	
+		code := codegen(code_type);
+		upd_code := codegen(upd_code_type);
+	
+		insert into public.user_personal_data (
+			code,
+			first_name,
+			last_name,
+			gender_code, 
+			document_type_code,
+			dni,
+			born_date,
+			martial_status_code,
+			disability,
+			disability_type_code,
+			ethnic_group,
+			ethnic_description,
+			parrish_code,
+			direction,
+			phone_number
+		) values (
+			upd_code,
+			_first_name,
+			_last_name,
+			_gender_code, 
+			_document_type_code,
+			_dni,
+			_born_date,
+			_martial_status_code,
+			_disability,
+			_disability_type_code,
+			_ethnic_group,
+			_ethnic_description,
+			_parrish_code,
+			_direction,
+			_phone_number
+		);
+		INSERT INTO public.users
+		(
+			code,
+			username,
+			"password",
+			email,
+			security_code,
+			recuperate_password_token,
+			personal_data_code,
+			status_code,
+			role_code
+		)
+		VALUES(
+			code,
+			_username,
+			_password,
+			_email,
+			_security_code,
+			null::character varying,
+			upd_code, 
+			_status_code,
+			_role_code
+		);
+	END;]]></definition>
+</procedure>
+
+<view name="view_users" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="1560" y="3560"/>
+	<reference>
+		<expression><![CDATA[ SELECT users.code,
+    users.username,
+    users.password,
+    users.email,
+    users.security_code AS "userSecurityCode",
+    users.recuperate_password_token AS "recuperatePasswordToken",
+    users.personal_data_code AS "personalDataCode",
+    upd.first_name AS "firstName",
+    upd.last_name AS "lastName",
+    upd.gender_code AS "genderCode",
+    g.name AS "genderName",
+    upd.document_type_code AS "documentTypeCode",
+    document_type.name AS "documentTypeName",
+    document_type.acronym AS "documentTypeAcronym",
+    upd.dni,
+    upd.born_date AS "bornData",
+    upd.martial_status_code AS "martialStatusCode",
+    ms.name AS "martialStatusName",
+    upd.disability,
+    upd.disability_type_code AS "disabilityTypeCode",
+    dt.name AS "disabilityTypeName",
+    upd.ethnic_group AS "ethnicGroup",
+    upd.ethnic_description AS "ethnicDescription",
+    upd.parrish_code AS "parrishCode",
+    p.name AS "parrishName",
+    m.code AS "municipalityCode",
+    m.name AS "municipalityName",
+    s.code AS "stadeCode",
+    s.name AS "stadeName",
+    r.code AS "regionCode",
+    r.name AS "regionName",
+    upd.direction,
+    upd.phone_number AS "phoneNumber",
+    users.status_code AS "statusCode",
+    us.name AS "statusName",
+    users.role_code AS "roleCode",
+    ur.name AS "roleName"
+   FROM (((((((((((users
+     JOIN user_personal_data upd ON (((users.personal_data_code)::text = (upd.code)::text)))
+     JOIN gender g ON (((upd.gender_code)::text = (g.code)::text)))
+     JOIN document_type ON (((upd.document_type_code)::text = (document_type.code)::text)))
+     JOIN martial_status ms ON (((upd.martial_status_code)::text = (ms.code)::text)))
+     LEFT JOIN disability_type dt ON (((upd.disability_type_code)::text = (dt.code)::text)))
+     JOIN parrish p ON (((upd.parrish_code)::text = (p.code)::text)))
+     JOIN municipality m ON (((p.municipality_code)::text = (m.code)::text)))
+     JOIN stade s ON (((m.stade_code)::text = (s.code)::text)))
+     JOIN region r ON (((s.region_code)::text = (r.code)::text)))
+     JOIN users_status us ON (((users.status_code)::text = (us.code)::text)))
+     JOIN users_role ur ON (((users.role_code)::text = (ur.code)::text)));]]></expression>
+	<column name="code">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="username">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="password">
+		<type name="character varying" length="150"/>
+	</column>
+	<column name="email">
+		<type name="character varying" length="150"/>
+	</column>
+	<column name="userSecurityCode">
+		<type name="character varying" length="150"/>
+	</column>
+	<column name="recuperatePasswordToken">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="personalDataCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="firstName">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="lastName">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="genderCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="genderName">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="documentTypeCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="documentTypeName">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="documentTypeAcronym">
+		<type name="character" length="1"/>
+	</column>
+	<column name="dni">
+		<type name="character varying" length="14"/>
+	</column>
+	<column name="bornData">
+		<type name="date" length="0"/>
+	</column>
+	<column name="martialStatusCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="martialStatusName">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="disability">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="disabilityTypeCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="disabilityTypeName">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="ethnicGroup">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="ethnicDescription">
+		<type name="character varying" length="60"/>
+	</column>
+	<column name="parrishCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="parrishName">
+		<type name="character varying" length="60"/>
+	</column>
+	<column name="municipalityCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="municipalityName">
+		<type name="character varying" length="60"/>
+	</column>
+	<column name="stadeCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="stadeName">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="regionCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="regionName">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="direction">
+		<type name="character varying" length="150"/>
+	</column>
+	<column name="phoneNumber">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="statusCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="statusName">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="roleCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="roleName">
+		<type name="character varying" length="50"/>
+	</column>
+		<reftable name="public.users"/>
+		<reftable name="public.users_status"/>
+		<reftable name="public.users_role"/>
+		<reftable name="public.document_type"/>
+		<reftable name="public.gender"/>
+		<reftable name="public.martial_status"/>
+		<reftable name="public.disability_type"/>
+		<reftable name="public.stade"/>
+		<reftable name="public.municipality"/>
+		<reftable name="public.parrish"/>
+		<reftable name="public.user_personal_data"/>
+		<reftable name="public.region"/>
+	</reference>
+</view>
+
+<relationship name="rel_view_users_users" type="reltv" layers="0"
+	 custom-color="#9c70a9"
+	 src-table="public.view_users"
+	 dst-table="public.users"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_users_users_status" type="reltv" layers="0"
+	 custom-color="#6b96c0"
+	 src-table="public.view_users"
+	 dst-table="public.users_status"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_users_users_role" type="reltv" layers="0"
+	 custom-color="#1e08a7"
+	 src-table="public.view_users"
+	 dst-table="public.users_role"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_users_document_type" type="reltv" layers="0"
+	 custom-color="#ecdc51"
+	 src-table="public.view_users"
+	 dst-table="public.document_type"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_users_gender" type="reltv" layers="0"
+	 custom-color="#2e245c"
+	 src-table="public.view_users"
+	 dst-table="public.gender"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_users_martial_status" type="reltv" layers="0"
+	 custom-color="#dc8f14"
+	 src-table="public.view_users"
+	 dst-table="public.martial_status"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_users_disability_type" type="reltv" layers="0"
+	 custom-color="#a3e429"
+	 src-table="public.view_users"
+	 dst-table="public.disability_type"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_users_stade" type="reltv" layers="0"
+	 custom-color="#445815"
+	 src-table="public.view_users"
+	 dst-table="public.stade"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_users_municipality" type="reltv" layers="0"
+	 custom-color="#dc8a62"
+	 src-table="public.view_users"
+	 dst-table="public.municipality"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_users_parrish" type="reltv" layers="0"
+	 custom-color="#3d9bd5"
+	 src-table="public.view_users"
+	 dst-table="public.parrish"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_users_user_personal_data" type="reltv" layers="0"
+	 custom-color="#7b6c4d"
+	 src-table="public.view_users"
+	 dst-table="public.user_personal_data"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_users_region" type="reltv" layers="0"
+	 custom-color="#b32df8"
+	 src-table="public.view_users"
+	 dst-table="public.region"
+	 src-required="false" dst-required="false"/>
+
+<procedure name="add_departament" security-type="SECURITY INVOKER">
+	<schema name="public"/>
+	<role name="krash"/>
+	<language name="plpgsql"/>
+	<parameter name="_name">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<definition><![CDATA[	declare
+		code character varying;
+		code_type character varying := 'DPTM';
+	BEGIN
+		code := codegen(code_type);
+		insert into departament ( code, "name")
+		values( code, _name);
+	END;]]></definition>
+</procedure>
+
+<procedure name="add_job_position" security-type="SECURITY INVOKER">
+	<schema name="public"/>
+	<role name="krash"/>
+	<language name="plpgsql"/>
+	<parameter name="_name">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<definition><![CDATA[	declare 
+		code character varying;
+		code_type character varying := 'JOBPOSI';
+	BEGIN
+		code := codegen(code_type);
+		insert into job_position (code,"name")
+		values (code,_name);
+	END;]]></definition>
+</procedure>
+
+<view name="view_modules" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="60" y="4360"/>
+	<reference>
+		<expression><![CDATA[ SELECT mp."moduleCode",
+    mp."moduleName",
+    mp."moduleSrc",
+    mp."moduleIcon",
+    mp."roleCode",
+    mp."jobPosition",
+    mp."departamentCode",
+    mp.show,
+    mp."create",
+    mp.update,
+    mp.print,
+    mp.repoort
+   FROM ( SELECT m.code AS "moduleCode",
+            m.name AS "moduleName",
+            m.src AS "moduleSrc",
+            m.icon AS "moduleIcon",
+            (ur.code)::character varying AS "roleCode",
+            NULL::character varying AS "jobPosition",
+            NULL::character varying AS "departamentCode",
+            rmp.show,
+            rmp."create",
+            rmp.update,
+            rmp.print,
+            rmp.report AS repoort
+           FROM ((modules m
+             JOIN role_module_permission rmp ON (((rmp.module_code)::text = (m.code)::text)))
+             JOIN users_role ur ON (((rmp.role_code)::text = (ur.code)::text)))
+        UNION
+         SELECT m2.code AS "moduleCode",
+            m2.name AS "moduleName",
+            m2.src AS "moduleSrc",
+            m2.icon AS "moduleIcon",
+            NULL::character varying AS "roleCode",
+            (jp.code)::character varying AS "jobPosition",
+            (d.code)::character varying AS "departamentCode",
+            mbjpd.show,
+            mbjpd."create",
+            mbjpd.update,
+            mbjpd.print,
+            mbjpd.report AS repoort
+           FROM (((modules m2
+             JOIN modules_by_job_position_departament mbjpd ON (((mbjpd.module_code)::text = (m2.code)::text)))
+             JOIN departament d ON (((mbjpd.departament_code)::text = (d.code)::text)))
+             JOIN job_position jp ON (((mbjpd.job_position_code)::text = (jp.code)::text)))) mp
+  ORDER BY mp."moduleCode";]]></expression>
+	<column name="moduleCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="moduleName">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="moduleSrc">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="moduleIcon">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="roleCode">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="jobPosition">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="departamentCode">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="show">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="create">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="update">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="print">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="repoort">
+		<type name="boolean" length="0"/>
+	</column>
+		<reftable name="public.users_role"/>
+		<reftable name="public.role_module_permission"/>
+		<reftable name="public.modules"/>
+		<reftable name="public.job_position"/>
+		<reftable name="public.departament"/>
+		<reftable name="public.modules_by_job_position_departament"/>
+	</reference>
+</view>
+
+<relationship name="rel_view_modules_users_role" type="reltv" layers="0"
+	 custom-color="#a81e46"
+	 src-table="public.view_modules"
+	 dst-table="public.users_role"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_modules_role_module_permission" type="reltv" layers="0"
+	 custom-color="#200de2"
+	 src-table="public.view_modules"
+	 dst-table="public.role_module_permission"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_modules_modules" type="reltv" layers="0"
+	 custom-color="#2ddbb6"
+	 src-table="public.view_modules"
+	 dst-table="public.modules"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_modules_job_position" type="reltv" layers="0"
+	 custom-color="#1bfb56"
+	 src-table="public.view_modules"
+	 dst-table="public.job_position"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_modules_departament" type="reltv" layers="0"
+	 custom-color="#ba9813"
+	 src-table="public.view_modules"
+	 dst-table="public.departament"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_modules_modules_by_job_position_departament" type="reltv" layers="0"
+	 custom-color="#43bd73"
+	 src-table="public.view_modules"
+	 dst-table="public.modules_by_job_position_departament"
+	 src-required="false" dst-required="false"/>
+
+<procedure name="add_employed" security-type="SECURITY INVOKER">
+	<schema name="public"/>
+	<role name="krash"/>
+	<language name="plpgsql"/>
+	<parameter name="_user_personal_data_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_date_of_entry">
+		<type name="date" length="0"/>
+	</parameter>
+	<parameter name="_date_of_discharge">
+		<type name="date" length="0"/>
+	</parameter>
+	<parameter name="_job_position_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_departament_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<definition><![CDATA[	declare 
+		code character varying;
+		code_type character varying := 'EMPL';
+	begin
+		code := codegen(code_type);
+		insert into public.employed 
+		(code,user_personal_data_code,date_of_entry,date_of_discharge,job_position_code,departament_code)
+		values
+		(
+		code,
+		_user_personal_data_code,
+		_date_of_entry,
+		_date_of_discharge,
+		_job_position_code,
+		_departament_code
+		);
 	END;]]></definition>
 </procedure>
 
@@ -3008,6 +3774,12 @@ end;]]></definition>
 <constraint name="patient_fk_gender" type="fk-constr" comparison-type="MATCH SIMPLE"
 	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.gender" table="public.patient">
 	<columns names="gender_code" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="stade_fk_region" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.region" table="public.stade">
+	<columns names="region_code" ref-type="src-columns"/>
 	<columns names="code" ref-type="dst-columns"/>
 </constraint>
 
@@ -3131,190 +3903,268 @@ end;]]></definition>
 	<columns names="code" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="employed_fk_personal_data" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.user_personal_data" table="public.employed">
+	<columns names="user_personal_data_code" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="employed_fk_job_position" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.job_position" table="public.employed">
+	<columns names="job_position_code" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="employed_pk_departament" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.departament" table="public.employed">
+	<columns names="departament_code" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="modules_by_job_position_departament_fk_module" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.modules" table="public.modules_by_job_position_departament">
+	<columns names="module_code" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="modules_by_job_position_departament_fk_job_position" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.job_position" table="public.modules_by_job_position_departament">
+	<columns names="job_position_code" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="modules_by_job_position_departament_fk_departament" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.departament" table="public.modules_by_job_position_departament">
+	<columns names="departament_code" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
 <relationship name="rel_users_user_personal_data" type="relfk" layers="0"
-	 custom-color="#5172db"
+	 custom-color="#eb4dff"
 	 src-table="public.users"
 	 dst-table="public.user_personal_data" reference-fk="users_fk_personal_data"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_users_users_role" type="relfk" layers="0"
-	 custom-color="#87f3c0"
+	 custom-color="#8065fc"
 	 src-table="public.users"
 	 dst-table="public.users_role" reference-fk="users_fk_roles"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_users_users_status" type="relfk" layers="0"
-	 custom-color="#db0b82"
+	 custom-color="#75b13a"
 	 src-table="public.users"
 	 dst-table="public.users_status" reference-fk="users_fk_status"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_role_module_permission_users_role" type="relfk" layers="0"
-	 custom-color="#9b1bca"
+	 custom-color="#774c95"
 	 src-table="public.role_module_permission"
 	 dst-table="public.users_role" reference-fk="role_module_permission_fk_roles"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_role_module_permission_modules" type="relfk" layers="0"
-	 custom-color="#381bc7"
+	 custom-color="#94b010"
 	 src-table="public.role_module_permission"
 	 dst-table="public.modules" reference-fk="role_module_permission_fk_modules"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_representative_document_type" type="relfk" layers="0"
-	 custom-color="#daa8db"
+	 custom-color="#3c6b6f"
 	 src-table="public.representative"
 	 dst-table="public.document_type" reference-fk="representative_fk_document_type"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_representative_gender" type="relfk" layers="0"
-	 custom-color="#3d2513"
+	 custom-color="#d55d17"
 	 src-table="public.representative"
 	 dst-table="public.gender" reference-fk="representative_fk_gender"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_representative_martial_status" type="relfk" layers="0"
-	 custom-color="#1ea320"
+	 custom-color="#b33ed8"
 	 src-table="public.representative"
 	 dst-table="public.martial_status" reference-fk="representative_fk_martial_status"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_representative_disability_type" type="relfk" layers="0"
-	 custom-color="#a9be6a"
+	 custom-color="#5b3f39"
 	 src-table="public.representative"
 	 dst-table="public.disability_type" reference-fk="representative_fk_disability"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_representative_parrish" type="relfk" layers="0"
-	 custom-color="#e38ca2"
+	 custom-color="#d2f4b3"
 	 src-table="public.representative"
 	 dst-table="public.parrish" reference-fk="representative_fk_parrish"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_patient_gender" type="relfk" layers="0"
-	 custom-color="#56f4c5"
+	 custom-color="#7f4040"
 	 src-table="public.patient"
 	 dst-table="public.gender" reference-fk="patient_fk_gender"
 	 src-required="false" dst-required="true"/>
 
+<relationship name="rel_stade_region" type="relfk" layers="0"
+	 custom-color="#7f0ea8"
+	 src-table="public.stade"
+	 dst-table="public.region" reference-fk="stade_fk_region"
+	 src-required="false" dst-required="true"/>
+
 <relationship name="rel_municipality_stade" type="relfk" layers="0"
-	 custom-color="#07c366"
+	 custom-color="#b2b1e0"
 	 src-table="public.municipality"
 	 dst-table="public.stade" reference-fk="municipality_fk_stade"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_parrish_municipality" type="relfk" layers="0"
-	 custom-color="#35f03d"
+	 custom-color="#81282e"
 	 src-table="public.parrish"
 	 dst-table="public.municipality" reference-fk="parrish_fk_municipality"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_clinic_history_patient" type="relfk" layers="0"
-	 custom-color="#4d54c5"
+	 custom-color="#2cffcb"
 	 src-table="public.clinic_history"
 	 dst-table="public.patient" reference-fk="clinic_history_fk_patient"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_clinic_history_project" type="relfk" layers="0"
-	 custom-color="#b5ec6f"
+	 custom-color="#81f672"
 	 src-table="public.clinic_history"
 	 dst-table="public.project" reference-fk="clinic_history_fk_project"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_reception_agenda_clinic_history" type="relfk" layers="0"
-	 custom-color="#4be4c0"
+	 custom-color="#0b74e9"
 	 src-table="public.reception_agenda"
 	 dst-table="public.clinic_history" reference-fk="reception_agenda_fk_clinicHistory"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_reception_agenda_project" type="relfk" layers="0"
-	 custom-color="#e10a27"
+	 custom-color="#6fd9a9"
 	 src-table="public.reception_agenda"
 	 dst-table="public.project" reference-fk="reception_agenda_fk_project"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_nursing_clinic_history" type="relfk" layers="0"
-	 custom-color="#e19efd"
+	 custom-color="#b68930"
 	 src-table="public.nursing"
 	 dst-table="public.clinic_history" reference-fk="nursing_fk_clinic_history"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_nursing_sizes" type="relfk" layers="0"
-	 custom-color="#8571fb"
+	 custom-color="#4a48a8"
 	 src-table="public.nursing"
 	 dst-table="public.sizes" reference-fk="nursing_fk_sizes"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_nursing_weight" type="relfk" layers="0"
-	 custom-color="#0b7ece"
+	 custom-color="#eb1f05"
 	 src-table="public.nursing"
 	 dst-table="public.weight" reference-fk="nursing_fk_"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_nursing_exit_status" type="relfk" layers="0"
-	 custom-color="#5efaf6"
+	 custom-color="#503052"
 	 src-table="public.nursing"
 	 dst-table="public.exit_status" reference-fk="nursing_fk_exit_status"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_3phase_clinic_history" type="relfk" layers="0"
-	 custom-color="#de8e64"
+	 custom-color="#0effaa"
 	 src-table="public.&quot;3phase&quot;"
 	 dst-table="public.clinic_history" reference-fk="3phase_fk_clinic_history"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_3phase_grown_monitoring_status" type="relfk" layers="0"
-	 custom-color="#09ca17"
+	 custom-color="#4c8f9d"
 	 src-table="public.&quot;3phase&quot;"
 	 dst-table="public.grown_monitoring_status" reference-fk="3phase_fk_grown_monitoring"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_babysitter_patient" type="relfk" layers="0"
-	 custom-color="#6c4c3a"
+	 custom-color="#3d4585"
 	 src-table="public.babysitter"
 	 dst-table="public.patient" reference-fk="babysitter_fk_patient"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_babysitter_representative" type="relfk" layers="0"
-	 custom-color="#9497e6"
+	 custom-color="#915959"
 	 src-table="public.babysitter"
 	 dst-table="public.representative" reference-fk="babysitter_fk_representative"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_patient_disability_patient" type="relfk" layers="0"
-	 custom-color="#cc62ef"
+	 custom-color="#11b341"
 	 src-table="public.patient_disability"
 	 dst-table="public.patient" reference-fk="patient_disability_fk_patient"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_user_personal_data_document_type" type="relfk" layers="0"
-	 custom-color="#aa7733"
+	 custom-color="#f6479d"
 	 src-table="public.user_personal_data"
 	 dst-table="public.document_type" reference-fk="user_personal_data_fk_document_type"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_user_personal_data_gender" type="relfk" layers="0"
-	 custom-color="#394407"
+	 custom-color="#aab7b3"
 	 src-table="public.user_personal_data"
 	 dst-table="public.gender" reference-fk="user_personal_data_fk_gender"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_user_personal_data_martial_status" type="relfk" layers="0"
-	 custom-color="#425d28"
+	 custom-color="#caba84"
 	 src-table="public.user_personal_data"
 	 dst-table="public.martial_status" reference-fk="user_personal_data_fk_martial_status"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_user_personal_data_disability_type" type="relfk" layers="0"
-	 custom-color="#efc7d1"
+	 custom-color="#f745d1"
 	 src-table="public.user_personal_data"
 	 dst-table="public.disability_type" reference-fk="user_personal_data_fk_disability"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_user_personal_data_parrish" type="relfk" layers="0"
-	 custom-color="#f53edb"
+	 custom-color="#305ecb"
 	 src-table="public.user_personal_data"
 	 dst-table="public.parrish" reference-fk="user_personal_data_fk_parrish"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_employed_user_personal_data" type="relfk" layers="0"
+	 custom-color="#4d16cc"
+	 src-table="public.employed"
+	 dst-table="public.user_personal_data" reference-fk="employed_fk_personal_data"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_employed_job_position" type="relfk" layers="0"
+	 custom-color="#a9396f"
+	 src-table="public.employed"
+	 dst-table="public.job_position" reference-fk="employed_fk_job_position"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_employed_departament" type="relfk" layers="0"
+	 custom-color="#858b41"
+	 src-table="public.employed"
+	 dst-table="public.departament" reference-fk="employed_pk_departament"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_modules_by_job_position_departament_modules" type="relfk" layers="0"
+	 custom-color="#219793"
+	 src-table="public.modules_by_job_position_departament"
+	 dst-table="public.modules" reference-fk="modules_by_job_position_departament_fk_module"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_modules_by_job_position_departament_job_position" type="relfk" layers="0"
+	 custom-color="#f1e7ee"
+	 src-table="public.modules_by_job_position_departament"
+	 dst-table="public.job_position" reference-fk="modules_by_job_position_departament_fk_job_position"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_modules_by_job_position_departament_departament" type="relfk" layers="0"
+	 custom-color="#9f5485"
+	 src-table="public.modules_by_job_position_departament"
+	 dst-table="public.departament" reference-fk="modules_by_job_position_departament_fk_departament"
 	 src-required="false" dst-required="true"/>
 
 <permission>

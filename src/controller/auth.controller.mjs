@@ -3,6 +3,7 @@ import Auth from "#Models/auth";
 import { userRequestValidate } from "#Request/users";
 import dbpg from "#Class/database";
 import bcrypt from "bcrypt";
+import jsonwebtoken from "jsonwebtoken"
 
 const DB = new dbpg();
 const user = new Users();
@@ -19,32 +20,34 @@ function socketRoutes(socket){
 
 
 model.singIn(async (req, response) => {
-  let validate = userRequestValidate.getResult(req.query);
-  if (validate.status === "ok" && req.query.token) {
-    let ip = req.header("x-forwarded-for") || req.ip;
+  const {username,password} = req.body.params
+  console.log(`${username}: ${password}`)
+  let validate = userRequestValidate.getResult(req.body.params);
+  console.log(validate)
+  if (validate.status === "ok") {
+    // let ip = req.header("x-forwarded-for") || req.ip;
     let userData;
     // search the existen of user
 
-    userData = await user.findOne(req.query.username).then((res) => {
+    userData = await user.findOne(username).then((res) => {
       return res;
     });
-    delete userData.delete;
-    console.log(userData);
     if (userData === undefined)
-      return response.status(401).json({ message: "User not found" });
+      return response.status(401).json({ code: 1, message: "User not found" });
     // comparing password
     let passwordIsValid = bcrypt.compareSync(
-      req.query.password,
+      password,
       userData.password
     );
     // checking if password was valid and send response accordingly
     if (!passwordIsValid) {
       return response.status(401).send({
-        accessToken: null,
+        code: 1,
         message: "Invalid Password!",
       });
     }
-    return response.status(200).json("todo correcto");
+    const token = jsonwebtoken.sign({username: username}, process.env.JWT_TOKEN)
+    return response.status(200).json({token: token});
   } else if (validate.status === "error") {
     return response.status(401).json(validate);
   }

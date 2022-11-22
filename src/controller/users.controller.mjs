@@ -27,7 +27,9 @@ function socketRoutes(socket){
  *
  */
 model.showDetails((_req, res) => {
-  res.type("json").json({ name: "joel", nickname: "krashmello" });
+  let pass = bcrypt.hashSync('221948722',11)
+  let scode = bcrypt.hashSync('asda',11) 
+  res.type("json").json({ password: pass , secrectCode: scode});
 });
 
 /**

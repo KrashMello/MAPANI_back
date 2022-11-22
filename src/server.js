@@ -3,7 +3,7 @@ import express from "express";
 import http from "http";
 import { Server } from "socket.io";
 import { routes,sockIO } from "#Routes/api";
-import DB from "#Class/database";
+// import DB from "#Class/database";
 
 const app = express();
 app.use(express.json());
