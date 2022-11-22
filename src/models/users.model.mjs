@@ -12,9 +12,9 @@ export default class Users extends Model {
   //method for search a user in the data base
   async findOne(username) {
     let searchUsername = await this.DB.select(
-      "username,password",
+      "*",
       "view_users",
-      "username = '" + username + "'"
+      `username = '${username}'`
     )
       .then((response) => {
         return response.rows[0];

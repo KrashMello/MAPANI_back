@@ -1,5 +1,6 @@
 import Users from "#Models/users";
 import Auth from "#Models/auth";
+import Modules from "#Models/module";
 import { userRequestValidate } from "#Request/users";
 import dbpg from "#Class/database";
 import bcrypt from "bcrypt";
@@ -8,6 +9,7 @@ import jsonwebtoken from "jsonwebtoken"
 const DB = new dbpg();
 const user = new Users();
 const model = new Auth();
+const modules = new Modules();
 
 function socketRoutes(socket){
   model.io(socket,(socket)=>{
@@ -21,9 +23,7 @@ function socketRoutes(socket){
 
 model.singIn(async (req, response) => {
   const {username,password} = req.body.params
-  console.log(`${username}: ${password}`)
   let validate = userRequestValidate.getResult(req.body.params);
-  console.log(validate)
   if (validate.status === "ok") {
     // let ip = req.header("x-forwarded-for") || req.ip;
     let userData;
@@ -46,8 +46,13 @@ model.singIn(async (req, response) => {
         message: "Invalid Password!",
       });
     }
+    delete userData.password
+    delete userData.userSecurityCode
+    
     const token = jsonwebtoken.sign({username: username}, process.env.JWT_TOKEN)
-    return response.status(200).json({token: token});
+    let permissions;
+    permissions = await modules.findUserModules(userData.roleCode,userData.jobPositionCode, userData.departamentCode).then(res => {return res});
+    return response.status(200).json({token: token, userData: userData, permissions: permissions});
   } else if (validate.status === "error") {
     return response.status(401).json(validate);
   }
