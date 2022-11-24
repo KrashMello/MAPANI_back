@@ -35,6 +35,7 @@ export function sockIO(io) {
    io.on('connection', (socket) => {
     console.log(`connection success id: ${socket.id}`);
     users.socketRoutes(socket);
+    auth.socketRoutes(io,socket);
     receptionAgenda.socketRoutes(io,socket);
 
   })

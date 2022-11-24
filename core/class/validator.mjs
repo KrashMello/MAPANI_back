@@ -22,13 +22,13 @@ export class RequestValidator {
       }
     });
     let index = result.findIndex((value) => {
-      return value.status == "error";
+      return value.status == 1;
     });
     if (index > -1)
       return result.find((value) => {
-        return value.status == "error";
+        return value.status == 1;
       });
-    else return { status: "ok" };
+    else return { status: 0 };
   }
   #findValidator(type, rules, str) {
     let validate = true;
