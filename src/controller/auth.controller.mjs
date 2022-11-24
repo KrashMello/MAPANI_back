@@ -24,12 +24,12 @@ function socketRoutes(io,socket){
           if (err) {
             return {status: 1, message: 'error'}
           }
-          userData = await user.findOne(decoded.data.username).then(res=>{return res})
+          userData = await user.findOne(decoded.data.username);
           delete userData.password;
-        delete userData.userSecurityCode;
-          permissions = await modules.findUserModules(userData.roleCode,userData.jobPositionCode, userData.departamentCode).then(res => {return res});
+          delete userData.userSecurityCode;
+          permissions = await modules.findUserModules(userData.roleCode,userData.jobPositionCode, userData.departamentCode);
         });
-        socket.emit("verifyToken", {userData: userData , permmisions: permissions})
+        socket.emit("verifyToken", {userData: userData , permissions: permissions})
     })
   })
 }
@@ -47,7 +47,7 @@ model.singIn(async (req, response) => {
       return res;
     });
     if (userData === undefined)
-      return response.status(401).json({ code: 1, message: "User not found" });
+      return response.status(401).json({ code: 1, message: "Usuario no encontrado" });
     // comparing password
     let passwordIsValid = bcrypt.compareSync(
       password,
@@ -57,7 +57,7 @@ model.singIn(async (req, response) => {
     if (!passwordIsValid) {
       return response.status(401).json({
         code: 1,
-        message: "Invalid Password!",
+        message: "Clave invalida!",
       });
     }
     delete userData.password
