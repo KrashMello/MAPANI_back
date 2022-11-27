@@ -19,17 +19,25 @@ function socketRoutes(io,socket){
       })
     socket.on("verifyToken",async (token) =>{
         let permissions;
+        let username;
         let userData;
-        await jsonwebtoken.verify(token, process.env.JWT_TOKEN, async (err, decoded) => {
+        let errors = false;
+        await jsonwebtoken.verify(token, process.env.JWT_TOKEN, (err, decoded) => {
           if (err) {
-            return {status: 1, message: 'error'}
-          }
-          userData = await user.findOne(decoded.data.username);
-          delete userData.password;
-          delete userData.userSecurityCode;
-          permissions = await modules.findUserModules(userData.roleCode,userData.jobPositionCode, userData.departamentCode);
+              errors = true
+            }else
+            username = decoded.data.username;
         });
-        socket.emit("verifyToken", {userData: userData , permissions: permissions})
+      if(!errors){
+        setInterval(async ()=>{
+          userData = await user.findOne(username);
+          delete userData.userSecurityCode;
+          delete userData.password;
+          permissions = await modules.findUserModules(userData.roleCode,userData.jobPositionCode, userData.departamentCode);
+          io.to(socket.id).emit("getUserData", {userData: userData, permissions: permissions})
+        },10000)
+      }
+        io.to(socket.id).emit("verifyToken", errors)
     })
   })
 }
