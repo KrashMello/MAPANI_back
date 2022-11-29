@@ -46,44 +46,49 @@ function socketRoutes(io,socket){
  *
  */
 model.created(async (_req, res) => {
-//   CALL public.add_appointment(
-// 	<_pediatrics boolean>, 
-// 	<_nutritionist boolean>, 
-// 	<_psychiatry boolean>, 
-// 	<_breastfeeding_advice boolean>, 
-// 	<_advocacy boolean>, 
-// 	<_social_psychology boolean>, 
-// 	<_clinical_psychology boolean>, 
-// 	<_clinic_history_code character varying>, 
-// 	<"_representative_firstName" character varying>, 
-// 	<"_representative_lastName" character varying>, 
-// 	<"_representative_numberPhone" character varying>, 
-// 	<_representative_direction character varying>, 
-// 	<"_patient_firstName" character varying>, 
-// 	<"_patient_lastName" character varying>, 
-// 	<"_patient_bornDate" date>
-// )
+
+  // CALL public.add_employed(
+  // : _user_personal_data_code character varying,
+  // : _job_position_code character varying,
+  // : _departament_code character varying,
+  // : _date_of_entry date,
+  // : _date_of_discharge date,
+  // : _userpersonaldatafirstname charater varying,
+  // : _userpersonaldatalastname character varying,
+  // : _userpersonaldatagendercode character varying,
+  // : _usepersonaldatadocumenttypecode character varying,
+  // : _userpersonaldatadin character varying,
+  // : _userpersonaldataborndate date,
+  // : _userpersonaldatamartialstatuscode character varying,
+  // : _userpersonaldatadisability boolean,
+  // : _userpersonaldatadisabilitytypecode character varying,
+  // : _userpersonaldataethnicgroup boolean,
+  // : _userpersonaldataethnicdesciption character varying,
+  // : _userpersonaldatadirection character varying,
+  // : _userpersonaldataphonenumber character varying);
+
+
   let requestValues = _req.body.params;
   let queryOptions = [
-    requestValues.userPersonalDataCode === null ? `NULL::character varying` : `'${requestValues.userPersonalDataCode}'::character varying`,
+    requestValues.personalDataCode === null ? `NULL::character varying` : `'${requestValues.userPersonalDataCode}'::character varying`,
     `'${requestValues.jobPositionCode}'::character varying`,
     `'${requestValues.departamentCode}'::character varying`,
     `'${requestValues.dateOfEntry}'::DATE`,
     `'${requestValues.dateOfDischarge}'::DATE`,
-    requestValues.userPersonalDataFirstName === null ? `NULL::character varying` : `'${requestValues.userPersonalDataFirstName}'::character varying`,
-    requestValues.userPersonalDataLastName === null ? `NULL::character varying` : `'${requestValues.userPersonalDataLastName}'::character varying`,
-    requestValues.userPersonalDataGenderCode === null ? `NULL::character varying` : `'${requestValues.userPersonalDataGenderCode}'::character varying`,
-    requestValues.userPersonalDataDocumentTypeCode === null ? `NULL::character varying` : `'${requestValues.userPersonalDataDocumentTypeCode}'::character varying`,
-    requestValues.userPersonalDataDni === null ? `NULL::character varying` : `'${requestValues.userPersonalDataDni}'::character varying`,
-    requestValues.userPersonalDataBornDate=== null ? `NULL::DATE` : `'${requestValues.userPersonalDataBornDate}'::DATE`,
-    requestValues.userPersonalDataMartialStausCode === null ? `NULL::character varying` : `'${requestValues.userPersonalDataBornDate}'::character varying`,
-    requestValues.userPersonalDataDisability === null ? `NULL::boolean` : `'${requestValues.userPersonalDataMartialStausCode}'::character varying`,
-    requestValues.userPersonalDataDisabilityTypeCode === null ? `NULL::character varying` : `'${requestValues.userPersonalDataDisabilityTypeCode}'::character varying`,
-    requestValues.userPersonalDataEthnicGroup === null ? `NULL::BOOLEAN` : `'${requestValues.userPersonalDataEthnicGroup}'::BOOLEAN`,
-    requestValues.userPersonalDataEthnicDescription === null ? `NULL::character varying` : `'${requestValues.userPersonalDataEthnicDescription}'::character varying`,
-    requestValues.userPersonalDataParrishCode === null ? `NULL::character varying` : `'${requestValues.userPersonalDataParrishCode}'::character varying`,
-    requestValues.userPersonalDataDirection === null ? `NULL::character varying` : `'${requestValues.userPersonalDataDirection}'::character varying`,
-    requestValues.userPersonalDataPhoneNumber === null ? `NULL::character varying` : `'${requestValues.userPersonalDataPhoneNumber}'::character varying`,
+    requestValues.firstName === null ? `NULL::character varying` : `'${requestValues.userPersonalDataFirstName}'::character varying`,
+    requestValues.lastName === null ? `NULL::character varying` : `'${requestValues.userPersonalDataLastName}'::character varying`,
+    requestValues.genderCode === null ? `NULL::character varying` : `'${requestValues.userPersonalDataGenderCode}'::character varying`,
+    requestValues.documentTypeCode === null ? `NULL::character varying` : `'${requestValues.userPersonalDataDocumentTypeCode}'::character varying`,
+    requestValues.dni === null ? `NULL::character varying` : `'${requestValues.userPersonalDataDni}'::character varying`,
+    requestValues.bornDate=== null ? `NULL::DATE` : `'${requestValues.userPersonalDataBornDate}'::DATE`,
+    requestValues.martialStausCode === null ? `NULL::character varying` : `'${requestValues.userPersonalDataBornDate}'::character varying`,
+    requestValues.disability === null ? `NULL::boolean` : `'${requestValues.userPersonalDataMartialStausCode}'::character varying`,
+    requestValues.disabilityTypeCode === null ? `NULL::character varying` : `'${requestValues.userPersonalDataDisabilityTypeCode}'::character varying`,
+    requestValues.ethnicGroup === null ? `NULL::BOOLEAN` : `'${requestValues.userPersonalDataEthnicGroup}'::BOOLEAN`,
+    requestValues.ethnicDescription === null ? `NULL::character varying` : `'${requestValues.userPersonalDataEthnicDescription}'::character varying`,
+    requestValues.parrishCode === null ? `NULL::character varying` : `'${requestValues.userPersonalDataParrishCode}'::character varying`,
+    requestValues.direction === null ? `NULL::character varying` : `'${requestValues.userPersonalDataDirection}'::character varying`,
+    requestValues.phoneNumber === null ? `NULL::character varying` : `'${requestValues.userPersonalDataPhoneNumber}'::character varying`,
   ];
   // console.log(requestValues)
   // console.log(queryOptions)
@@ -107,52 +112,54 @@ model.created(async (_req, res) => {
  *
  */
 model.updated(async (_req, res) => {
-//   CALL public.update_appointment(
-// 	<_code character varying>, 
-// 	<"_appointmentDate" date>, 
-// 	<_pediatrics boolean>, 
-// 	<_nutritionist boolean>, 
-// 	<_psychiatry boolean>, 
-// 	<"_breastfeedingAdvice" boolean>, 
-// 	<_advocacy boolean>, 
-// 	<"_socialPsychology" boolean>, 
-// 	<"_clinicalPsychology" boolean>, 
-// 	<"_clinicHistoryCode" character varying>, 
-// 	<"_representativeFirstName" character varying>, 
-// 	<"_representativeLastName" character varying>, 
-// 	<"_representativeNumberPhone" character varying>, 
-// 	<"_representativeDirection" character varying>, 
-// 	<"_patientFirstName" character varying>, 
-// 	<"_patientLastName" character varying>, 
-// 	<"_patientBornDate" date>, 
-// 	<_status integer>
-// )
+// public.udate_employed(
+// _userPersonalDataCode character varying,
+// _employedCode character varying,
+// _job_position_code character varying,
+// _departament_code character varying,
+// _date_of_entry date,
+// _date_of_discharge date,
+// _userpersonaldatafirstname character varying,
+// _userpersonaldatalastname character varying,
+// _userpersonaldatagendercode character varying,
+// _usepersonaldatadocumenttypecode character varying,
+// _userpersonaldatadin character varying,
+// _userpersonaldataborndate date,
+// _userpersonaldatamartialstatuscode character varying,
+// _userpersonaldatadisability boolean,
+// _userpersonaldatadisabilitytypecode character varying,
+// _userpersonaldataethnicgroup boolean,
+// _userpersonaldataethnicdesciption character varying,
+// _userpersonaldatadirection character varying,
+// _userpersonaldataphonenumber character varying)
+
   
   let requestValues = _req.body.params;
   let queryOptions = [
-    "'" + requestValues.code + "'::character varying",
-    "'" + requestValues.projectCode + "'::character varying",
-    "'" + requestValues.appointmentDate + "'::DATE",
-    requestValues.pediatrics,
-    requestValues.nutritionist,
-    requestValues.psychiatry,
-    requestValues.breastfeedingAdvice,
-    requestValues.advocacy,
-    requestValues.socialPsychology,
-    requestValues.clinicalPsychology,
-    requestValues.clinicHistoryCode === null ? "NULL::character varying" : "'" + requestValues.clinicHistroryCode + "'::character varying",
-    "'" + requestValues.representativeFirstName + "'::character varying",
-    "'" + requestValues.representativeLastName + "'::character varying",
-    "'" + requestValues.representativeNumberPhone + "'::character varying",
-    "'" + requestValues.representativeDirection + "'::character varying",
-    "'" + requestValues.patientFirstName + "'::character varying",
-    "'" + requestValues.patientLastName + "'::character varying",
-    "'" + requestValues.patientBornDate + "'::DATE",
-    requestValues.status
+    requestValues.personalDataCode === null ? `NULL::character varying` : `'${requestValues.userPersonalDataCode}'::character varying`,
+    `'${requestValues.employedCode}'::character varying`, 
+    `'${requestValues.jobPositionCode}'::character varying`,
+    `'${requestValues.departamentCode}'::character varying`,
+    `'${requestValues.dateOfEntry}'::DATE`,
+    `'${requestValues.dateOfDischarge}'::DATE`,
+    requestValues.firstName === null ? `NULL::character varying` : `'${requestValues.userPersonalDataFirstName}'::character varying`,
+    requestValues.lastName === null ? `NULL::character varying` : `'${requestValues.userPersonalDataLastName}'::character varying`,
+    requestValues.genderCode === null ? `NULL::character varying` : `'${requestValues.userPersonalDataGenderCode}'::character varying`,
+    requestValues.documentTypeCode === null ? `NULL::character varying` : `'${requestValues.userPersonalDataDocumentTypeCode}'::character varying`,
+    requestValues.dni === null ? `NULL::character varying` : `'${requestValues.userPersonalDataDni}'::character varying`,
+    requestValues.bornDate=== null ? `NULL::DATE` : `'${requestValues.userPersonalDataBornDate}'::DATE`,
+    requestValues.martialStausCode === null ? `NULL::character varying` : `'${requestValues.userPersonalDataBornDate}'::character varying`,
+    requestValues.disability === null ? `NULL::boolean` : `'${requestValues.userPersonalDataMartialStausCode}'::character varying`,
+    requestValues.disabilityTypeCode === null ? `NULL::character varying` : `'${requestValues.userPersonalDataDisabilityTypeCode}'::character varying`,
+    requestValues.ethnicGroup === null ? `NULL::BOOLEAN` : `'${requestValues.userPersonalDataEthnicGroup}'::BOOLEAN`,
+    requestValues.ethnicDescription === null ? `NULL::character varying` : `'${requestValues.userPersonalDataEthnicDescription}'::character varying`,
+    requestValues.parrishCode === null ? `NULL::character varying` : `'${requestValues.userPersonalDataParrishCode}'::character varying`,
+    requestValues.direction === null ? `NULL::character varying` : `'${requestValues.userPersonalDataDirection}'::character varying`,
+    requestValues.phoneNumber === null ? `NULL::character varying` : `'${requestValues.userPersonalDataPhoneNumber}'::character varying`,
   ];
   
   // console.log(queryOptions)
-  await DB.call("update_appointment", queryOptions.toString())
+  await DB.call("update_employed", queryOptions.toString())
     .then((response) => {
       res
         .status(200)
