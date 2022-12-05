@@ -2,7 +2,7 @@ import Model from "#Class/model";
 
 import dbpg from "#Class/database";
 
-export default class Gender extends Model {
+export default class Departament extends Model {
   //the constructor
   constructor() {
     super();

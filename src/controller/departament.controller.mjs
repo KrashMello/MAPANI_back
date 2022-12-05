@@ -1,10 +1,10 @@
-import Gender from "#Models/gender";
+import Departament from "#Models/departament";
 // import { modelRequestValidate } from "#Request/users";
 import dbpg from "#Class/database";
 // import bcrypt from "bcrypt";
 
 const DB = new dbpg();
-const model = new Gender();
+const model = new Departament();
 
 /**
  * metodo obtener generos
@@ -20,7 +20,7 @@ function socketRoutes(socket){
 }
 
 model.get(async (_req, res) => {
-  await DB.select("*", "view_gender")
+  await DB.select("*", "view_departament")
     .then((response) => {
       res.json(
           response.rows

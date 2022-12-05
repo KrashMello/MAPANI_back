@@ -1,10 +1,10 @@
-import Gender from "#Models/gender";
-// import { modelRequestValidate } from "#Request/users";
+import Parrish from "#Models/parrish";
+// import {  modelRequestValidate } from "#Request/users";
 import dbpg from "#Class/database";
 // import bcrypt from "bcrypt";
 
 const DB = new dbpg();
-const model = new Gender();
+const model = new Parrish();
 
 /**
  * metodo obtener generos
@@ -20,7 +20,8 @@ function socketRoutes(socket){
 }
 
 model.get(async (_req, res) => {
-  await DB.select("*", "view_gender")
+  let requestValues = _req.query;
+  await DB.select("code,name", "view_parrish",`"municipalityCode" = '${requestValues.municipalityCode}'`)
     .then((response) => {
       res.json(
           response.rows

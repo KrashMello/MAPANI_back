@@ -5,6 +5,16 @@ import * as project from "#Controller/project";
 import * as sponsor from "#Controller/sponsor";
 import * as patient from "#Controller/patient";
 import * as gender from "#Controller/gender";
+import * as documentType from "#Controller/documentType";
+import * as martialStatus from "#Controller/martialStatus";
+import * as disability from "#Controller/disability";
+import * as region from "#Controller/region";
+import * as stade from "#Controller/stade";
+import * as municipality from "#Controller/municipality";
+import * as parrish from "#Controller/parrish";
+import * as jobPosition from "#Controller/jobPosition";
+import * as departament from "#Controller/departament";
+import * as employed from "#Controller/employed"
 
 export function routes(app) {
   app.get('/404', function(req, res, next){
@@ -17,6 +27,16 @@ export function routes(app) {
   app.use("/sponsor",sponsor.apiRoutes)
   app.use("/patient",patient.apiRoutes)
   app.use("/gender",gender.apiRoutes)
+  app.use("/documentType",documentType.apiRoutes)
+  app.use("/martialStatus",martialStatus.apiRoutes)
+  app.use("/disability",disability.apiRoutes)
+  app.use("/region",region.apiRoutes)
+  app.use("/stade",stade.apiRoutes)
+  app.use("/municipality",municipality.apiRoutes)
+  app.use("/parrish",parrish.apiRoutes)
+  app.use("/jobPosition",jobPosition.apiRoutes)
+  app.use("/departament",departament.apiRoutes)
+  app.use("/employed",employed.apiRoutes)
 
   app.use(function(req, res, next){
     res.status(404);
@@ -37,6 +57,7 @@ export function sockIO(io) {
     users.socketRoutes(socket);
     auth.socketRoutes(io,socket);
     receptionAgenda.socketRoutes(io,socket);
+    employed.socketRoutes(io,socket);
 
   })
 }
