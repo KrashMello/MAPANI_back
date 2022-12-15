@@ -10,32 +10,31 @@ const model = new Stade();
  * metodo obtener generos
  *
  */
-function socketRoutes(socket){
-  user.io(socket,(socket)=>{
-      // socket.on("getMessage",async (msj)=>{
-      //   msj = await DB.select("*", "view_users")
-      //   socket.emit('getMessage',msj)
-      // })
-  })
+function socketRoutes(socket) {
+  user.io(socket, (socket) => {
+    // socket.on("getMessage",async (msj)=>{
+    //   msj = await DB.select("*", "view_users")
+    //   socket.emit('getMessage',msj)
+    // })
+  });
 }
 
 model.get(async (_req, res) => {
   let requestValues = _req.query;
-  await DB.select("code,name", "view_stade",`"regionCode" = '${requestValues.regionCode}'`)
+  await DB.select(
+    "code,name",
+    "view_stade",
+    `"regionCode" = '${requestValues.regionCode}'`
+  )
     .then((response) => {
-      res.json(
-          response.rows
-      );
+      return res.status(200).json(response.rows);
     })
     .catch((error) => {
       console.log(error);
-      res.status(401).json({ error: "Ah ocurrido un error!! " });
+      return res.status(401).json({ error: "Ah ocurrido un error!! " });
     });
 });
 
-let apiRoutes = model.router()
+let apiRoutes = model.router();
 
-export {
-  apiRoutes,
-  socketRoutes
-}
+export { apiRoutes };

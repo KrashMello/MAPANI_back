@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.4" use-changelog="false" last-position="0,0" last-zoom="1" max-obj-count="76"
+<dbmodel pgmodeler-ver="1.0.0-beta1" use-changelog="false" last-position="0,0" last-zoom="1" max-obj-count="110"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -15,7 +15,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
  createrole="true"
  inherit="true"
  login="true"
- encrypted="true"
  password="********">
 </role>
 
@@ -23,7 +22,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
  replication="true"
  inherit="true"
  login="true"
- encrypted="true"
  password="********">
 </role>
 
@@ -97,7 +95,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="users_status" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="580" y="60"/>
+	<position x="560" y="60"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -133,7 +131,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="users_role" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="980" y="60"/>
+	<position x="960" y="60"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -169,7 +167,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="role_module_permission" layers="0" collapse-mode="2" max-obj-count="12" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1400" y="60"/>
+	<position x="1360" y="60"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
 		<type name="bigint" length="0"/>
@@ -214,10 +212,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="krash"/>
 </sequence>
 
-<table name="modules" layers="0" collapse-mode="2" max-obj-count="9" z-value="0">
+<table name="modules" layers="0" collapse-mode="2" max-obj-count="13" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1880" y="60"/>
+	<position x="1840" y="60"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -243,6 +241,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="update_at">
 		<type name="timestamp" length="0"/>
 	</column>
+	<column name="haschildren" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="order" default-value="0">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="fathercode" default-value="NULL">
+		<type name="character varying" length="15"/>
+	</column>
 	<constraint name="module_pk" type="pk-constr" table="public.modules">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
@@ -259,7 +266,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="representative" layers="0" collapse-mode="2" max-obj-count="22" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="60" y="480"/>
+	<position x="60" y="580"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
 		<type name="bigint" length="0"/>
@@ -334,7 +341,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="patient" layers="0" collapse-mode="2" max-obj-count="12" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="540" y="480"/>
+	<position x="520" y="580"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
 		<type name="bigint" length="0"/>
@@ -382,7 +389,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="document_type" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1000" y="480"/>
+	<position x="960" y="580"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -418,7 +425,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="gender" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1400" y="480"/>
+	<position x="1360" y="580"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -451,7 +458,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="martial_status" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1820" y="480"/>
+	<position x="1760" y="580"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -484,7 +491,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="disability_type" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="60" y="1100"/>
+	<position x="60" y="1320"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -517,7 +524,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="stade" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="460" y="1100"/>
+	<position x="460" y="1320"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -553,7 +560,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="municipality" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="900" y="1100"/>
+	<position x="860" y="1320"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -589,7 +596,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="parrish" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1320" y="1100"/>
+	<position x="1280" y="1320"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -625,7 +632,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="clinic_history" layers="0" collapse-mode="2" max-obj-count="18" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1780" y="1100"/>
+	<position x="1720" y="1320"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
 		<type name="bigint" length="0"/>
@@ -688,7 +695,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="reception_agenda" layers="0" collapse-mode="2" max-obj-count="27" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="60" y="1580"/>
+	<position x="60" y="1900"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
 		<type name="bigint" length="0"/>
@@ -775,7 +782,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="project" layers="0" collapse-mode="2" max-obj-count="15" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="580" y="1580"/>
+	<position x="580" y="1900"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -832,7 +839,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="nursing" layers="0" collapse-mode="2" max-obj-count="15" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1040" y="1580"/>
+	<position x="1020" y="1900"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
 		<type name="bigint" length="0"/>
@@ -886,7 +893,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="sizes" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1500" y="1580"/>
+	<position x="1460" y="1900"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -922,7 +929,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="weight" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1920" y="1580"/>
+	<position x="1880" y="1900"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -955,7 +962,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="exit_status" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="60" y="2220"/>
+	<position x="60" y="2700"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -988,7 +995,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="3phase" layers="0" collapse-mode="2" max-obj-count="10" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="440" y="2220"/>
+	<position x="440" y="2700"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
 		<type name="bigint" length="0"/>
@@ -1030,7 +1037,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="grown_monitoring_status" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="980" y="2220"/>
+	<position x="940" y="2700"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -1063,7 +1070,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="babysitter" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1400" y="2220"/>
+	<position x="1360" y="2700"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
 		<type name="bigint" length="0"/>
@@ -1114,12 +1121,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<parameter name="_bornDate">
 		<type name="date" length="0"/>
 	</parameter>
-	<definition><![CDATA[declare
+	<definition> <![CDATA[declare
 age character varying;
 begin
 SELECT age(CURRENT_DATE, "_bornDate") into age;
 return age;
-end;]]></definition>
+end;]]> </definition>
 </function>
 
 <function name="findAppointmentDate"
@@ -1140,7 +1147,7 @@ end;]]></definition>
 	<parameter name="_Birthdate">
 		<type name="character varying" length="0"/>
 	</parameter>
-	<definition><![CDATA[DECLARE
+	<definition> <![CDATA[DECLARE
     var record;
     response record;
     i int := 1;
@@ -1218,7 +1225,7 @@ BEGIN
         NULL::character varying,
         NULL::date INTO response;
     RETURN response;
-END;]]></definition>
+END;]]> </definition>
 </function>
 
 <procedure name="add_appointment" security-type="SECURITY INVOKER">
@@ -1270,7 +1277,7 @@ END;]]></definition>
 	<parameter name="_patient_bornDate">
 		<type name="date" length="0"/>
 	</parameter>
-	<definition><![CDATA[DECLARE 
+	<definition> <![CDATA[DECLARE 
 code character varying;
 code_type character varying := 'ra';
 appointment_data record;
@@ -1356,7 +1363,7 @@ if _clinic_history_code is NULL then
         _clinic_history_code
         );
  end if;
-END;]]></definition>
+END;]]> </definition>
 </procedure>
 
 <procedure name="add_project" security-type="SECURITY INVOKER">
@@ -1390,7 +1397,7 @@ END;]]></definition>
 	<parameter name="_oneDay">
 		<type name="boolean" length="0"/>
 	</parameter>
-	<definition><![CDATA[DECLARE
+	<definition> <![CDATA[DECLARE
 code character varying;
 code_type character varying := 'prjt';
 BEGIN
@@ -1423,7 +1430,7 @@ BEGIN
         "_oneDay"
     );
     
-END;]]></definition>
+END;]]> </definition>
 </procedure>
 
 <procedure name="add_gender" security-type="SECURITY INVOKER">
@@ -1433,7 +1440,7 @@ END;]]></definition>
 	<parameter name="_name">
 		<type name="character varying" length="0"/>
 	</parameter>
-	<definition><![CDATA[declare
+	<definition> <![CDATA[declare
 code character varying;
 code_type character varying := 'gndr';
 begin
@@ -1445,7 +1452,7 @@ begin
         code,
         _name
     );
-end;]]></definition>
+end;]]> </definition>
 </procedure>
 
 <procedure name="add_disability_type" security-type="SECURITY INVOKER">
@@ -1455,7 +1462,7 @@ end;]]></definition>
 	<parameter name="_name">
 		<type name="character varying" length="0"/>
 	</parameter>
-	<definition><![CDATA[declare
+	<definition> <![CDATA[declare
 code character varying;
 code_type character varying := 'dsbltyType';
 begin
@@ -1465,13 +1472,13 @@ begin
 	code, name)
 	VALUES (code,_name);
     
-end;]]></definition>
+end;]]> </definition>
 </procedure>
 
 <table name="patient_disability" layers="0" collapse-mode="2" max-obj-count="9" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1860" y="2220"/>
+	<position x="1820" y="2700"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
 		<type name="bigint" length="0"/>
@@ -1528,7 +1535,7 @@ end;]]></definition>
 	<parameter name="_acronym" default-value="NULL::character varying">
 		<type name="character varying" length="0"/>
 	</parameter>
-	<definition><![CDATA[DECLARE
+	<definition> <![CDATA[DECLARE
 count_code integer := 0;
 BEGIN
 	if code = 'ra' then
@@ -1590,17 +1597,17 @@ BEGIN
     elsif code = 'EMPL' then
     	-- employed
     	select count(*) into count_code from public.employed;
-    	return concat('JBPST-', substring('0000',length(count_code::character varying) + 1, 4), count_code + 1);
+    	return concat('EMP-', substring('0000',length(count_code::character varying) + 1, 4), count_code + 1);
     else
         return 'codigo no existe';
 	end if;
-END;]]></definition>
+END;]]> </definition>
 </function>
 
 <table name="sponsors" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="60" y="2560"/>
+	<position x="60" y="3120"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -1639,7 +1646,7 @@ END;]]></definition>
 <table name="sponsors_by_project" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="500" y="2560"/>
+	<position x="480" y="3120"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
 		<type name="bigint" length="0"/>
@@ -1685,7 +1692,7 @@ END;]]></definition>
 	<parameter name="_email">
 		<type name="character varying" length="0"/>
 	</parameter>
-	<definition><![CDATA[declare 
+	<definition> <![CDATA[declare 
 /*code character varying;
 code_type character varying := 'spns';*/
 code_exist int := 0;
@@ -1704,7 +1711,7 @@ INSERT INTO public.sponsors(
         _email
     );
     
-end;]]></definition>
+end;]]> </definition>
 </procedure>
 
 <procedure name="add_patient" security-type="SECURITY INVOKER">
@@ -1744,7 +1751,7 @@ end;]]></definition>
 	<parameter name="_auditive">
 		<type name="boolean" length="0"/>
 	</parameter>
-	<definition><![CDATA[declare
+	<definition> <![CDATA[declare
 code character varying;
 code_type character varying := 'ptnt';
 disability_selected boolean := false;
@@ -1799,7 +1806,7 @@ begin
         patient_code, motor,visual,cognitive,auditive) SELECT code , "code_type"::character varying  FROM unnest( _disability_type) AS "code_type";
 		*/
     end if;
-end;]]></definition>
+end;]]> </definition>
 </procedure>
 
 <procedure name="update_patient" security-type="SECURITY INVOKER">
@@ -1839,7 +1846,7 @@ end;]]></definition>
 	<parameter name="_auditive">
 		<type name="boolean" length="0"/>
 	</parameter>
-	<definition><![CDATA[declare
+	<definition> <![CDATA[declare
 disability_selected boolean := false;
 begin
 	if _motor = true or _visual = true or _cognitive = true or _auditive = true then
@@ -1873,7 +1880,7 @@ begin
 		auditive=_auditive
 		WHERE patient_code = _code;
     end if;
-end;]]></definition>
+end;]]> </definition>
 </procedure>
 
 <function name="update_appointment_trigger"
@@ -1891,7 +1898,7 @@ end;]]></definition>
 	<return-type>
 	<type name="trigger" length="0"/>
 	</return-type>
-	<definition><![CDATA[declare
+	<definition> <![CDATA[declare
 appointment_data record;
 _project_code character varying;
 appointment_date date;
@@ -1936,7 +1943,7 @@ begin
 	
 	RETURN NEW;
 	
-end;]]></definition>
+end;]]> </definition>
 </function>
 
 <procedure name="update_appointment" security-type="SECURITY INVOKER">
@@ -2000,7 +2007,7 @@ end;]]></definition>
 	<parameter name="_status">
 		<type name="integer" length="0"/>
 	</parameter>
-	<definition><![CDATA[begin
+	<definition> <![CDATA[begin
      if _code is NULL then
         RAISE EXCEPTION 'el codigo no puede estar vacio' USING HINT = 'EXCEPTION is raised here and transaction aborted';
      end if;
@@ -2026,7 +2033,7 @@ end;]]></definition>
 			update_at = now(),
 			status=_status
 			WHERE code=_code;
-end;]]></definition>
+end;]]> </definition>
 </procedure>
 
 <procedure name="add_user_status" security-type="SECURITY INVOKER">
@@ -2036,7 +2043,7 @@ end;]]></definition>
 	<parameter name="_name">
 		<type name="character varying" length="0"/>
 	</parameter>
-	<definition><![CDATA[	declare 
+	<definition> <![CDATA[	declare 
 		code character varying;
 		code_type character varying := 'usrStatus';
 	BEGIN
@@ -2050,7 +2057,7 @@ end;]]></definition>
 			code,
 			_name
 		);
-	END;]]></definition>
+	END;]]> </definition>
 </procedure>
 
 <procedure name="add_module" security-type="SECURITY INVOKER">
@@ -2069,7 +2076,7 @@ end;]]></definition>
 	<parameter name="_unabled">
 		<type name="boolean" length="0"/>
 	</parameter>
-	<definition><![CDATA[	declare 
+	<definition> <![CDATA[	declare 
 		code character varying;
 		code_type character varying := 'module';
 	BEGIN
@@ -2087,13 +2094,13 @@ end;]]></definition>
 			_icon,
 			_unabled
 		);
-	END;]]></definition>
+	END;]]> </definition>
 </procedure>
 
 <table name="user_personal_data" layers="0" collapse-mode="2" max-obj-count="21" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="920" y="2560"/>
+	<position x="900" y="3120"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
 		<type name="bigint" length="0"/>
@@ -2171,11 +2178,11 @@ end;]]></definition>
 <view name="view_gender" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1480" y="3160"/>
+	<position x="1440" y="3840"/>
 	<reference>
-		<expression><![CDATA[ SELECT gender.code,
+		<expression> <![CDATA[ SELECT gender.code,
     gender.name
-   FROM gender;]]></expression>
+   FROM gender;]]> </expression>
 	<column name="code">
 		<type name="character varying" length="15"/>
 	</column>
@@ -2187,7 +2194,7 @@ end;]]></definition>
 </view>
 
 <relationship name="rel_view_gender_gender" type="reltv" layers="0"
-	 custom-color="#886306"
+	 custom-color="#81092f"
 	 src-table="public.view_gender"
 	 dst-table="public.gender"
 	 src-required="false" dst-required="false"/>
@@ -2195,9 +2202,9 @@ end;]]></definition>
 <view name="view_patient" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1800" y="3160"/>
+	<position x="1740" y="3840"/>
 	<reference>
-		<expression><![CDATA[ SELECT patient.code,
+		<expression> <![CDATA[ SELECT patient.code,
     patient."firstName",
     patient."lastName",
     patient.born_date AS "bornDate",
@@ -2212,7 +2219,7 @@ end;]]></definition>
    FROM ((patient
      JOIN gender ON (((gender.code)::text = (patient.gender_code)::text)))
      LEFT JOIN patient_disability ON (((patient_disability.patient_code)::text = (patient.code)::text)))
-  ORDER BY patient.code;]]></expression>
+  ORDER BY patient.code;]]> </expression>
 	<column name="code">
 		<type name="character varying" length="15"/>
 	</column>
@@ -2256,19 +2263,19 @@ end;]]></definition>
 </view>
 
 <relationship name="rel_view_patient_patient" type="reltv" layers="0"
-	 custom-color="#94495b"
+	 custom-color="#6e8bbd"
 	 src-table="public.view_patient"
 	 dst-table="public.patient"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_patient_gender" type="reltv" layers="0"
-	 custom-color="#7ad7df"
+	 custom-color="#c52f3a"
 	 src-table="public.view_patient"
 	 dst-table="public.gender"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_patient_patient_disability" type="reltv" layers="0"
-	 custom-color="#3e9f96"
+	 custom-color="#1fb07d"
 	 src-table="public.view_patient"
 	 dst-table="public.patient_disability"
 	 src-required="false" dst-required="false"/>
@@ -2276,9 +2283,9 @@ end;]]></definition>
 <view name="view_appointment" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="60" y="3560"/>
+	<position x="60" y="4320"/>
 	<reference>
-		<expression><![CDATA[ SELECT reception_agenda.code,
+		<expression> <![CDATA[ SELECT reception_agenda.code,
     reception_agenda.project_code AS "projectCode",
     reception_agenda."Appointment_date" AS "appointmentDate",
     reception_agenda.pediatrics,
@@ -2321,7 +2328,7 @@ end;]]></definition>
     (reception_agenda.create_at)::date AS "aggregateIn",
     reception_agenda.status
    FROM reception_agenda
-  ORDER BY reception_agenda.code DESC;]]></expression>
+  ORDER BY reception_agenda.code DESC;]]> </expression>
 	<column name="code">
 		<type name="character varying" length="15"/>
 	</column>
@@ -2390,7 +2397,7 @@ end;]]></definition>
 </view>
 
 <relationship name="rel_view_appointment_reception_agenda" type="reltv" layers="0"
-	 custom-color="#ecf988"
+	 custom-color="#b6e09b"
 	 src-table="public.view_appointment"
 	 dst-table="public.reception_agenda"
 	 src-required="false" dst-required="false"/>
@@ -2398,9 +2405,9 @@ end;]]></definition>
 <view name="view_project" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="520" y="3560"/>
+	<position x="520" y="4320"/>
 	<reference>
-		<expression><![CDATA[ SELECT project.code,
+		<expression> <![CDATA[ SELECT project.code,
     project.name,
     project.acronym,
     project.start_date AS "startDate",
@@ -2410,7 +2417,7 @@ end;]]></definition>
     project.from_day AS "fromDay",
     project.to_day AS "toDay",
     project.one_day AS "isJustOneDay"
-   FROM project;]]></expression>
+   FROM project;]]> </expression>
 	<column name="code">
 		<type name="character varying" length="15"/>
 	</column>
@@ -2446,7 +2453,7 @@ end;]]></definition>
 </view>
 
 <relationship name="rel_view_project_project" type="reltv" layers="0"
-	 custom-color="#a6173a"
+	 custom-color="#6c7a0c"
 	 src-table="public.view_project"
 	 dst-table="public.project"
 	 src-required="false" dst-required="false"/>
@@ -2454,13 +2461,13 @@ end;]]></definition>
 <view name="view_sponsor" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="880" y="3560"/>
+	<position x="860" y="4320"/>
 	<reference>
-		<expression><![CDATA[ SELECT sponsors.code,
+		<expression> <![CDATA[ SELECT sponsors.code,
     sponsors.name,
     sponsors.contac_number AS "contacNumber",
     sponsors.email
-   FROM sponsors;]]></expression>
+   FROM sponsors;]]> </expression>
 	<column name="code">
 		<type name="character varying" length="15"/>
 	</column>
@@ -2478,7 +2485,7 @@ end;]]></definition>
 </view>
 
 <relationship name="rel_view_sponsor_sponsors" type="reltv" layers="0"
-	 custom-color="#f87782"
+	 custom-color="#922bd3"
 	 src-table="public.view_sponsor"
 	 dst-table="public.sponsors"
 	 src-required="false" dst-required="false"/>
@@ -2486,11 +2493,11 @@ end;]]></definition>
 <view name="view_disability_type" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1240" y="3560"/>
+	<position x="1240" y="4320"/>
 	<reference>
-		<expression><![CDATA[ SELECT disability_type.code,
+		<expression> <![CDATA[ SELECT disability_type.code,
     disability_type.name
-   FROM disability_type;]]></expression>
+   FROM disability_type;]]> </expression>
 	<column name="code">
 		<type name="character varying" length="15"/>
 	</column>
@@ -2502,7 +2509,7 @@ end;]]></definition>
 </view>
 
 <relationship name="rel_view_disability_type_disability_type" type="reltv" layers="0"
-	 custom-color="#7e6a73"
+	 custom-color="#1f9482"
 	 src-table="public.view_disability_type"
 	 dst-table="public.disability_type"
 	 src-required="false" dst-required="false"/>
@@ -2556,7 +2563,7 @@ end;]]></definition>
 	<parameter name="_phone_number">
 		<type name="character varying" length="0"/>
 	</parameter>
-	<definition><![CDATA[	BEGIN
+	<definition> <![CDATA[	BEGIN
 		UPDATE public.user_personal_data
 		SET 
 		first_name=_first_name,
@@ -2575,152 +2582,7 @@ end;]]></definition>
 		phone_number=_phone_number, 
 		update_at=now()
 		WHERE code=_code;
-	END;]]></definition>
-</procedure>
-
-<procedure name="add_user" security-type="SECURITY INVOKER">
-	<schema name="public"/>
-	<role name="krash"/>
-	<language name="plpgsql"/>
-	<parameter name="_username">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_password">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_email">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_security_code">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_status_code">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_role_code">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_first_name">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_last_name">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_gender_code">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_document_type_code">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_dni">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_born_date">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_martial_status_code">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_disability">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_disability_type_code">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_ethnic_group">
-		<type name="boolean" length="0"/>
-	</parameter>
-	<parameter name="_ethnic_description">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_parrish_code">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_direction">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_phone_number">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<definition><![CDATA[	declare 
-		code character varying;
-		
-		code_type character varying := 'usr';
-	
-		upd_code character varying;
-	
-		upd_code_type character varying := 'upd';
-	
-		exist_upd int;
-		
-		
-	BEGIN
-		select count(*) into exist_upd from public.user_personal_data where dni = _dni;
-	
-		if exist_upd > 0 then
-			raise exception 'cedula regristrada' USING HINT = 'EXCEPTION is raised here and transaction aborted';
-		end if;
-	
-		code := codegen(code_type);
-		upd_code := codegen(udp_code_type);
-	
-		insert into public.user_personal_data (
-			code,
-			first_name,
-			last_name,
-			gender_code, 
-			document_type_code,
-			dni,
-			born_date,
-			martial_status_code,
-			disability,
-			disability_type_code,
-			ethnic_group,
-			ethnic_description,
-			parrish_code,
-			direction,
-			phone_number
-		) values (
-			upd_code,
-			_first_name,
-			_last_name,
-			_gender_code, 
-			_document_type_code,
-			_dni,
-			_born_date::date,
-			_martial_status_code,
-			_disability,
-			_disability_type_code,
-			_ethnic_group,
-			_ethnic_description,
-			_parrish_code,
-			_direction,
-			_phone_number
-		);
-		INSERT INTO public.users
-		(
-			code,
-			username,
-			"password",
-			email,
-			security_code,
-			recuperate_password_token,
-			personal_data_code,
-			status_code,
-			role_code
-		)
-		VALUES(
-			code,
-			_username,
-			_password,
-			_email,
-			_security_code,
-			null::character varying,
-			upd_code, 
-			_status_code,
-			_role_code
-		);
-	END;]]></definition>
+	END;]]> </definition>
 </procedure>
 
 <procedure name="add_user_role" security-type="SECURITY INVOKER">
@@ -2748,7 +2610,7 @@ end;]]></definition>
 	<parameter name="_report">
 		<type name="boolean" length="0" dimension="1"/>
 	</parameter>
-	<definition><![CDATA[	declare 
+	<definition> <![CDATA[	declare 
 		code character varying;
 		code_type character varying := 'usrRole';
 	BEGin
@@ -2779,13 +2641,13 @@ end;]]></definition>
 		group by "module", "show", "create", "update", "print", "report"
 		order by "module" asc
 		;
-	END;]]></definition>
+	END;]]> </definition>
 </procedure>
 
 <table name="employed" layers="0" collapse-mode="2" max-obj-count="10" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1420" y="2560"/>
+	<position x="1380" y="3120"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
 		<type name="bigint" length="0"/>
@@ -2830,7 +2692,7 @@ end;]]></definition>
 <table name="job_position" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1940" y="2560"/>
+	<position x="1880" y="3120"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -2863,7 +2725,7 @@ end;]]></definition>
 <table name="departament" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="60" y="3160"/>
+	<position x="60" y="3840"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -2896,7 +2758,7 @@ end;]]></definition>
 <table name="modules_by_job_position_departament" layers="0" collapse-mode="2" max-obj-count="13" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="460" y="3160"/>
+	<position x="460" y="3840"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
 		<type name="bigint" length="0"/>
@@ -2969,7 +2831,7 @@ end;]]></definition>
 	<parameter name="_report">
 		<type name="boolean" length="0" dimension="1"/>
 	</parameter>
-	<definition><![CDATA[	BEGIN
+	<definition> <![CDATA[	BEGIN
 		insert into modules_by_job_position_departament (
 			job_position_code ,
 			departament_code ,
@@ -2989,7 +2851,7 @@ end;]]></definition>
 		group by "module", "show" , "create", "update", "print", "report"
 		order by "module" asc
 		;
-	END;]]></definition>
+	END;]]> </definition>
 </procedure>
 
 <procedure name="add_role_modules_permission" security-type="SECURITY INVOKER">
@@ -3017,7 +2879,7 @@ end;]]></definition>
 	<parameter name="_report">
 		<type name="boolean" length="0" dimension="1"/>
 	</parameter>
-	<definition><![CDATA[	BEGIN
+	<definition> <![CDATA[	BEGIN
 		insert into public."role_module_permission" (
 			role_code,
 			module_code,
@@ -3037,7 +2899,7 @@ end;]]></definition>
 		order by "module" asc)
 		ON CONFLICT (role_code,module_code) DO NOTHING
 		;
-	END;]]></definition>
+	END;]]> </definition>
 </procedure>
 
 <procedure name="add_document_type" security-type="SECURITY INVOKER">
@@ -3050,7 +2912,7 @@ end;]]></definition>
 	<parameter name="_name">
 		<type name="character varying" length="0"/>
 	</parameter>
-	<definition><![CDATA[	declare
+	<definition> <![CDATA[	declare
 		code character varying;
 		code_type character varying := 'DType';
 	BEGIN
@@ -3059,13 +2921,13 @@ end;]]></definition>
 		INSERT INTO public.document_type
 		(code, "acronym" ,"name")
 		VALUES(code, _acronym ,_name);
-	END;]]></definition>
+	END;]]> </definition>
 </procedure>
 
 <table name="region" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1060" y="3160"/>
+	<position x="1040" y="3840"/>
 	<column name="id" not-null="true"
 	 identity-type="ALWAYS" start="1" increment="1" min-value="1" max-value="32767" cache="1">
 		<type name="smallint" length="0"/>
@@ -3102,19 +2964,205 @@ end;]]></definition>
 	<parameter name="_name">
 		<type name="character varying" length="0"/>
 	</parameter>
-	<definition><![CDATA[	declare 
+	<definition> <![CDATA[	declare 
 		code character varying;
 		code_type character varying := 'Mstatus';
 	BEGIN
 		code := codegen(code_type);
 		insert into public.martial_status (code, "name") values (code, _name);
-	END;]]></definition>
+	END;]]> </definition>
 </procedure>
+
+<procedure name="add_departament" security-type="SECURITY INVOKER">
+	<schema name="public"/>
+	<role name="krash"/>
+	<language name="plpgsql"/>
+	<parameter name="_name">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<definition> <![CDATA[	declare
+		code character varying;
+		code_type character varying := 'DPTM';
+	BEGIN
+		code := codegen(code_type);
+		insert into departament ( code, "name")
+		values( code, _name);
+	END;]]> </definition>
+</procedure>
+
+<procedure name="add_job_position" security-type="SECURITY INVOKER">
+	<schema name="public"/>
+	<role name="krash"/>
+	<language name="plpgsql"/>
+	<parameter name="_name">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<definition> <![CDATA[	declare 
+		code character varying;
+		code_type character varying := 'JOBPOSI';
+	BEGIN
+		code := codegen(code_type);
+		insert into job_position (code,"name")
+		values (code,_name);
+	END;]]> </definition>
+</procedure>
+
+<view name="view_modules" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="1540" y="4320"/>
+	<reference>
+		<expression> <![CDATA[ SELECT mp."moduleCode",
+    mp."moduleName",
+    mp."moduleSrc",
+    mp."moduleIcon",
+    mp."roleCode",
+    mp."jobPositionCode",
+    mp."departamentCode",
+    mp."hasChildren",
+    mp."order",
+    mp."fatherCode",
+    mp.show,
+    mp."create",
+    mp.update,
+    mp.print,
+    mp.repoort
+   FROM ( SELECT m.code AS "moduleCode",
+            m.name AS "moduleName",
+            m.src AS "moduleSrc",
+            m.icon AS "moduleIcon",
+            (ur.code)::character varying AS "roleCode",
+            NULL::character varying AS "jobPositionCode",
+            NULL::character varying AS "departamentCode",
+            m.haschildren AS "hasChildren",
+            m."order",
+            m.fathercode AS "fatherCode",
+            rmp.show,
+            rmp."create",
+            rmp.update,
+            rmp.print,
+            rmp.report AS repoort
+           FROM ((modules m
+             JOIN role_module_permission rmp ON (((rmp.module_code)::text = (m.code)::text)))
+             JOIN users_role ur ON (((rmp.role_code)::text = (ur.code)::text)))
+        UNION
+         SELECT m2.code AS "moduleCode",
+            m2.name AS "moduleName",
+            m2.src AS "moduleSrc",
+            m2.icon AS "moduleIcon",
+            NULL::character varying AS "roleCode",
+            (jp.code)::character varying AS "jobPositionCode",
+            (d.code)::character varying AS "departamentCode",
+            m2.haschildren,
+            m2."order",
+            m2.fathercode AS "fatherCode",
+            mbjpd.show,
+            mbjpd."create",
+            mbjpd.update,
+            mbjpd.print,
+            mbjpd.report AS repoort
+           FROM (((modules m2
+             JOIN modules_by_job_position_departament mbjpd ON (((mbjpd.module_code)::text = (m2.code)::text)))
+             JOIN departament d ON (((mbjpd.departament_code)::text = (d.code)::text)))
+             JOIN job_position jp ON (((mbjpd.job_position_code)::text = (jp.code)::text)))) mp
+  ORDER BY mp."moduleCode", mp."order";]]> </expression>
+	<column name="moduleCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="moduleName">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="moduleSrc">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="moduleIcon">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="roleCode">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="jobPositionCode">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="departamentCode">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="hasChildren">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="order">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="fatherCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="show">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="create">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="update">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="print">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="repoort">
+		<type name="boolean" length="0"/>
+	</column>
+		<reftable name="public.users_role"/>
+		<reftable name="public.role_module_permission"/>
+		<reftable name="public.modules"/>
+		<reftable name="public.job_position"/>
+		<reftable name="public.departament"/>
+		<reftable name="public.modules_by_job_position_departament"/>
+	</reference>
+</view>
+
+<relationship name="rel_view_modules_users_role" type="reltv" layers="0"
+	 custom-color="#cc4639"
+	 src-table="public.view_modules"
+	 dst-table="public.users_role"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_modules_role_module_permission" type="reltv" layers="0"
+	 custom-color="#999a51"
+	 src-table="public.view_modules"
+	 dst-table="public.role_module_permission"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_modules_modules" type="reltv" layers="0"
+	 custom-color="#090c79"
+	 src-table="public.view_modules"
+	 dst-table="public.modules"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_modules_job_position" type="reltv" layers="0"
+	 custom-color="#a07214"
+	 src-table="public.view_modules"
+	 dst-table="public.job_position"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_modules_departament" type="reltv" layers="0"
+	 custom-color="#1c2bfe"
+	 src-table="public.view_modules"
+	 dst-table="public.departament"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_modules_modules_by_job_position_departament" type="reltv" layers="0"
+	 custom-color="#bcd1ae"
+	 src-table="public.view_modules"
+	 dst-table="public.modules_by_job_position_departament"
+	 src-required="false" dst-required="false"/>
 
 <procedure name="add_user" security-type="SECURITY INVOKER">
 	<schema name="public"/>
 	<role name="krash"/>
 	<language name="plpgsql"/>
+	<parameter name="_user_personal_data_code">
+		<type name="character varying" length="0"/>
+	</parameter>
 	<parameter name="_username">
 		<type name="character varying" length="0"/>
 	</parameter>
@@ -3175,7 +3223,8 @@ end;]]></definition>
 	<parameter name="_phone_number">
 		<type name="character varying" length="0"/>
 	</parameter>
-	<definition><![CDATA[	declare 
+	<definition> <![CDATA[
+	declare 
 		code character varying;
 		
 		code_type character varying := 'usr';
@@ -3187,81 +3236,763 @@ end;]]></definition>
 		exist_upd int;
 		
 		
-	BEGIN
-		select count(*) into exist_upd from public.user_personal_data where dni = _dni;
-	
-		if exist_upd > 0 then
-			raise exception 'cedula regristrada' USING HINT = 'EXCEPTION is raised here and transaction aborted';
+	begin
+		
+		if _user_personal_data_code is null then
+			
+			select count(*) into exist_upd from public.user_personal_data where dni = _dni;
+		
+			if exist_upd > 0 then
+				raise exception 'cedula regristrada' USING HINT = 'EXCEPTION is raised here and transaction aborted';
+			end if;
+		
+			code := codegen(code_type);
+			upd_code := codegen(udp_code_type);
+		
+			insert into public.user_personal_data (
+				code,
+				first_name,
+				last_name,
+				gender_code, 
+				document_type_code,
+				dni,
+				born_date,
+				martial_status_code,
+				disability,
+				disability_type_code,
+				ethnic_group,
+				ethnic_description,
+				parrish_code,
+				direction,
+				phone_number
+			) values (
+				upd_code,
+				_first_name,
+				_last_name,
+				_gender_code, 
+				_document_type_code,
+				_dni,
+				_born_date,
+				_martial_status_code,
+				_disability,
+				_disability_type_code,
+				_ethnic_group,
+				_ethnic_description,
+				_parrish_code,
+				_direction,
+				_phone_number
+			);
+		
+			INSERT INTO public.users
+			(
+				code,
+				username,
+				"password",
+				email,
+				security_code,
+				recuperate_password_token,
+				personal_data_code,
+				status_code,
+				role_code
+			)
+			VALUES(
+				code,
+				_username,
+				_password,
+				_email,
+				_security_code,
+				'null'::character varying,
+				upd_code, 
+				_status_code,
+				_role_code
+			);
+		else
+			code := codegen(code_type);
+			INSERT INTO public.users
+				(
+					code,
+					username,
+					"password",
+					email,
+					security_code,
+					recuperate_password_token,
+					personal_data_code,
+					status_code,
+					role_code
+				)
+				VALUES(
+					code,
+					_username,
+					_password,
+					_email,
+					_security_code,
+					null::character varying,
+					_user_personal_data_code, 
+					_status_code,
+					_role_code
+				);
 		end if;
-	
+	END;
+]]> </definition>
+</procedure>
+
+<view name="view_region" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="60" y="4940"/>
+	<reference>
+		<expression> <![CDATA[ SELECT r.code,
+    r.name
+   FROM region r;]]> </expression>
+	<column name="code">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="name">
+		<type name="character varying" length="50"/>
+	</column>
+		<reftable name="public.region"/>
+	</reference>
+</view>
+
+<relationship name="rel_view_region_region" type="reltv" layers="0"
+	 custom-color="#d98b49"
+	 src-table="public.view_region"
+	 dst-table="public.region"
+	 src-required="false" dst-required="false"/>
+
+<view name="view_stade" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="360" y="4940"/>
+	<reference>
+		<expression> <![CDATA[ SELECT s.code,
+    s.name,
+    s.region_code AS "regionCode"
+   FROM stade s;]]> </expression>
+	<column name="code">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="name">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="regionCode">
+		<type name="character varying" length="15"/>
+	</column>
+		<reftable name="public.stade"/>
+	</reference>
+</view>
+
+<relationship name="rel_view_stade_stade" type="reltv" layers="0"
+	 custom-color="#3e0687"
+	 src-table="public.view_stade"
+	 dst-table="public.stade"
+	 src-required="false" dst-required="false"/>
+
+<view name="view_municipality" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="700" y="4940"/>
+	<reference>
+		<expression> <![CDATA[ SELECT m.code,
+    m.name,
+    m.stade_code AS "stadeCode"
+   FROM municipality m;]]> </expression>
+	<column name="code">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="name">
+		<type name="character varying" length="60"/>
+	</column>
+	<column name="stadeCode">
+		<type name="character varying" length="15"/>
+	</column>
+		<reftable name="public.municipality"/>
+	</reference>
+</view>
+
+<relationship name="rel_view_municipality_municipality" type="reltv" layers="0"
+	 custom-color="#84664d"
+	 src-table="public.view_municipality"
+	 dst-table="public.municipality"
+	 src-required="false" dst-required="false"/>
+
+<view name="view_parrish" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="1040" y="4940"/>
+	<reference>
+		<expression> <![CDATA[ SELECT p.code,
+    p.name,
+    p.municipality_code AS "municipalityCode"
+   FROM parrish p;]]> </expression>
+	<column name="code">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="name">
+		<type name="character varying" length="60"/>
+	</column>
+	<column name="municipalityCode">
+		<type name="character varying" length="15"/>
+	</column>
+		<reftable name="public.parrish"/>
+	</reference>
+</view>
+
+<relationship name="rel_view_parrish_parrish" type="reltv" layers="0"
+	 custom-color="#3e3be3"
+	 src-table="public.view_parrish"
+	 dst-table="public.parrish"
+	 src-required="false" dst-required="false"/>
+
+<view name="view_documentType" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="1420" y="4940"/>
+	<reference>
+		<expression> <![CDATA[ SELECT dt.code,
+    dt.name,
+    dt.acronym
+   FROM document_type dt;]]> </expression>
+	<column name="code">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="name">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="acronym">
+		<type name="character" length="1"/>
+	</column>
+		<reftable name="public.document_type"/>
+	</reference>
+</view>
+
+<relationship name="&quot;rel_view_documentType_document_type&quot;" type="reltv" layers="0"
+	 custom-color="#07ba15"
+	 src-table="public.&quot;view_documentType&quot;"
+	 dst-table="public.document_type"
+	 src-required="false" dst-required="false"/>
+
+<view name="view_martialStatus" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="60" y="5140"/>
+	<reference>
+		<expression> <![CDATA[ SELECT ms.code,
+    ms.name
+   FROM martial_status ms;]]> </expression>
+	<column name="code">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="name">
+		<type name="character varying" length="20"/>
+	</column>
+		<reftable name="public.martial_status"/>
+	</reference>
+</view>
+
+<relationship name="&quot;rel_view_martialStatus_martial_status&quot;" type="reltv" layers="0"
+	 custom-color="#75889a"
+	 src-table="public.&quot;view_martialStatus&quot;"
+	 dst-table="public.martial_status"
+	 src-required="false" dst-required="false"/>
+
+<view name="view_disability" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="360" y="5140"/>
+	<reference>
+		<expression> <![CDATA[ SELECT dt.code,
+    dt.name
+   FROM disability_type dt;]]> </expression>
+	<column name="code">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="name">
+		<type name="character varying" length="20"/>
+	</column>
+		<reftable name="public.disability_type"/>
+	</reference>
+</view>
+
+<relationship name="rel_view_disability_disability_type" type="reltv" layers="0"
+	 custom-color="#89056e"
+	 src-table="public.view_disability"
+	 dst-table="public.disability_type"
+	 src-required="false" dst-required="false"/>
+
+<view name="view_departament" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="660" y="5140"/>
+	<reference>
+		<expression> <![CDATA[ SELECT d.code,
+    d.name
+   FROM departament d;]]> </expression>
+	<column name="code">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="name">
+		<type name="character varying" length="50"/>
+	</column>
+		<reftable name="public.departament"/>
+	</reference>
+</view>
+
+<relationship name="rel_view_departament_departament" type="reltv" layers="0"
+	 custom-color="#bca6be"
+	 src-table="public.view_departament"
+	 dst-table="public.departament"
+	 src-required="false" dst-required="false"/>
+
+<view name="view_jobPosition" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="960" y="5140"/>
+	<reference>
+		<expression> <![CDATA[ SELECT jp.code,
+    jp.name
+   FROM job_position jp;]]> </expression>
+	<column name="code">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="name">
+		<type name="character varying" length="50"/>
+	</column>
+		<reftable name="public.job_position"/>
+	</reference>
+</view>
+
+<relationship name="&quot;rel_view_jobPosition_job_position&quot;" type="reltv" layers="0"
+	 custom-color="#aea45a"
+	 src-table="public.&quot;view_jobPosition&quot;"
+	 dst-table="public.job_position"
+	 src-required="false" dst-required="false"/>
+
+<view name="view_employed" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="1260" y="5140"/>
+	<reference>
+		<expression> <![CDATA[ SELECT e.code AS "employedCode",
+    upd.code AS "personalDataCode",
+    e.job_position_code AS "jobPositionCode",
+    jp.name AS "jobPositionName",
+    e.departament_code AS "departamentCode",
+    d.name AS "departamentName",
+    e.date_of_entry AS "dateOfEntry",
+    e.date_of_discharge AS "dateOfDischarge",
+    upd.first_name AS "firstName",
+    upd.last_name AS "lastName",
+    upd.gender_code AS "genderCode",
+    upd.document_type_code AS "documentTypeCode",
+    upd.dni,
+    upd.born_date AS "bornDate",
+    upd.martial_status_code AS "martialStatusCode",
+    upd.disability,
+    upd.disability_type_code AS "disabilitiTypeCode",
+    upd.ethnic_group AS "ethnicGroup",
+    upd.ethnic_description AS "ethnicDescrption",
+    upd.parrish_code AS "parrishCode",
+    m.code AS "municipalityCode",
+    s.code AS "stadeCode",
+    r.code AS "regionCode",
+    upd.direction,
+    upd.phone_number AS "phoneNumber"
+   FROM (((((((employed e
+     JOIN user_personal_data upd ON (((e.user_personal_data_code)::text = (upd.code)::text)))
+     JOIN job_position jp ON (((e.job_position_code)::text = (jp.code)::text)))
+     JOIN departament d ON (((e.departament_code)::text = (d.code)::text)))
+     JOIN parrish p ON (((upd.parrish_code)::text = (p.code)::text)))
+     JOIN municipality m ON (((p.municipality_code)::text = (m.code)::text)))
+     JOIN stade s ON (((m.stade_code)::text = (s.code)::text)))
+     JOIN region r ON (((s.region_code)::text = (r.code)::text)));]]> </expression>
+	<column name="employedCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="personalDataCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="jobPositionCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="jobPositionName">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="departamentCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="departamentName">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="dateOfEntry">
+		<type name="date" length="0"/>
+	</column>
+	<column name="dateOfDischarge">
+		<type name="date" length="0"/>
+	</column>
+	<column name="firstName">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="lastName">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="genderCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="documentTypeCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="dni">
+		<type name="character varying" length="14"/>
+	</column>
+	<column name="bornDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="martialStatusCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="disability">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="disabilitiTypeCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="ethnicGroup">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="ethnicDescrption">
+		<type name="character varying" length="60"/>
+	</column>
+	<column name="parrishCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="municipalityCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="stadeCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="regionCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="direction">
+		<type name="character varying" length="150"/>
+	</column>
+	<column name="phoneNumber">
+		<type name="character varying" length="15"/>
+	</column>
+		<reftable name="public.stade"/>
+		<reftable name="public.municipality"/>
+		<reftable name="public.parrish"/>
+		<reftable name="public.user_personal_data"/>
+		<reftable name="public.employed"/>
+		<reftable name="public.job_position"/>
+		<reftable name="public.departament"/>
+		<reftable name="public.region"/>
+	</reference>
+</view>
+
+<relationship name="rel_view_employed_stade" type="reltv" layers="0"
+	 custom-color="#0b4b3c"
+	 src-table="public.view_employed"
+	 dst-table="public.stade"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_employed_municipality" type="reltv" layers="0"
+	 custom-color="#8bfbff"
+	 src-table="public.view_employed"
+	 dst-table="public.municipality"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_employed_parrish" type="reltv" layers="0"
+	 custom-color="#f27f30"
+	 src-table="public.view_employed"
+	 dst-table="public.parrish"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_employed_user_personal_data" type="reltv" layers="0"
+	 custom-color="#5ff30c"
+	 src-table="public.view_employed"
+	 dst-table="public.user_personal_data"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_employed_employed" type="reltv" layers="0"
+	 custom-color="#1a8428"
+	 src-table="public.view_employed"
+	 dst-table="public.employed"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_employed_job_position" type="reltv" layers="0"
+	 custom-color="#466304"
+	 src-table="public.view_employed"
+	 dst-table="public.job_position"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_employed_departament" type="reltv" layers="0"
+	 custom-color="#5c1ce9"
+	 src-table="public.view_employed"
+	 dst-table="public.departament"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_employed_region" type="reltv" layers="0"
+	 custom-color="#c62cde"
+	 src-table="public.view_employed"
+	 dst-table="public.region"
+	 src-required="false" dst-required="false"/>
+
+<procedure name="add_employed" security-type="SECURITY INVOKER">
+	<schema name="public"/>
+	<role name="krash"/>
+	<language name="plpgsql"/>
+	<parameter name="_user_personal_data_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_job_position_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_departament_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_date_of_entry">
+		<type name="date" length="0"/>
+	</parameter>
+	<parameter name="_date_of_discharge">
+		<type name="date" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldatafirstname">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldatalastname">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldatagendercode">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_usepersonaldatadocumenttypecode">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldatadni">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldataborndate">
+		<type name="date" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldatamartialstatuscode">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldatadisability">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldatadisabilitytypecode">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldataethnicgroup">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldataethnicdesciption">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldataparrishcode">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldatadirection">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldataphonenumber">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<definition> <![CDATA[	declare 
+		code character varying;
+		code_type character varying := 'EMPL';
+		upd_code character varying;
+		upd_code_type character varying := 'upd';
+		exist_upd int;	
+	begin
 		code := codegen(code_type);
-		upd_code := codegen(upd_code_type);
 	
-		insert into public.user_personal_data (
+		if _user_personal_data_code is null then
+			select count(*) into exist_upd from public.user_personal_data where dni = _userpersonaldatadni;
+	
+			if exist_upd > 0 then
+				raise exception 'cedula regristrada' USING HINT = 'EXCEPTION is raised here and transaction aborted';
+			end if;
+		
+			upd_code := codegen(upd_code_type);
+		
+			insert into public.user_personal_data (
+				code,
+				first_name,
+				last_name,
+				gender_code, 
+				document_type_code,
+				dni,
+				born_date,
+				martial_status_code,
+				disability,
+				disability_type_code,
+				ethnic_group,
+				ethnic_description,
+				parrish_code,
+				direction,
+				phone_number
+			) values (
+				upd_code,
+				_userpersonaldatafirstname,
+				_userpersonaldatalastname,
+				_userpersonaldatagendercode, 
+				_usepersonaldatadocumenttypecode,
+				_userpersonaldatadni,
+				_userpersonaldataborndate,	
+				_userpersonaldatamartialstatuscode,
+				_userpersonaldatadisability,
+				_userpersonaldatadisabilitytypecode,
+				_userpersonaldataethnicgroup,
+				_userpersonaldataethnicdesciption,
+				_userPersonalDataParrishCode,
+				_userpersonaldatadirection,
+				_userpersonaldataphonenumber
+			);
+			insert into public.employed 
+			(code,user_personal_data_code,date_of_entry,date_of_discharge,job_position_code,departament_code)
+			values
+			(
 			code,
-			first_name,
-			last_name,
-			gender_code, 
-			document_type_code,
-			dni,
-			born_date,
-			martial_status_code,
-			disability,
-			disability_type_code,
-			ethnic_group,
-			ethnic_description,
-			parrish_code,
-			direction,
-			phone_number
-		) values (
 			upd_code,
-			_first_name,
-			_last_name,
-			_gender_code, 
-			_document_type_code,
-			_dni,
-			_born_date,
-			_martial_status_code,
-			_disability,
-			_disability_type_code,
-			_ethnic_group,
-			_ethnic_description,
-			_parrish_code,
-			_direction,
-			_phone_number
-		);
-		INSERT INTO public.users
-		(
+			_date_of_entry,
+			_date_of_discharge,
+			_job_position_code,
+			_departament_code
+			);
+		else 
+		
+			insert into public.employed 
+			(code,user_personal_data_code,date_of_entry,date_of_discharge,job_position_code,departament_code)
+			values
+			(
 			code,
-			username,
-			"password",
-			email,
-			security_code,
-			recuperate_password_token,
-			personal_data_code,
-			status_code,
-			role_code
-		)
-		VALUES(
-			code,
-			_username,
-			_password,
-			_email,
-			_security_code,
-			null::character varying,
-			upd_code, 
-			_status_code,
-			_role_code
-		);
-	END;]]></definition>
+			_user_personal_data_code,
+			_date_of_entry,
+			_date_of_discharge,
+			_job_position_code,
+			_departament_code
+			);
+	
+		end if;
+		
+	
+	END;]]> </definition>
+</procedure>
+
+<procedure name="update_employed" security-type="SECURITY INVOKER">
+	<schema name="public"/>
+	<role name="krash"/>
+	<language name="plpgsql"/>
+	<parameter name="_userpersonaldatacode">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_employedcode">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_job_position_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_departament_code">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_date_of_entry">
+		<type name="date" length="0"/>
+	</parameter>
+	<parameter name="_date_of_discharge">
+		<type name="date" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldatafirstname">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldatalastname">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldatagendercode">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_usepersonaldatadocumenttypecode">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldatadni">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldataborndate">
+		<type name="date" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldatamartialstatuscode">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldatadisability">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldatadisabilitytypecode">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldataethnicgroup">
+		<type name="boolean" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldataethnicdesciption">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldataparrishcode">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldatadirection">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<parameter name="_userpersonaldataphonenumber">
+		<type name="character varying" length="0"/>
+	</parameter>
+	<definition> <![CDATA[	declare 
+		code character varying;
+		code_type character varying := 'EMPL';
+		upd_code character varying;
+		upd_code_type character varying := 'upd';
+		exist_upd int;	
+	begin
+		
+			update public."user_personal_data"
+			set 
+				first_name = _userpersonaldatafirstname,
+				last_name = _userpersonaldatalastname,
+				gender_code = _userpersonaldatagendercode, 
+				document_type_code = _usepersonaldatadocumenttypecode,
+				dni = _userpersonaldatadni,
+				born_date = _userpersonaldataborndate,
+				martial_status_code = _userpersonaldatamartialstatuscode,
+				disability = _userpersonaldatadisability,
+				disability_type_code = _userpersonaldatadisabilitytypecode,
+				ethnic_group = _userpersonaldataethnicgroup,
+				ethnic_description = _userpersonaldataethnicdesciption,
+				parrish_code = _userPersonalDataParrishCode,
+				direction = _userpersonaldatadirection,
+				phone_number = _userpersonaldataphonenumber
+			where public.user_personal_data."code" = _userpersonaldatacode;
+		
+			update public."employed" 
+			set 
+			user_personal_data_code = _userpersonaldatacode ,
+			date_of_entry = _date_of_entry ,
+			date_of_discharge = _date_of_discharge,
+			job_position_code = _job_position_code,
+			departament_code = _departament_code
+			where public.employed."code" = _employedCode;
+	
+		
+	
+	END;]]> </definition>
 </procedure>
 
 <view name="view_users" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1560" y="3560"/>
+	<position x="60" y="5860"/>
 	<reference>
-		<expression><![CDATA[ SELECT users.code,
+		<expression> <![CDATA[ SELECT users.code,
     users.username,
     users.password,
     users.email,
@@ -3276,7 +4007,7 @@ end;]]></definition>
     document_type.name AS "documentTypeName",
     document_type.acronym AS "documentTypeAcronym",
     upd.dni,
-    upd.born_date AS "bornData",
+    upd.born_date AS "bornDate",
     upd.martial_status_code AS "martialStatusCode",
     ms.name AS "martialStatusName",
     upd.disability,
@@ -3297,8 +4028,12 @@ end;]]></definition>
     users.status_code AS "statusCode",
     us.name AS "statusName",
     users.role_code AS "roleCode",
-    ur.name AS "roleName"
-   FROM (((((((((((users
+    ur.name AS "roleName",
+    e.departament_code AS "departamentCode",
+    d.name AS "departamentName",
+    e.job_position_code AS "jobPositionCode",
+    jp.name AS "jobPositionName"
+   FROM ((((((((((((((users
      JOIN user_personal_data upd ON (((users.personal_data_code)::text = (upd.code)::text)))
      JOIN gender g ON (((upd.gender_code)::text = (g.code)::text)))
      JOIN document_type ON (((upd.document_type_code)::text = (document_type.code)::text)))
@@ -3309,7 +4044,10 @@ end;]]></definition>
      JOIN stade s ON (((m.stade_code)::text = (s.code)::text)))
      JOIN region r ON (((s.region_code)::text = (r.code)::text)))
      JOIN users_status us ON (((users.status_code)::text = (us.code)::text)))
-     JOIN users_role ur ON (((users.role_code)::text = (ur.code)::text)));]]></expression>
+     JOIN users_role ur ON (((users.role_code)::text = (ur.code)::text)))
+     LEFT JOIN employed e ON (((upd.code)::text = (e.user_personal_data_code)::text)))
+     LEFT JOIN job_position jp ON (((e.job_position_code)::text = (jp.code)::text)))
+     LEFT JOIN departament d ON (((e.departament_code)::text = (d.code)::text)));]]> </expression>
 	<column name="code">
 		<type name="character varying" length="15"/>
 	</column>
@@ -3355,7 +4093,7 @@ end;]]></definition>
 	<column name="dni">
 		<type name="character varying" length="14"/>
 	</column>
-	<column name="bornData">
+	<column name="bornDate">
 		<type name="date" length="0"/>
 	</column>
 	<column name="martialStatusCode">
@@ -3421,6 +4159,18 @@ end;]]></definition>
 	<column name="roleName">
 		<type name="character varying" length="50"/>
 	</column>
+	<column name="departamentCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="departamentName">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="jobPositionCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="jobPositionName">
+		<type name="character varying" length="50"/>
+	</column>
 		<reftable name="public.users"/>
 		<reftable name="public.users_status"/>
 		<reftable name="public.users_role"/>
@@ -3432,284 +4182,286 @@ end;]]></definition>
 		<reftable name="public.municipality"/>
 		<reftable name="public.parrish"/>
 		<reftable name="public.user_personal_data"/>
+		<reftable name="public.employed"/>
+		<reftable name="public.job_position"/>
+		<reftable name="public.departament"/>
 		<reftable name="public.region"/>
 	</reference>
 </view>
 
 <relationship name="rel_view_users_users" type="reltv" layers="0"
-	 custom-color="#9c70a9"
+	 custom-color="#5b92f7"
 	 src-table="public.view_users"
 	 dst-table="public.users"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_users_status" type="reltv" layers="0"
-	 custom-color="#6b96c0"
+	 custom-color="#187aef"
 	 src-table="public.view_users"
 	 dst-table="public.users_status"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_users_role" type="reltv" layers="0"
-	 custom-color="#1e08a7"
+	 custom-color="#92eabd"
 	 src-table="public.view_users"
 	 dst-table="public.users_role"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_document_type" type="reltv" layers="0"
-	 custom-color="#ecdc51"
+	 custom-color="#bba130"
 	 src-table="public.view_users"
 	 dst-table="public.document_type"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_gender" type="reltv" layers="0"
-	 custom-color="#2e245c"
+	 custom-color="#09e696"
 	 src-table="public.view_users"
 	 dst-table="public.gender"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_martial_status" type="reltv" layers="0"
-	 custom-color="#dc8f14"
+	 custom-color="#abde4c"
 	 src-table="public.view_users"
 	 dst-table="public.martial_status"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_disability_type" type="reltv" layers="0"
-	 custom-color="#a3e429"
+	 custom-color="#352366"
 	 src-table="public.view_users"
 	 dst-table="public.disability_type"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_stade" type="reltv" layers="0"
-	 custom-color="#445815"
+	 custom-color="#22bd7b"
 	 src-table="public.view_users"
 	 dst-table="public.stade"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_municipality" type="reltv" layers="0"
-	 custom-color="#dc8a62"
+	 custom-color="#9b5cd9"
 	 src-table="public.view_users"
 	 dst-table="public.municipality"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_parrish" type="reltv" layers="0"
-	 custom-color="#3d9bd5"
+	 custom-color="#c15bb6"
 	 src-table="public.view_users"
 	 dst-table="public.parrish"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_user_personal_data" type="reltv" layers="0"
-	 custom-color="#7b6c4d"
+	 custom-color="#adbd23"
 	 src-table="public.view_users"
 	 dst-table="public.user_personal_data"
 	 src-required="false" dst-required="false"/>
 
+<relationship name="rel_view_users_employed" type="reltv" layers="0"
+	 custom-color="#90fbfe"
+	 src-table="public.view_users"
+	 dst-table="public.employed"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_users_job_position" type="reltv" layers="0"
+	 custom-color="#de2a14"
+	 src-table="public.view_users"
+	 dst-table="public.job_position"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_users_departament" type="reltv" layers="0"
+	 custom-color="#ec17fd"
+	 src-table="public.view_users"
+	 dst-table="public.departament"
+	 src-required="false" dst-required="false"/>
+
 <relationship name="rel_view_users_region" type="reltv" layers="0"
-	 custom-color="#b32df8"
+	 custom-color="#0831ea"
 	 src-table="public.view_users"
 	 dst-table="public.region"
 	 src-required="false" dst-required="false"/>
 
-<procedure name="add_departament" security-type="SECURITY INVOKER">
+<view name="view_user_personal_data" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<language name="plpgsql"/>
-	<parameter name="_name">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<definition><![CDATA[	declare
-		code character varying;
-		code_type character varying := 'DPTM';
-	BEGIN
-		code := codegen(code_type);
-		insert into departament ( code, "name")
-		values( code, _name);
-	END;]]></definition>
-</procedure>
-
-<procedure name="add_job_position" security-type="SECURITY INVOKER">
-	<schema name="public"/>
-	<role name="krash"/>
-	<language name="plpgsql"/>
-	<parameter name="_name">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<definition><![CDATA[	declare 
-		code character varying;
-		code_type character varying := 'JOBPOSI';
-	BEGIN
-		code := codegen(code_type);
-		insert into job_position (code,"name")
-		values (code,_name);
-	END;]]></definition>
-</procedure>
-
-<view name="view_modules" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
-	<schema name="public"/>
-	<role name="krash"/>
-	<position x="60" y="4360"/>
+	<position x="500" y="5860"/>
 	<reference>
-		<expression><![CDATA[ SELECT mp."moduleCode",
-    mp."moduleName",
-    mp."moduleSrc",
-    mp."moduleIcon",
-    mp."roleCode",
-    mp."jobPosition",
-    mp."departamentCode",
-    mp.show,
-    mp."create",
-    mp.update,
-    mp.print,
-    mp.repoort
-   FROM ( SELECT m.code AS "moduleCode",
-            m.name AS "moduleName",
-            m.src AS "moduleSrc",
-            m.icon AS "moduleIcon",
-            (ur.code)::character varying AS "roleCode",
-            NULL::character varying AS "jobPosition",
-            NULL::character varying AS "departamentCode",
-            rmp.show,
-            rmp."create",
-            rmp.update,
-            rmp.print,
-            rmp.report AS repoort
-           FROM ((modules m
-             JOIN role_module_permission rmp ON (((rmp.module_code)::text = (m.code)::text)))
-             JOIN users_role ur ON (((rmp.role_code)::text = (ur.code)::text)))
-        UNION
-         SELECT m2.code AS "moduleCode",
-            m2.name AS "moduleName",
-            m2.src AS "moduleSrc",
-            m2.icon AS "moduleIcon",
-            NULL::character varying AS "roleCode",
-            (jp.code)::character varying AS "jobPosition",
-            (d.code)::character varying AS "departamentCode",
-            mbjpd.show,
-            mbjpd."create",
-            mbjpd.update,
-            mbjpd.print,
-            mbjpd.report AS repoort
-           FROM (((modules m2
-             JOIN modules_by_job_position_departament mbjpd ON (((mbjpd.module_code)::text = (m2.code)::text)))
-             JOIN departament d ON (((mbjpd.departament_code)::text = (d.code)::text)))
-             JOIN job_position jp ON (((mbjpd.job_position_code)::text = (jp.code)::text)))) mp
-  ORDER BY mp."moduleCode";]]></expression>
-	<column name="moduleCode">
+		<expression> <![CDATA[ SELECT upd.code,
+    upd.first_name AS "firstName",
+    upd.last_name AS "lastName",
+    upd.gender_code AS "genderCode",
+    upd.document_type_code AS "documentTypeCode",
+    dt.name AS "documentTypeName",
+    dt.acronym AS "documentTypeAcronym",
+    upd.dni,
+    upd.born_date AS "bornDate",
+    upd.martial_status_code AS "martialStatusCode",
+    upd.disability,
+    upd.disability_type_code AS "disabilityTypeCode",
+    upd.ethnic_group AS "ethnicGroup",
+    upd.ethnic_description AS "ethnicDescription",
+    upd.parrish_code AS "parrishCode",
+    m.code AS "municipalityCode",
+    s.code AS "stadeCode",
+    r.code AS "regionCode",
+    upd.direction,
+    upd.phone_number AS "phoneNumber"
+   FROM (((((user_personal_data upd
+     JOIN parrish p ON (((upd.parrish_code)::text = (p.code)::text)))
+     JOIN document_type dt ON (((upd.document_type_code)::text = (dt.code)::text)))
+     JOIN municipality m ON (((p.municipality_code)::text = (m.code)::text)))
+     JOIN stade s ON (((m.stade_code)::text = (s.code)::text)))
+     JOIN region r ON (((s.region_code)::text = (r.code)::text)));]]> </expression>
+	<column name="code">
 		<type name="character varying" length="15"/>
 	</column>
-	<column name="moduleName">
+	<column name="firstName">
 		<type name="character varying" length="50"/>
 	</column>
-	<column name="moduleSrc">
+	<column name="lastName">
 		<type name="character varying" length="50"/>
 	</column>
-	<column name="moduleIcon">
-		<type name="character varying" length="50"/>
+	<column name="genderCode">
+		<type name="character varying" length="15"/>
 	</column>
-	<column name="roleCode">
-		<type name="character varying" length="0"/>
+	<column name="documentTypeCode">
+		<type name="character varying" length="15"/>
 	</column>
-	<column name="jobPosition">
-		<type name="character varying" length="0"/>
+	<column name="documentTypeName">
+		<type name="character varying" length="20"/>
 	</column>
-	<column name="departamentCode">
-		<type name="character varying" length="0"/>
+	<column name="documentTypeAcronym">
+		<type name="character" length="1"/>
 	</column>
-	<column name="show">
+	<column name="dni">
+		<type name="character varying" length="14"/>
+	</column>
+	<column name="bornDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="martialStatusCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="disability">
 		<type name="boolean" length="0"/>
 	</column>
-	<column name="create">
+	<column name="disabilityTypeCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="ethnicGroup">
 		<type name="boolean" length="0"/>
 	</column>
-	<column name="update">
-		<type name="boolean" length="0"/>
+	<column name="ethnicDescription">
+		<type name="character varying" length="60"/>
 	</column>
-	<column name="print">
-		<type name="boolean" length="0"/>
+	<column name="parrishCode">
+		<type name="character varying" length="15"/>
 	</column>
-	<column name="repoort">
-		<type name="boolean" length="0"/>
+	<column name="municipalityCode">
+		<type name="character varying" length="15"/>
 	</column>
-		<reftable name="public.users_role"/>
-		<reftable name="public.role_module_permission"/>
-		<reftable name="public.modules"/>
-		<reftable name="public.job_position"/>
-		<reftable name="public.departament"/>
-		<reftable name="public.modules_by_job_position_departament"/>
+	<column name="stadeCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="regionCode">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="direction">
+		<type name="character varying" length="150"/>
+	</column>
+	<column name="phoneNumber">
+		<type name="character varying" length="15"/>
+	</column>
+		<reftable name="public.document_type"/>
+		<reftable name="public.stade"/>
+		<reftable name="public.municipality"/>
+		<reftable name="public.parrish"/>
+		<reftable name="public.user_personal_data"/>
+		<reftable name="public.region"/>
 	</reference>
 </view>
 
-<relationship name="rel_view_modules_users_role" type="reltv" layers="0"
-	 custom-color="#a81e46"
-	 src-table="public.view_modules"
+<relationship name="rel_view_user_personal_data_document_type" type="reltv" layers="0"
+	 custom-color="#0d18fd"
+	 src-table="public.view_user_personal_data"
+	 dst-table="public.document_type"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_user_personal_data_stade" type="reltv" layers="0"
+	 custom-color="#53d468"
+	 src-table="public.view_user_personal_data"
+	 dst-table="public.stade"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_user_personal_data_municipality" type="reltv" layers="0"
+	 custom-color="#acaedf"
+	 src-table="public.view_user_personal_data"
+	 dst-table="public.municipality"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_user_personal_data_parrish" type="reltv" layers="0"
+	 custom-color="#e7bd61"
+	 src-table="public.view_user_personal_data"
+	 dst-table="public.parrish"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_user_personal_data_user_personal_data" type="reltv" layers="0"
+	 custom-color="#f3c294"
+	 src-table="public.view_user_personal_data"
+	 dst-table="public.user_personal_data"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_view_user_personal_data_region" type="reltv" layers="0"
+	 custom-color="#22e8c0"
+	 src-table="public.view_user_personal_data"
+	 dst-table="public.region"
+	 src-required="false" dst-required="false"/>
+
+<view name="view_user_roles" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
+	<schema name="public"/>
+	<role name="krash"/>
+	<position x="940" y="5860"/>
+	<reference>
+		<expression> <![CDATA[ SELECT ur.code,
+    ur.name
+   FROM users_role ur;]]> </expression>
+	<column name="code">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="name">
+		<type name="character varying" length="50"/>
+	</column>
+		<reftable name="public.users_role"/>
+	</reference>
+</view>
+
+<relationship name="rel_view_user_roles_users_role" type="reltv" layers="0"
+	 custom-color="#ed9bb1"
+	 src-table="public.view_user_roles"
 	 dst-table="public.users_role"
 	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_view_modules_role_module_permission" type="reltv" layers="0"
-	 custom-color="#200de2"
-	 src-table="public.view_modules"
-	 dst-table="public.role_module_permission"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_view_modules_modules" type="reltv" layers="0"
-	 custom-color="#2ddbb6"
-	 src-table="public.view_modules"
-	 dst-table="public.modules"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_view_modules_job_position" type="reltv" layers="0"
-	 custom-color="#1bfb56"
-	 src-table="public.view_modules"
-	 dst-table="public.job_position"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_view_modules_departament" type="reltv" layers="0"
-	 custom-color="#ba9813"
-	 src-table="public.view_modules"
-	 dst-table="public.departament"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_view_modules_modules_by_job_position_departament" type="reltv" layers="0"
-	 custom-color="#43bd73"
-	 src-table="public.view_modules"
-	 dst-table="public.modules_by_job_position_departament"
-	 src-required="false" dst-required="false"/>
-
-<procedure name="add_employed" security-type="SECURITY INVOKER">
+<view name="view_user_status" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<language name="plpgsql"/>
-	<parameter name="_user_personal_data_code">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_date_of_entry">
-		<type name="date" length="0"/>
-	</parameter>
-	<parameter name="_date_of_discharge">
-		<type name="date" length="0"/>
-	</parameter>
-	<parameter name="_job_position_code">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<parameter name="_departament_code">
-		<type name="character varying" length="0"/>
-	</parameter>
-	<definition><![CDATA[	declare 
-		code character varying;
-		code_type character varying := 'EMPL';
-	begin
-		code := codegen(code_type);
-		insert into public.employed 
-		(code,user_personal_data_code,date_of_entry,date_of_discharge,job_position_code,departament_code)
-		values
-		(
-		code,
-		_user_personal_data_code,
-		_date_of_entry,
-		_date_of_discharge,
-		_job_position_code,
-		_departament_code
-		);
-	END;]]></definition>
-</procedure>
+	<position x="1240" y="5860"/>
+	<reference>
+		<expression> <![CDATA[ SELECT us.code,
+    us.name
+   FROM users_status us;]]> </expression>
+	<column name="code">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="name">
+		<type name="character varying" length="50"/>
+	</column>
+		<reftable name="public.users_status"/>
+	</reference>
+</view>
+
+<relationship name="rel_view_user_status_users_status" type="reltv" layers="0"
+	 custom-color="#af7334"
+	 src-table="public.view_user_status"
+	 dst-table="public.users_status"
+	 src-required="false" dst-required="false"/>
 
 <constraint name="users_fk_personal_data" type="fk-constr" comparison-type="MATCH SIMPLE"
 	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.user_personal_data" table="public.users">
@@ -3940,229 +4692,229 @@ end;]]></definition>
 </constraint>
 
 <relationship name="rel_users_user_personal_data" type="relfk" layers="0"
-	 custom-color="#eb4dff"
+	 custom-color="#d6af3e"
 	 src-table="public.users"
 	 dst-table="public.user_personal_data" reference-fk="users_fk_personal_data"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_users_users_role" type="relfk" layers="0"
-	 custom-color="#8065fc"
+	 custom-color="#4b4de7"
 	 src-table="public.users"
 	 dst-table="public.users_role" reference-fk="users_fk_roles"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_users_users_status" type="relfk" layers="0"
-	 custom-color="#75b13a"
+	 custom-color="#aae489"
 	 src-table="public.users"
 	 dst-table="public.users_status" reference-fk="users_fk_status"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_role_module_permission_users_role" type="relfk" layers="0"
-	 custom-color="#774c95"
+	 custom-color="#756f80"
 	 src-table="public.role_module_permission"
 	 dst-table="public.users_role" reference-fk="role_module_permission_fk_roles"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_role_module_permission_modules" type="relfk" layers="0"
-	 custom-color="#94b010"
+	 custom-color="#fec5e8"
 	 src-table="public.role_module_permission"
 	 dst-table="public.modules" reference-fk="role_module_permission_fk_modules"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_representative_document_type" type="relfk" layers="0"
-	 custom-color="#3c6b6f"
+	 custom-color="#cfbbe6"
 	 src-table="public.representative"
 	 dst-table="public.document_type" reference-fk="representative_fk_document_type"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_representative_gender" type="relfk" layers="0"
-	 custom-color="#d55d17"
+	 custom-color="#b00610"
 	 src-table="public.representative"
 	 dst-table="public.gender" reference-fk="representative_fk_gender"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_representative_martial_status" type="relfk" layers="0"
-	 custom-color="#b33ed8"
+	 custom-color="#69365a"
 	 src-table="public.representative"
 	 dst-table="public.martial_status" reference-fk="representative_fk_martial_status"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_representative_disability_type" type="relfk" layers="0"
-	 custom-color="#5b3f39"
+	 custom-color="#9cffb8"
 	 src-table="public.representative"
 	 dst-table="public.disability_type" reference-fk="representative_fk_disability"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_representative_parrish" type="relfk" layers="0"
-	 custom-color="#d2f4b3"
+	 custom-color="#179aee"
 	 src-table="public.representative"
 	 dst-table="public.parrish" reference-fk="representative_fk_parrish"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_patient_gender" type="relfk" layers="0"
-	 custom-color="#7f4040"
+	 custom-color="#2c8b26"
 	 src-table="public.patient"
 	 dst-table="public.gender" reference-fk="patient_fk_gender"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_stade_region" type="relfk" layers="0"
-	 custom-color="#7f0ea8"
+	 custom-color="#599358"
 	 src-table="public.stade"
 	 dst-table="public.region" reference-fk="stade_fk_region"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_municipality_stade" type="relfk" layers="0"
-	 custom-color="#b2b1e0"
+	 custom-color="#120024"
 	 src-table="public.municipality"
 	 dst-table="public.stade" reference-fk="municipality_fk_stade"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_parrish_municipality" type="relfk" layers="0"
-	 custom-color="#81282e"
+	 custom-color="#ae28cd"
 	 src-table="public.parrish"
 	 dst-table="public.municipality" reference-fk="parrish_fk_municipality"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_clinic_history_patient" type="relfk" layers="0"
-	 custom-color="#2cffcb"
+	 custom-color="#f8274d"
 	 src-table="public.clinic_history"
 	 dst-table="public.patient" reference-fk="clinic_history_fk_patient"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_clinic_history_project" type="relfk" layers="0"
-	 custom-color="#81f672"
+	 custom-color="#6976a7"
 	 src-table="public.clinic_history"
 	 dst-table="public.project" reference-fk="clinic_history_fk_project"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_reception_agenda_clinic_history" type="relfk" layers="0"
-	 custom-color="#0b74e9"
+	 custom-color="#c90882"
 	 src-table="public.reception_agenda"
 	 dst-table="public.clinic_history" reference-fk="reception_agenda_fk_clinicHistory"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_reception_agenda_project" type="relfk" layers="0"
-	 custom-color="#6fd9a9"
+	 custom-color="#3d67e8"
 	 src-table="public.reception_agenda"
 	 dst-table="public.project" reference-fk="reception_agenda_fk_project"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_nursing_clinic_history" type="relfk" layers="0"
-	 custom-color="#b68930"
+	 custom-color="#f1c24d"
 	 src-table="public.nursing"
 	 dst-table="public.clinic_history" reference-fk="nursing_fk_clinic_history"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_nursing_sizes" type="relfk" layers="0"
-	 custom-color="#4a48a8"
+	 custom-color="#e12f57"
 	 src-table="public.nursing"
 	 dst-table="public.sizes" reference-fk="nursing_fk_sizes"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_nursing_weight" type="relfk" layers="0"
-	 custom-color="#eb1f05"
+	 custom-color="#6d058a"
 	 src-table="public.nursing"
 	 dst-table="public.weight" reference-fk="nursing_fk_"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_nursing_exit_status" type="relfk" layers="0"
-	 custom-color="#503052"
+	 custom-color="#d0a8cf"
 	 src-table="public.nursing"
 	 dst-table="public.exit_status" reference-fk="nursing_fk_exit_status"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_3phase_clinic_history" type="relfk" layers="0"
-	 custom-color="#0effaa"
+	 custom-color="#43fb75"
 	 src-table="public.&quot;3phase&quot;"
 	 dst-table="public.clinic_history" reference-fk="3phase_fk_clinic_history"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_3phase_grown_monitoring_status" type="relfk" layers="0"
-	 custom-color="#4c8f9d"
+	 custom-color="#8c024c"
 	 src-table="public.&quot;3phase&quot;"
 	 dst-table="public.grown_monitoring_status" reference-fk="3phase_fk_grown_monitoring"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_babysitter_patient" type="relfk" layers="0"
-	 custom-color="#3d4585"
+	 custom-color="#9866e7"
 	 src-table="public.babysitter"
 	 dst-table="public.patient" reference-fk="babysitter_fk_patient"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_babysitter_representative" type="relfk" layers="0"
-	 custom-color="#915959"
+	 custom-color="#ad9259"
 	 src-table="public.babysitter"
 	 dst-table="public.representative" reference-fk="babysitter_fk_representative"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_patient_disability_patient" type="relfk" layers="0"
-	 custom-color="#11b341"
+	 custom-color="#912589"
 	 src-table="public.patient_disability"
 	 dst-table="public.patient" reference-fk="patient_disability_fk_patient"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_user_personal_data_document_type" type="relfk" layers="0"
-	 custom-color="#f6479d"
+	 custom-color="#cf1de7"
 	 src-table="public.user_personal_data"
 	 dst-table="public.document_type" reference-fk="user_personal_data_fk_document_type"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_user_personal_data_gender" type="relfk" layers="0"
-	 custom-color="#aab7b3"
+	 custom-color="#38139f"
 	 src-table="public.user_personal_data"
 	 dst-table="public.gender" reference-fk="user_personal_data_fk_gender"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_user_personal_data_martial_status" type="relfk" layers="0"
-	 custom-color="#caba84"
+	 custom-color="#c6d398"
 	 src-table="public.user_personal_data"
 	 dst-table="public.martial_status" reference-fk="user_personal_data_fk_martial_status"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_user_personal_data_disability_type" type="relfk" layers="0"
-	 custom-color="#f745d1"
+	 custom-color="#03fc23"
 	 src-table="public.user_personal_data"
 	 dst-table="public.disability_type" reference-fk="user_personal_data_fk_disability"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_user_personal_data_parrish" type="relfk" layers="0"
-	 custom-color="#305ecb"
+	 custom-color="#c4811c"
 	 src-table="public.user_personal_data"
 	 dst-table="public.parrish" reference-fk="user_personal_data_fk_parrish"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_employed_user_personal_data" type="relfk" layers="0"
-	 custom-color="#4d16cc"
+	 custom-color="#fb1ee1"
 	 src-table="public.employed"
 	 dst-table="public.user_personal_data" reference-fk="employed_fk_personal_data"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_employed_job_position" type="relfk" layers="0"
-	 custom-color="#a9396f"
+	 custom-color="#dc83be"
 	 src-table="public.employed"
 	 dst-table="public.job_position" reference-fk="employed_fk_job_position"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_employed_departament" type="relfk" layers="0"
-	 custom-color="#858b41"
+	 custom-color="#05a883"
 	 src-table="public.employed"
 	 dst-table="public.departament" reference-fk="employed_pk_departament"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_modules_by_job_position_departament_modules" type="relfk" layers="0"
-	 custom-color="#219793"
+	 custom-color="#cf43e0"
 	 src-table="public.modules_by_job_position_departament"
 	 dst-table="public.modules" reference-fk="modules_by_job_position_departament_fk_module"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_modules_by_job_position_departament_job_position" type="relfk" layers="0"
-	 custom-color="#f1e7ee"
+	 custom-color="#267cbd"
 	 src-table="public.modules_by_job_position_departament"
 	 dst-table="public.job_position" reference-fk="modules_by_job_position_departament_fk_job_position"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_modules_by_job_position_departament_departament" type="relfk" layers="0"
-	 custom-color="#9f5485"
+	 custom-color="#6c3b3b"
 	 src-table="public.modules_by_job_position_departament"
 	 dst-table="public.departament" reference-fk="modules_by_job_position_departament_fk_departament"
 	 src-required="false" dst-required="true"/>

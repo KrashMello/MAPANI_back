@@ -10,4 +10,7 @@ export default class Auth extends Model {
   singIn(_callback) {
     this.routes("/singIn", "singIn", "POST", _callback);
   }
+  getUserData(_callback) {
+    this.routes("/userData", "getUserData", "POST", _callback);
+  }
 }

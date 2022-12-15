@@ -11,13 +11,13 @@ const model = new Role();
  *
  *
  */
-function socketRoutes(socket){
-  user.io(socket,(socket)=>{
-      socket.on("getMessage",async (msj)=>{
-        msj = await DB.select("*", "view_users")
-        socket.emit('getMessage',msj)
-      })
-  })
+function socketRoutes(socket) {
+  user.io(socket, (socket) => {
+    // socket.on("getMessage",async (msj)=>{
+    //   msj = await DB.select("*", "view_users")
+    //   socket.emit('getMessage',msj)
+    // })
+  });
 }
 
 /**
@@ -26,25 +26,23 @@ function socketRoutes(socket){
  *
  */
 model.created(async (_req, res) => {
-// CALL public.add_role(
-// 	<_name character varying>, 
-// )
+  // CALL public.add_role(
+  // 	<_name character varying>,
+  // )
 
   let requestValues = _req.body.params;
-  let queryOptions = [
-    "'" + requestValues.name + "'::character varying",
-  ];
-  
+  let queryOptions = ["'" + requestValues.name + "'::character varying"];
+
   // res.json(queryOptions)
   await DB.call("add_user_role", queryOptions.toString())
     .then((response) => {
-      res
+      return res
         .status(200)
         .json({ status: "success", message: "sponsor agregado exitosamente" });
     })
     .catch((error) => {
       console.log(error);
-      res
+      return res
         .status(401)
         .json({ status: "error", message: "Ah ocurrido un error!! " });
     });
@@ -67,9 +65,6 @@ model.updated(async (_req, res) => {
 model.delete(async (_req, res) => {
   await res.json("delete an model");
 });
-let apiRoutes = user.router()
+let apiRoutes = user.router();
 
-export {
-  apiRoutes,
-  socketRoutes
-}
+export { apiRoutes };

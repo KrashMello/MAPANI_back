@@ -18,7 +18,7 @@ export default class Model {
       typeof funct === "function"
     ) {
       const HASMIDDELWARE = this.hasMiddelware(routeName);
-      let route = this.app.get("/", funct);
+      let route;
       switch (method) {
         case "GET":
           route = HASMIDDELWARE
@@ -46,7 +46,9 @@ export default class Model {
   }
 
   hasMiddelware(type) {
-    return this.middelwareExepction.filter((value) => value === type).length > 0 ? false : true;
+    return this.middelwareExepction.filter((value) => value === type).length > 0
+      ? false
+      : true;
   }
 
   get(funct) {
@@ -65,7 +67,7 @@ export default class Model {
     this.routes("/", "delete", "DELETE", funct);
   }
 
-  io(socket,callback){
-    callback(socket)
+  io(socket, callback) {
+    callback(socket);
   }
 }

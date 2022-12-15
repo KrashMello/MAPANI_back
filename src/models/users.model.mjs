@@ -7,8 +7,9 @@ export default class Users extends Model {
   constructor() {
     super();
     this.DB = new dbpg();
-    this.middelwareExepction = ["showDetails","create","update"];
+    this.middelwareExepction = [];
   }
+
   //method for search a user in the data base
   async findOne(username) {
     let searchUsername = await this.DB.select(
@@ -32,7 +33,8 @@ export default class Users extends Model {
     );
   }
   //extra method
-  showDetails(_callback) {
-    this.routes("/showDetails", "showDetails", "GET", _callback);
+
+  searchUserPersonalData(_callback) {
+    this.routes("/searchPersonalData", "searchPersonalData", "GET", _callback);
   }
 }

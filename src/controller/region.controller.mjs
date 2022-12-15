@@ -10,31 +10,26 @@ const model = new Region();
  * metodo obtener generos
  *
  */
-function socketRoutes(socket){
-  user.io(socket,(socket)=>{
-      // socket.on("getMessage",async (msj)=>{
-      //   msj = await DB.select("*", "view_users")
-      //   socket.emit('getMessage',msj)
-      // })
-  })
+function socketRoutes(socket) {
+  user.io(socket, (socket) => {
+    // socket.on("getMessage",async (msj)=>{
+    //   msj = await DB.select("*", "view_users")
+    //   socket.emit('getMessage',msj)
+    // })
+  });
 }
 
 model.get(async (_req, res) => {
   await DB.select("*", "view_region")
     .then((response) => {
-      res.json(
-          response.rows
-      );
+      return res.status(200).json(response.rows);
     })
     .catch((error) => {
       console.log(error);
-      res.status(401).json({ error: "Ah ocurrido un error!! " });
+      return res.status(401).json({ error: "Ah ocurrido un error!! " });
     });
 });
 
-let apiRoutes = model.router()
+let apiRoutes = model.router();
 
-export {
-  apiRoutes,
-  socketRoutes
-}
+export { apiRoutes };
