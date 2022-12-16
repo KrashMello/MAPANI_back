@@ -88,7 +88,7 @@ model.created(async (_req, res) => {
 
   let requestValues = _req.body.params;
   let queryOptions = [
-    requestValues.personalDataCode === null
+    !requestValues.personalDataCode
       ? `null::character varying`
       : `'${requestValues.personalDataCode}'::character varying`,
     `'${requestValues.username}'::character varying`,
@@ -97,48 +97,48 @@ model.created(async (_req, res) => {
     `'${bcrypt.hashSync(requestValues.securityCode, 11)}'::character varying`,
     `'${requestValues.statusCode}'::character varying`,
     `'${requestValues.roleCode}'::character varying`,
-    requestValues.firstName === null || requestValues !== null
+    !requestValues.firstName || requestValues.personalDataCode
       ? `null::character varying`
       : `'${requestValues.firstName}'::character varying`,
-    requestValues.lastName === null || requestValues !== null
+    !requestValues.lastName || requestValues.personalDataCode
       ? `null::character varying`
       : `'${requestValues.lastName}'::character varying`,
-    requestValues.genderCode === null || requestValues !== null
+    !requestValues.genderCode || requestValues.personalDataCode
       ? `null::character varying`
       : `'${requestValues.genderCode}'::character varying`,
-    requestValues.documentTypeCode === null || requestValues !== null
+    !requestValues.documentTypeCode || requestValues.personalDataCode
       ? `null::character varying`
       : `'${requestValues.documentTypeCode}'::character varying`,
-    requestValues.dni === null || requestValues !== null
+    !requestValues.dni || requestValues.personalDataCode
       ? `null::character varying`
       : `'${requestValues.dni}'::character varying`,
-    requestValues.bornDate === null || requestValues !== null
+    !requestValues.bornDate || requestValues.personalDataCode
       ? `null::date`
       : `'${requestValues.bornDate}'::Date`,
-    requestValues.martialStatusCode === null || requestValues !== null
+    !requestValues.martialStatusCode || requestValues.personalDataCode
       ? `null::character varying`
       : `'${requestValues.martialStatusCode}'::character varying`,
-    requestValues.disability === null || requestValues !== null
+    !requestValues.disability || requestValues.personalDataCode
       ? `null::boolean`
       : `'${requestValues.disability}'::boolean`,
-    requestValues.disabilityTypeCode === null || requestValues !== null
+    !requestValues.disabilityTypeCode || requestValues.personalDataCode
       ? `null::character varying`
       : `'${requestValues.disabilityTypeCode}'::character varying`,
-    requestValues.ethnicGroup === null || requestValues !== null
+    !requestValues.ethnicGroup || requestValues.personalDataCode
       ? `null::boolean`
       : `'${requestValues.ethnicGroup}'::boolean`,
-    requestValues.ethnicDescription === null ||
-    requestValues.ethnicDescription === "undefined" ||
-    requestValues !== null
+    !requestValues.ethnicDescription ||
+    !requestValues.ethnicDescription === "undefined" ||
+    !requestValues.personalDataCode
       ? `null::character varying`
       : `'${requestValues.ethnicDescription}'::character varying`,
-    requestValues.parrishCode === null || requestValues !== null
+    !requestValues.parrishCode || requestValues.personalDataCode
       ? `null::character varying`
       : `'${requestValues.parrishCode}'::character varying`,
-    requestValues.direction === null || requestValues !== null
+    !requestValues.direction || requestValues.personalDataCode
       ? `null::character varying`
       : `'${requestValues.direction}'::character varying`,
-    requestValues.phoneNumber === null || requestValues !== null
+    !requestValues.phoneNumber || requestValues.personalDataCode
       ? `null::character varying`
       : `'${requestValues.phoneNumber}'::character varying`,
   ];
@@ -162,7 +162,100 @@ model.created(async (_req, res) => {
  *
  */
 model.updated(async (_req, res) => {
-  await res.json("update an user");
+  //  call public.update_user(
+  // _user_personal_data_code character varying,
+  // _user_code character varying,
+  // _username character varying,
+  // _password character varying,
+  // _email character varying,
+  // _security_code character varying,
+  // _status_code character varying,
+  // _role_code character varying,
+  // _first_name character varying,
+  // _last_name character varying,
+  // _gender_code character varying,
+  // _document_type_code character varying,
+  // _dni character varying,
+  // _born_date date,
+  // _martial_status_code character varying,
+  // _disability boolean,
+  // _disability_type_code character varying,
+  // _ethnic_group boolean,
+  // _ethnic_description character varying,
+  // _parrish_code character varying,
+  // _direction character varying,
+  // _phone_number character varying)
+
+  let requestValues = _req.body.params;
+  let queryOptions = [
+    !requestValues.personalDataCode
+      ? `null::character varying`
+      : `'${requestValues.personalDataCode}'::character varying`,
+    `'${requestValues.userCode}'::character varying`,
+    `'${requestValues.username}'::character varying`,
+    !requestValues.password
+      ? `null::character varying`
+      : `'${bcrypt.hashSync(requestValues.password, 11)}'::character varying`,
+    `'${requestValues.email}'::character varying`,
+    !requestValues.securityCode
+      ? `null::character varying`
+      : `'${bcrypt.hashSync(
+          requestValues.securityCode,
+          11
+        )}'::character varying`,
+    `'${requestValues.statusCode}'::character varying`,
+    `'${requestValues.roleCode}'::character varying`,
+    !requestValues.firstName
+      ? `null::character varying`
+      : `'${requestValues.firstName}'::character varying`,
+    !requestValues.lastName
+      ? `null::character varying`
+      : `'${requestValues.lastName}'::character varying`,
+    !requestValues.genderCode
+      ? `null::character varying`
+      : `'${requestValues.genderCode}'::character varying`,
+    !requestValues.documentTypeCode
+      ? `null::character varying`
+      : `'${requestValues.documentTypeCode}'::character varying`,
+    !requestValues.dni
+      ? `null::character varying`
+      : `'${requestValues.dni}'::character varying`,
+    !requestValues.bornDate
+      ? `null::date`
+      : `'${requestValues.bornDate}'::Date`,
+    !requestValues.martialStatusCode
+      ? `null::character varying`
+      : `'${requestValues.martialStatusCode}'::character varying`,
+    `'${requestValues.disability}'::boolean`,
+    !requestValues.disabilityTypeCode
+      ? `null::character varying`
+      : `'${requestValues.disabilityTypeCode}'::character varying`,
+    `'${requestValues.ethnicGroup}'::boolean`,
+    !requestValues.ethnicDescription
+      ? `null::character varying`
+      : `'${requestValues.ethnicDescription}'::character varying`,
+    !requestValues.parrishCode
+      ? `null::character varying`
+      : `'${requestValues.parrishCode}'::character varying`,
+    !requestValues.direction
+      ? `null::character varying`
+      : `'${requestValues.direction}'::character varying`,
+    !requestValues.phoneNumber
+      ? `null::character varying`
+      : `'${requestValues.phoneNumber}'::character varying`,
+  ];
+  // console.log(queryOptions);
+  // return res.status(401).json({});
+  await DB.call("update_user", queryOptions.toString())
+    .then((response) => {
+      res
+        .status(200)
+        .json({ status: 0, message: "Usuario Actualizado exitosamente" });
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(401).json({ status: 1, message: "Ah ocurrido un error!! " });
+    });
 });
 
 /**

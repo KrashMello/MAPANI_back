@@ -17,7 +17,7 @@ model.get(async (req, resp) => {
   await DB.select(
     "*",
     "view_employed",
-    `"employedCode" like '%${searchOption.employedCode}%' and "jobPositionCode" like '%${searchOption.jobPositionCode}%' and "departamentCode" like '%${searchOption.departamentCode}%' and "dateOfEntry"::character varying like '%${searchOption.dateOfEntry}%'::character varying and "dateOfDischarge" is null or "dateOfDischarge"::character varying like '%${searchOption.dateOfDischarge}%'::character varying and "dni" like '%${searchOption.dni}%' and "parrishCode" like '%${searchOption.parrishCode}%' and "stadeCode" like '%${searchOption.stadeCode}%' and "municipalityCode" like '%${searchOption.municipalityCode}%'`
+    ` "jobPositionCode" like '%${searchOption.jobPositionCode}%' and "departamentCode" like '%${searchOption.departamentCode}%' and "dateOfEntry"::character varying like '%${searchOption.dateOfEntry}%'::character varying and "dateOfDischarge" is null or "dateOfDischarge"::character varying like '%${searchOption.dateOfDischarge}%'::character varying and "dni" like '%${searchOption.dni}%' and "parrishCode" like '%${searchOption.parrishCode}%' and "stadeCode" like '%${searchOption.stadeCode}%' and "municipalityCode" like '%${searchOption.municipalityCode}%'`
   ).then((re) => {
     return resp.status(200).json(re.rows);
   });

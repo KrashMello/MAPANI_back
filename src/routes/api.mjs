@@ -17,6 +17,7 @@ import * as departament from "#Controller/departament";
 import * as employed from "#Controller/employed";
 import * as userRoles from "#Controller/user_roles";
 import * as userStatus from "#Controller/user_status";
+import * as modules from "#Controller/module";
 
 export function routes(app) {
   app.get("/404", function (req, res, next) {
@@ -41,6 +42,7 @@ export function routes(app) {
   app.use("/employed", employed.apiRoutes);
   app.use("/userRoles", userRoles.apiRoutes);
   app.use("/userStatus", userStatus.apiRoutes);
+  app.use("/modules", modules.apiRoutes);
 
   app.use(function (req, res, next) {
     res.status(404);
