@@ -53,7 +53,7 @@ model.created(async (_req, res) => {
   let queryOptions = [
     !requestValues.personalDataCode
       ? `NULL::character varying`
-      : `'${requestValues.userPersonalDataCode}'::character varying`,
+      : `'${requestValues.personalDataCode}'::character varying`,
     `'${requestValues.jobPositionCode}'::character varying`,
     `'${requestValues.departamentCode}'::character varying`,
     `'${requestValues.dateOfEntry}'::DATE`,
@@ -99,8 +99,8 @@ model.created(async (_req, res) => {
       ? `NULL::character varying`
       : `'${requestValues.numberPhone}'::character varying`,
   ];
-  // console.log(requestValues)
-  //  console.log(queryOptions.toString())
+  // console.log(requestValues);
+  // console.log(queryOptions);
   await DB.call("add_employed", queryOptions.toString())
     .then((response) => {
       res

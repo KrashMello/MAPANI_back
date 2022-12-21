@@ -18,6 +18,7 @@ import * as employed from "#Controller/employed";
 import * as userRoles from "#Controller/user_roles";
 import * as userStatus from "#Controller/user_status";
 import * as modules from "#Controller/module";
+import * as userDepartamentPermissions from "#Controller/user_departament_permissions";
 
 export function routes(app) {
   app.get("/404", function (req, res, next) {
@@ -43,6 +44,10 @@ export function routes(app) {
   app.use("/userRoles", userRoles.apiRoutes);
   app.use("/userStatus", userStatus.apiRoutes);
   app.use("/modules", modules.apiRoutes);
+  app.use(
+    "/user_departament_permissions",
+    userDepartamentPermissions.apiRoutes
+  );
 
   app.use(function (req, res, next) {
     res.status(404);

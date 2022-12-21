@@ -118,13 +118,13 @@ model.created(async (_req, res) => {
     !requestValues.martialStatusCode || requestValues.personalDataCode
       ? `null::character varying`
       : `'${requestValues.martialStatusCode}'::character varying`,
-    !requestValues.disability || requestValues.personalDataCode
+    requestValues.disability === null || requestValues.personalDataCode
       ? `null::boolean`
       : `'${requestValues.disability}'::boolean`,
     !requestValues.disabilityTypeCode || requestValues.personalDataCode
       ? `null::character varying`
       : `'${requestValues.disabilityTypeCode}'::character varying`,
-    !requestValues.ethnicGroup || requestValues.personalDataCode
+    requestValues.ethnicGroup === null || requestValues.personalDataCode
       ? `null::boolean`
       : `'${requestValues.ethnicGroup}'::boolean`,
     !requestValues.ethnicDescription ||
@@ -142,7 +142,8 @@ model.created(async (_req, res) => {
       ? `null::character varying`
       : `'${requestValues.phoneNumber}'::character varying`,
   ];
-  // console.log(queryOptions.toString());
+  // console.log(queryOptions);
+  // console.log(requestValues);
   // return res.status(401).json({});
   await DB.call("add_user", queryOptions.toString())
     .then((response) => {
