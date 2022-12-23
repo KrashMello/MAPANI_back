@@ -60,6 +60,13 @@ export class RequestValidator {
                 : this.message.alphanumeric ||
                   "el campo solo debe contener letras y numeros",
             };
+          case "notNull":
+            return {
+              valid: str ? true : false,
+              messaje: str
+                ? "success"
+                : this.message.notNull || "el campo es obligatorio",
+            };
           default:
             console.log("no exists");
         }

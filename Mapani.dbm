@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="1.0.0-beta1" use-changelog="false" last-position="33,3587" last-zoom="1" max-obj-count="111"
+<dbmodel pgmodeler-ver="1.0.0-beta1" use-changelog="false" last-position="0,2278" last-zoom="0.85" max-obj-count="112"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -1604,7 +1604,7 @@ BEGIN
 END;]]> </definition>
 </function>
 
-<table name="sponsors" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+<table name="sponsors" layers="0" collapse-mode="2" max-obj-count="10" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
 	<position x="60" y="3120"/>
@@ -1629,6 +1629,12 @@ END;]]> </definition>
 	</column>
 	<column name="update_at">
 		<type name="timestamp" length="0"/>
+	</column>
+	<column name="rif" not-null="true">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="document_type_code" not-null="true">
+		<type name="character varying" length="15"/>
 	</column>
 	<constraint name="sponsors_pk" type="pk-constr" table="public.sponsors">
 		<columns names="id" ref-type="src-columns"/>
@@ -2157,7 +2163,7 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_gender_gender" type="reltv" layers="0"
-	 custom-color="#8ee2e6"
+	 custom-color="#6949c7"
 	 src-table="public.view_gender"
 	 dst-table="public.gender"
 	 src-required="false" dst-required="false"/>
@@ -2226,19 +2232,19 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_patient_patient" type="reltv" layers="0"
-	 custom-color="#02a249"
+	 custom-color="#efaa8c"
 	 src-table="public.view_patient"
 	 dst-table="public.patient"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_patient_gender" type="reltv" layers="0"
-	 custom-color="#72ce8a"
+	 custom-color="#4251f5"
 	 src-table="public.view_patient"
 	 dst-table="public.gender"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_patient_patient_disability" type="reltv" layers="0"
-	 custom-color="#27a6d0"
+	 custom-color="#f6756b"
 	 src-table="public.view_patient"
 	 dst-table="public.patient_disability"
 	 src-required="false" dst-required="false"/>
@@ -2246,7 +2252,7 @@ end;]]> </definition>
 <view name="view_appointment" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="60" y="4320"/>
+	<position x="60" y="4340"/>
 	<reference>
 		<expression> <![CDATA[ SELECT reception_agenda.code,
     reception_agenda.project_code AS "projectCode",
@@ -2360,7 +2366,7 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_appointment_reception_agenda" type="reltv" layers="0"
-	 custom-color="#d66c74"
+	 custom-color="#2723ac"
 	 src-table="public.view_appointment"
 	 dst-table="public.reception_agenda"
 	 src-required="false" dst-required="false"/>
@@ -2368,7 +2374,7 @@ end;]]> </definition>
 <view name="view_project" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="520" y="4320"/>
+	<position x="520" y="4340"/>
 	<reference>
 		<expression> <![CDATA[ SELECT project.code,
     project.name,
@@ -2416,7 +2422,7 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_project_project" type="reltv" layers="0"
-	 custom-color="#d759d2"
+	 custom-color="#2107ef"
 	 src-table="public.view_project"
 	 dst-table="public.project"
 	 src-required="false" dst-required="false"/>
@@ -2424,7 +2430,7 @@ end;]]> </definition>
 <view name="view_sponsor" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="860" y="4320"/>
+	<position x="860" y="4340"/>
 	<reference>
 		<expression> <![CDATA[ SELECT sponsors.code,
     sponsors.name,
@@ -2448,7 +2454,7 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_sponsor_sponsors" type="reltv" layers="0"
-	 custom-color="#fcb522"
+	 custom-color="#bcf9bc"
 	 src-table="public.view_sponsor"
 	 dst-table="public.sponsors"
 	 src-required="false" dst-required="false"/>
@@ -2456,7 +2462,7 @@ end;]]> </definition>
 <view name="view_disability_type" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1240" y="4320"/>
+	<position x="1240" y="4340"/>
 	<reference>
 		<expression> <![CDATA[ SELECT disability_type.code,
     disability_type.name
@@ -2472,7 +2478,7 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_disability_type_disability_type" type="reltv" layers="0"
-	 custom-color="#e0a158"
+	 custom-color="#2e10ed"
 	 src-table="public.view_disability_type"
 	 dst-table="public.disability_type"
 	 src-required="false" dst-required="false"/>
@@ -2807,16 +2813,18 @@ end;]]> </definition>
 			"update" ,
 			print ,
 			report 
-		) SELECT _job_position_code,_departament_code,  *  FROM 
+		) select distinct on (_job_position_code,_departament_code,"modules") * from (SELECT _job_position_code,_departament_code,  *  FROM 
 		unnest(_modules_codes::character varying[]) AS "module",
 		unnest(_show::boolean[]) AS "show",
 		unnest(_create::boolean[]) AS "create",
 		unnest(_update::boolean[]) AS "update",
 		unnest(_print::boolean[]) AS "print",
-		unnest(_report::boolean[]) AS "report"
-		group by "module", "show" , "create", "update", "print", "report"
-		order by "module" asc
-		;
+		unnest(_report::boolean[]) AS "report") as v(_job_position_code,_departament_code,"modules","show","create","update","print","report")
+		on conflict(job_position_code, departament_code, module_code) do update 
+			set "show" = EXCLUDED."show",
+			"create" = EXCLUDED."create",
+			"print"= EXCLUDED."print",
+			"report" = EXCLUDED."report";
 	END;]]> </definition>
 </procedure>
 
@@ -3064,7 +3072,7 @@ end;]]> </definition>
 			end if;
 		
 			code := codegen(code_type);
-			upd_code := codegen(udp_code_type);
+			upd_code := codegen(upd_code_type);
 		
 			insert into public.user_personal_data (
 				code,
@@ -3156,7 +3164,7 @@ end;]]> </definition>
 <view name="view_region" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1540" y="4320"/>
+	<position x="1540" y="4340"/>
 	<reference>
 		<expression> <![CDATA[ SELECT r.code,
     r.name
@@ -3172,7 +3180,7 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_region_region" type="reltv" layers="0"
-	 custom-color="#d9976e"
+	 custom-color="#728a82"
 	 src-table="public.view_region"
 	 dst-table="public.region"
 	 src-required="false" dst-required="false"/>
@@ -3180,7 +3188,7 @@ end;]]> </definition>
 <view name="view_stade" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="60" y="4940"/>
+	<position x="60" y="4960"/>
 	<reference>
 		<expression> <![CDATA[ SELECT s.code,
     s.name,
@@ -3200,7 +3208,7 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_stade_stade" type="reltv" layers="0"
-	 custom-color="#35deef"
+	 custom-color="#1c4173"
 	 src-table="public.view_stade"
 	 dst-table="public.stade"
 	 src-required="false" dst-required="false"/>
@@ -3208,7 +3216,7 @@ end;]]> </definition>
 <view name="view_municipality" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="400" y="4940"/>
+	<position x="400" y="4960"/>
 	<reference>
 		<expression> <![CDATA[ SELECT m.code,
     m.name,
@@ -3228,7 +3236,7 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_municipality_municipality" type="reltv" layers="0"
-	 custom-color="#c10d7a"
+	 custom-color="#26b2a3"
 	 src-table="public.view_municipality"
 	 dst-table="public.municipality"
 	 src-required="false" dst-required="false"/>
@@ -3236,7 +3244,7 @@ end;]]> </definition>
 <view name="view_parrish" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="740" y="4940"/>
+	<position x="740" y="4960"/>
 	<reference>
 		<expression> <![CDATA[ SELECT p.code,
     p.name,
@@ -3256,7 +3264,7 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_parrish_parrish" type="reltv" layers="0"
-	 custom-color="#d8d898"
+	 custom-color="#d997b8"
 	 src-table="public.view_parrish"
 	 dst-table="public.parrish"
 	 src-required="false" dst-required="false"/>
@@ -3264,7 +3272,7 @@ end;]]> </definition>
 <view name="view_documentType" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1120" y="4940"/>
+	<position x="1120" y="4960"/>
 	<reference>
 		<expression> <![CDATA[ SELECT dt.code,
     dt.name,
@@ -3284,7 +3292,7 @@ end;]]> </definition>
 </view>
 
 <relationship name="&quot;rel_view_documentType_document_type&quot;" type="reltv" layers="0"
-	 custom-color="#008a67"
+	 custom-color="#1ea344"
 	 src-table="public.&quot;view_documentType&quot;"
 	 dst-table="public.document_type"
 	 src-required="false" dst-required="false"/>
@@ -3292,7 +3300,7 @@ end;]]> </definition>
 <view name="view_martialStatus" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1440" y="4940"/>
+	<position x="1440" y="4960"/>
 	<reference>
 		<expression> <![CDATA[ SELECT ms.code,
     ms.name
@@ -3308,7 +3316,7 @@ end;]]> </definition>
 </view>
 
 <relationship name="&quot;rel_view_martialStatus_martial_status&quot;" type="reltv" layers="0"
-	 custom-color="#94af7b"
+	 custom-color="#51b628"
 	 src-table="public.&quot;view_martialStatus&quot;"
 	 dst-table="public.martial_status"
 	 src-required="false" dst-required="false"/>
@@ -3316,7 +3324,7 @@ end;]]> </definition>
 <view name="view_disability" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="60" y="5140"/>
+	<position x="60" y="5160"/>
 	<reference>
 		<expression> <![CDATA[ SELECT dt.code,
     dt.name
@@ -3332,7 +3340,7 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_disability_disability_type" type="reltv" layers="0"
-	 custom-color="#49afce"
+	 custom-color="#b0a6c6"
 	 src-table="public.view_disability"
 	 dst-table="public.disability_type"
 	 src-required="false" dst-required="false"/>
@@ -3340,7 +3348,7 @@ end;]]> </definition>
 <view name="view_departament" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="360" y="5140"/>
+	<position x="360" y="5160"/>
 	<reference>
 		<expression> <![CDATA[ SELECT d.code,
     d.name
@@ -3356,7 +3364,7 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_departament_departament" type="reltv" layers="0"
-	 custom-color="#992bbd"
+	 custom-color="#c5dca5"
 	 src-table="public.view_departament"
 	 dst-table="public.departament"
 	 src-required="false" dst-required="false"/>
@@ -3364,7 +3372,7 @@ end;]]> </definition>
 <view name="view_jobPosition" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="660" y="5140"/>
+	<position x="660" y="5160"/>
 	<reference>
 		<expression> <![CDATA[ SELECT jp.code,
     jp.name
@@ -3380,7 +3388,7 @@ end;]]> </definition>
 </view>
 
 <relationship name="&quot;rel_view_jobPosition_job_position&quot;" type="reltv" layers="0"
-	 custom-color="#a02f40"
+	 custom-color="#c1db99"
 	 src-table="public.&quot;view_jobPosition&quot;"
 	 dst-table="public.job_position"
 	 src-required="false" dst-required="false"/>
@@ -3635,7 +3643,7 @@ end;]]> </definition>
 <view name="view_users" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="960" y="5140"/>
+	<position x="960" y="5160"/>
 	<reference>
 		<expression> <![CDATA[ SELECT users.code,
     users.username,
@@ -3835,91 +3843,91 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_users_users" type="reltv" layers="0"
-	 custom-color="#978539"
+	 custom-color="#5b13d5"
 	 src-table="public.view_users"
 	 dst-table="public.users"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_users_status" type="reltv" layers="0"
-	 custom-color="#bd4556"
+	 custom-color="#65e778"
 	 src-table="public.view_users"
 	 dst-table="public.users_status"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_users_role" type="reltv" layers="0"
-	 custom-color="#9b495e"
+	 custom-color="#9aab6f"
 	 src-table="public.view_users"
 	 dst-table="public.users_role"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_document_type" type="reltv" layers="0"
-	 custom-color="#ba27c5"
+	 custom-color="#7ff0fc"
 	 src-table="public.view_users"
 	 dst-table="public.document_type"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_gender" type="reltv" layers="0"
-	 custom-color="#62c4d5"
+	 custom-color="#82c249"
 	 src-table="public.view_users"
 	 dst-table="public.gender"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_martial_status" type="reltv" layers="0"
-	 custom-color="#7d41a4"
+	 custom-color="#c5c38b"
 	 src-table="public.view_users"
 	 dst-table="public.martial_status"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_disability_type" type="reltv" layers="0"
-	 custom-color="#d63d83"
+	 custom-color="#a6197f"
 	 src-table="public.view_users"
 	 dst-table="public.disability_type"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_stade" type="reltv" layers="0"
-	 custom-color="#4959de"
+	 custom-color="#ab271a"
 	 src-table="public.view_users"
 	 dst-table="public.stade"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_municipality" type="reltv" layers="0"
-	 custom-color="#ee0462"
+	 custom-color="#c40e46"
 	 src-table="public.view_users"
 	 dst-table="public.municipality"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_parrish" type="reltv" layers="0"
-	 custom-color="#995590"
+	 custom-color="#235a9c"
 	 src-table="public.view_users"
 	 dst-table="public.parrish"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_user_personal_data" type="reltv" layers="0"
-	 custom-color="#7ed9ac"
+	 custom-color="#e578bd"
 	 src-table="public.view_users"
 	 dst-table="public.user_personal_data"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_employed" type="reltv" layers="0"
-	 custom-color="#e369d0"
+	 custom-color="#152a87"
 	 src-table="public.view_users"
 	 dst-table="public.employed"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_job_position" type="reltv" layers="0"
-	 custom-color="#f35d26"
+	 custom-color="#beb852"
 	 src-table="public.view_users"
 	 dst-table="public.job_position"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_departament" type="reltv" layers="0"
-	 custom-color="#ad5ec3"
+	 custom-color="#aa272c"
 	 src-table="public.view_users"
 	 dst-table="public.departament"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_users_region" type="reltv" layers="0"
-	 custom-color="#1e2d7c"
+	 custom-color="#fda1e3"
 	 src-table="public.view_users"
 	 dst-table="public.region"
 	 src-required="false" dst-required="false"/>
@@ -3927,7 +3935,7 @@ end;]]> </definition>
 <view name="view_user_personal_data" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1420" y="5140"/>
+	<position x="1420" y="5160"/>
 	<reference>
 		<expression> <![CDATA[ SELECT upd.code,
     upd.first_name AS "firstName",
@@ -4025,37 +4033,37 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_user_personal_data_document_type" type="reltv" layers="0"
-	 custom-color="#8dc782"
+	 custom-color="#4edcb6"
 	 src-table="public.view_user_personal_data"
 	 dst-table="public.document_type"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_user_personal_data_stade" type="reltv" layers="0"
-	 custom-color="#1b0e19"
+	 custom-color="#d0f9d0"
 	 src-table="public.view_user_personal_data"
 	 dst-table="public.stade"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_user_personal_data_municipality" type="reltv" layers="0"
-	 custom-color="#56a302"
+	 custom-color="#cb8740"
 	 src-table="public.view_user_personal_data"
 	 dst-table="public.municipality"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_user_personal_data_parrish" type="reltv" layers="0"
-	 custom-color="#2da57d"
+	 custom-color="#8425e4"
 	 src-table="public.view_user_personal_data"
 	 dst-table="public.parrish"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_user_personal_data_user_personal_data" type="reltv" layers="0"
-	 custom-color="#6009dc"
+	 custom-color="#135aea"
 	 src-table="public.view_user_personal_data"
 	 dst-table="public.user_personal_data"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_user_personal_data_region" type="reltv" layers="0"
-	 custom-color="#982d0d"
+	 custom-color="#0c8f0b"
 	 src-table="public.view_user_personal_data"
 	 dst-table="public.region"
 	 src-required="false" dst-required="false"/>
@@ -4063,7 +4071,7 @@ end;]]> </definition>
 <view name="view_user_roles" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="60" y="6240"/>
+	<position x="60" y="6260"/>
 	<reference>
 		<expression> <![CDATA[ SELECT ur.code,
     ur.name
@@ -4079,7 +4087,7 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_user_roles_users_role" type="reltv" layers="0"
-	 custom-color="#7b69f8"
+	 custom-color="#ea82a0"
 	 src-table="public.view_user_roles"
 	 dst-table="public.users_role"
 	 src-required="false" dst-required="false"/>
@@ -4087,7 +4095,7 @@ end;]]> </definition>
 <view name="view_user_status" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="360" y="6240"/>
+	<position x="360" y="6260"/>
 	<reference>
 		<expression> <![CDATA[ SELECT us.code,
     us.name
@@ -4103,7 +4111,7 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_user_status_users_status" type="reltv" layers="0"
-	 custom-color="#0562ea"
+	 custom-color="#1fc586"
 	 src-table="public.view_user_status"
 	 dst-table="public.users_status"
 	 src-required="false" dst-required="false"/>
@@ -4223,7 +4231,7 @@ end;]]> </definition>
 <view name="view_employed" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="660" y="6240"/>
+	<position x="660" y="6260"/>
 	<reference>
 		<expression> <![CDATA[ SELECT e.code,
     upd.code AS "personalDataCode",
@@ -4345,49 +4353,49 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_employed_stade" type="reltv" layers="0"
-	 custom-color="#ac13bf"
+	 custom-color="#28cd1a"
 	 src-table="public.view_employed"
 	 dst-table="public.stade"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_employed_municipality" type="reltv" layers="0"
-	 custom-color="#a2cbb8"
+	 custom-color="#b8e5e7"
 	 src-table="public.view_employed"
 	 dst-table="public.municipality"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_employed_parrish" type="reltv" layers="0"
-	 custom-color="#398829"
+	 custom-color="#f142e0"
 	 src-table="public.view_employed"
 	 dst-table="public.parrish"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_employed_user_personal_data" type="reltv" layers="0"
-	 custom-color="#72aeac"
+	 custom-color="#ea5414"
 	 src-table="public.view_employed"
 	 dst-table="public.user_personal_data"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_employed_employed" type="reltv" layers="0"
-	 custom-color="#e4bc55"
+	 custom-color="#8377fa"
 	 src-table="public.view_employed"
 	 dst-table="public.employed"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_employed_job_position" type="reltv" layers="0"
-	 custom-color="#f7996a"
+	 custom-color="#b8bd79"
 	 src-table="public.view_employed"
 	 dst-table="public.job_position"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_employed_departament" type="reltv" layers="0"
-	 custom-color="#da8ee7"
+	 custom-color="#cae265"
 	 src-table="public.view_employed"
 	 dst-table="public.departament"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_employed_region" type="reltv" layers="0"
-	 custom-color="#2ab2e4"
+	 custom-color="#84d9da"
 	 src-table="public.view_employed"
 	 dst-table="public.region"
 	 src-required="false" dst-required="false"/>
@@ -4489,7 +4497,7 @@ end;]]> </definition>
 <view name="view_modules" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1060" y="6240"/>
+	<position x="1060" y="6260"/>
 	<reference>
 		<expression> <![CDATA[ SELECT (NULLIF(regexp_replace((m.code)::text, '[A-Z-]'::text, ''::text, 'g'::text), ''::text))::integer AS "codeR",
     m.code,
@@ -4534,7 +4542,7 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_modules_modules" type="reltv" layers="0"
-	 custom-color="#99fb65"
+	 custom-color="#5f60a2"
 	 src-table="public.view_modules"
 	 dst-table="public.modules"
 	 src-required="false" dst-required="false"/>
@@ -4542,15 +4550,18 @@ end;]]> </definition>
 <view name="view_permissions" layers="0" collapse-mode="2" max-obj-count="1" z-value="0">
 	<schema name="public"/>
 	<role name="krash"/>
-	<position x="1420" y="6240"/>
+	<position x="1420" y="6260"/>
 	<reference>
 		<expression> <![CDATA[ SELECT mp."moduleCode",
     mp."moduleName",
     mp."moduleSrc",
     mp."moduleIcon",
     mp."roleCode",
+    mp."roleName",
     mp."jobPositionCode",
+    mp."jobPositionName",
     mp."departamentCode",
+    mp."departamentName",
     mp."hasChildren",
     mp."order",
     mp."fatherCode",
@@ -4564,8 +4575,11 @@ end;]]> </definition>
             m.src AS "moduleSrc",
             m.icon AS "moduleIcon",
             (ur.code)::character varying AS "roleCode",
+            (ur.name)::character varying AS "roleName",
             NULL::character varying AS "jobPositionCode",
+            NULL::character varying AS "jobPositionName",
             NULL::character varying AS "departamentCode",
+            NULL::character varying AS "departamentName",
             m.haschildren AS "hasChildren",
             m."order",
             m.fathercode AS "fatherCode",
@@ -4583,8 +4597,11 @@ end;]]> </definition>
             m2.src AS "moduleSrc",
             m2.icon AS "moduleIcon",
             NULL::character varying AS "roleCode",
+            NULL::character varying AS "roleName",
             (jp.code)::character varying AS "jobPositionCode",
+            (jp.name)::character varying AS "jobPositionName",
             (d.code)::character varying AS "departamentCode",
+            (d.name)::character varying AS "departamentName",
             m2.haschildren,
             m2."order",
             m2.fathercode AS "fatherCode",
@@ -4613,10 +4630,19 @@ end;]]> </definition>
 	<column name="roleCode">
 		<type name="character varying" length="0"/>
 	</column>
+	<column name="roleName">
+		<type name="character varying" length="0"/>
+	</column>
 	<column name="jobPositionCode">
 		<type name="character varying" length="0"/>
 	</column>
+	<column name="jobPositionName">
+		<type name="character varying" length="0"/>
+	</column>
 	<column name="departamentCode">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="departamentName">
 		<type name="character varying" length="0"/>
 	</column>
 	<column name="hasChildren">
@@ -4653,37 +4679,37 @@ end;]]> </definition>
 </view>
 
 <relationship name="rel_view_permissions_users_role" type="reltv" layers="0"
-	 custom-color="#ba579c"
+	 custom-color="#d4aa9e"
 	 src-table="public.view_permissions"
 	 dst-table="public.users_role"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_permissions_role_module_permission" type="reltv" layers="0"
-	 custom-color="#5fbe83"
+	 custom-color="#35af7f"
 	 src-table="public.view_permissions"
 	 dst-table="public.role_module_permission"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_permissions_modules" type="reltv" layers="0"
-	 custom-color="#e1c6fc"
+	 custom-color="#f0bf5d"
 	 src-table="public.view_permissions"
 	 dst-table="public.modules"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_permissions_job_position" type="reltv" layers="0"
-	 custom-color="#2ecd9d"
+	 custom-color="#ba601f"
 	 src-table="public.view_permissions"
 	 dst-table="public.job_position"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_permissions_departament" type="reltv" layers="0"
-	 custom-color="#630d65"
+	 custom-color="#ed5772"
 	 src-table="public.view_permissions"
 	 dst-table="public.departament"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_view_permissions_modules_by_job_position_departament" type="reltv" layers="0"
-	 custom-color="#0840dc"
+	 custom-color="#fc0e99"
 	 src-table="public.view_permissions"
 	 dst-table="public.modules_by_job_position_departament"
 	 src-required="false" dst-required="false"/>
@@ -4850,6 +4876,12 @@ end;]]> </definition>
 	<columns names="code" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="sponsors_fk_documentType" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.document_type" table="public.sponsors">
+	<columns names="document_type_code" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
 <constraint name="user_personal_data_fk_document_type" type="fk-constr" comparison-type="MATCH SIMPLE"
 	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.document_type" table="public.user_personal_data">
 	<columns names="document_type_code" ref-type="src-columns"/>
@@ -4917,231 +4949,236 @@ end;]]> </definition>
 </constraint>
 
 <relationship name="rel_users_user_personal_data" type="relfk" layers="0"
-	 custom-color="#161f27"
+	 custom-color="#6cf4cd"
 	 src-table="public.users"
 	 dst-table="public.user_personal_data" reference-fk="users_fk_personal_data"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_users_users_role" type="relfk" layers="0"
-	 custom-color="#0292b3"
+	 custom-color="#0e3bd1"
 	 src-table="public.users"
 	 dst-table="public.users_role" reference-fk="users_fk_roles"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_users_users_status" type="relfk" layers="0"
-	 custom-color="#8f5564"
+	 custom-color="#5f6b82"
 	 src-table="public.users"
 	 dst-table="public.users_status" reference-fk="users_fk_status"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_role_module_permission_users_role" type="relfk" layers="0"
-	 custom-color="#dd8214"
+	 custom-color="#6ed4f6"
 	 src-table="public.role_module_permission"
 	 dst-table="public.users_role" reference-fk="role_module_permission_fk_roles"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_role_module_permission_modules" type="relfk" layers="0"
-	 custom-color="#1d4d9c"
+	 custom-color="#94dfde"
 	 src-table="public.role_module_permission"
 	 dst-table="public.modules" reference-fk="role_module_permission_fk_modules"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_representative_document_type" type="relfk" layers="0"
-	 custom-color="#7d2241"
+	 custom-color="#fa94df"
 	 src-table="public.representative"
 	 dst-table="public.document_type" reference-fk="representative_fk_document_type"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_representative_gender" type="relfk" layers="0"
-	 custom-color="#b29626"
+	 custom-color="#9686d8"
 	 src-table="public.representative"
 	 dst-table="public.gender" reference-fk="representative_fk_gender"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_representative_martial_status" type="relfk" layers="0"
-	 custom-color="#9c61f4"
+	 custom-color="#06201d"
 	 src-table="public.representative"
 	 dst-table="public.martial_status" reference-fk="representative_fk_martial_status"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_representative_disability_type" type="relfk" layers="0"
-	 custom-color="#27ed98"
+	 custom-color="#8a0361"
 	 src-table="public.representative"
 	 dst-table="public.disability_type" reference-fk="representative_fk_disability"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_representative_parrish" type="relfk" layers="0"
-	 custom-color="#5d07bb"
+	 custom-color="#3e4ee9"
 	 src-table="public.representative"
 	 dst-table="public.parrish" reference-fk="representative_fk_parrish"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_patient_gender" type="relfk" layers="0"
-	 custom-color="#25e5eb"
+	 custom-color="#4c25ec"
 	 src-table="public.patient"
 	 dst-table="public.gender" reference-fk="patient_fk_gender"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_stade_region" type="relfk" layers="0"
-	 custom-color="#4b6815"
+	 custom-color="#71eac6"
 	 src-table="public.stade"
 	 dst-table="public.region" reference-fk="stade_fk_region"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_municipality_stade" type="relfk" layers="0"
-	 custom-color="#9c4c6a"
+	 custom-color="#e82307"
 	 src-table="public.municipality"
 	 dst-table="public.stade" reference-fk="municipality_fk_stade"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_parrish_municipality" type="relfk" layers="0"
-	 custom-color="#025111"
+	 custom-color="#51bbb4"
 	 src-table="public.parrish"
 	 dst-table="public.municipality" reference-fk="parrish_fk_municipality"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_clinic_history_patient" type="relfk" layers="0"
-	 custom-color="#36930a"
+	 custom-color="#76d82e"
 	 src-table="public.clinic_history"
 	 dst-table="public.patient" reference-fk="clinic_history_fk_patient"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_clinic_history_project" type="relfk" layers="0"
-	 custom-color="#fdabff"
+	 custom-color="#4fdae2"
 	 src-table="public.clinic_history"
 	 dst-table="public.project" reference-fk="clinic_history_fk_project"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_reception_agenda_clinic_history" type="relfk" layers="0"
-	 custom-color="#651758"
+	 custom-color="#cfc3fd"
 	 src-table="public.reception_agenda"
 	 dst-table="public.clinic_history" reference-fk="reception_agenda_fk_clinicHistory"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_reception_agenda_project" type="relfk" layers="0"
-	 custom-color="#c2395a"
+	 custom-color="#5df99c"
 	 src-table="public.reception_agenda"
 	 dst-table="public.project" reference-fk="reception_agenda_fk_project"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_nursing_clinic_history" type="relfk" layers="0"
-	 custom-color="#9d5884"
+	 custom-color="#0ed043"
 	 src-table="public.nursing"
 	 dst-table="public.clinic_history" reference-fk="nursing_fk_clinic_history"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_nursing_sizes" type="relfk" layers="0"
-	 custom-color="#558c23"
+	 custom-color="#a44724"
 	 src-table="public.nursing"
 	 dst-table="public.sizes" reference-fk="nursing_fk_sizes"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_nursing_weight" type="relfk" layers="0"
-	 custom-color="#89cede"
+	 custom-color="#fe261a"
 	 src-table="public.nursing"
 	 dst-table="public.weight" reference-fk="nursing_fk_"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_nursing_exit_status" type="relfk" layers="0"
-	 custom-color="#b4ff28"
+	 custom-color="#c7dbd6"
 	 src-table="public.nursing"
 	 dst-table="public.exit_status" reference-fk="nursing_fk_exit_status"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_3phase_clinic_history" type="relfk" layers="0"
-	 custom-color="#1c67be"
+	 custom-color="#46a404"
 	 src-table="public.&quot;3phase&quot;"
 	 dst-table="public.clinic_history" reference-fk="3phase_fk_clinic_history"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_3phase_grown_monitoring_status" type="relfk" layers="0"
-	 custom-color="#503e9d"
+	 custom-color="#4f2b36"
 	 src-table="public.&quot;3phase&quot;"
 	 dst-table="public.grown_monitoring_status" reference-fk="3phase_fk_grown_monitoring"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_babysitter_patient" type="relfk" layers="0"
-	 custom-color="#eb175c"
+	 custom-color="#9b5d7b"
 	 src-table="public.babysitter"
 	 dst-table="public.patient" reference-fk="babysitter_fk_patient"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_babysitter_representative" type="relfk" layers="0"
-	 custom-color="#d8455e"
+	 custom-color="#61f377"
 	 src-table="public.babysitter"
 	 dst-table="public.representative" reference-fk="babysitter_fk_representative"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_patient_disability_patient" type="relfk" layers="0"
-	 custom-color="#39e544"
+	 custom-color="#a7eba0"
 	 src-table="public.patient_disability"
 	 dst-table="public.patient" reference-fk="patient_disability_fk_patient"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_user_personal_data_document_type" type="relfk" layers="0"
-	 custom-color="#5830d8"
+	 custom-color="#5c0d91"
 	 src-table="public.user_personal_data"
 	 dst-table="public.document_type" reference-fk="user_personal_data_fk_document_type"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_user_personal_data_gender" type="relfk" layers="0"
-	 custom-color="#b9cbbe"
+	 custom-color="#fdc1ae"
 	 src-table="public.user_personal_data"
 	 dst-table="public.gender" reference-fk="user_personal_data_fk_gender"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_user_personal_data_martial_status" type="relfk" layers="0"
-	 custom-color="#e36a03"
+	 custom-color="#f80f6a"
 	 src-table="public.user_personal_data"
 	 dst-table="public.martial_status" reference-fk="user_personal_data_fk_martial_status"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_user_personal_data_disability_type" type="relfk" layers="0"
-	 custom-color="#472af4"
+	 custom-color="#53c0a1"
 	 src-table="public.user_personal_data"
 	 dst-table="public.disability_type" reference-fk="user_personal_data_fk_disability"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_user_personal_data_parrish" type="relfk" layers="0"
-	 custom-color="#259bc2"
+	 custom-color="#cbac07"
 	 src-table="public.user_personal_data"
 	 dst-table="public.parrish" reference-fk="user_personal_data_fk_parrish"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_employed_user_personal_data" type="relfk" layers="0"
-	 custom-color="#689907"
+	 custom-color="#54146e"
 	 src-table="public.employed"
 	 dst-table="public.user_personal_data" reference-fk="employed_fk_personal_data"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_employed_job_position" type="relfk" layers="0"
-	 custom-color="#b92f85"
+	 custom-color="#067a34"
 	 src-table="public.employed"
 	 dst-table="public.job_position" reference-fk="employed_fk_job_position"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_employed_departament" type="relfk" layers="0"
-	 custom-color="#49d4ab"
+	 custom-color="#b663dc"
 	 src-table="public.employed"
 	 dst-table="public.departament" reference-fk="employed_pk_departament"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_modules_by_job_position_departament_modules" type="relfk" layers="0"
-	 custom-color="#4df3a8"
+	 custom-color="#0faf6a"
 	 src-table="public.modules_by_job_position_departament"
 	 dst-table="public.modules" reference-fk="modules_by_job_position_departament_fk_module"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_modules_by_job_position_departament_job_position" type="relfk" layers="0"
-	 custom-color="#77540d"
+	 custom-color="#d9570a"
 	 src-table="public.modules_by_job_position_departament"
 	 dst-table="public.job_position" reference-fk="modules_by_job_position_departament_fk_job_position"
 	 src-required="false" dst-required="true"/>
 
 <relationship name="rel_modules_by_job_position_departament_departament" type="relfk" layers="0"
-	 custom-color="#b00f53"
+	 custom-color="#edf99c"
 	 src-table="public.modules_by_job_position_departament"
 	 dst-table="public.departament" reference-fk="modules_by_job_position_departament_fk_departament"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_sponsors_document_type" type="relfk" layers="0"
+	 src-table="public.sponsors"
+	 dst-table="public.document_type" reference-fk="sponsors_fk_documentType"
 	 src-required="false" dst-required="true"/>
 
 <permission>
