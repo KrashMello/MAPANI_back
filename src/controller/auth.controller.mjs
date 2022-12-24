@@ -11,53 +11,53 @@ const user = new Users();
 const model = new Auth();
 const modules = new Modules();
 
-function socketRoutes(io, socket) {
-  model.io(socket, (socket) => {
-    socket.on("verifyToken", async (token) => {
-      let permissions;
-      let userData;
-      let errors = false;
-      if (
-        user.getSingUpUsers().filter((v) => v.token === token) &&
-        user.getSingUpUsers().filter((v) => v.socketID === null)
-      )
-        user.setRegisterUsers(
-          user.getSingUpUsers().map((value) => {
-            if (value.token === token && value.socketID === null)
-              value.socketID = socket.id;
-            return value;
-          })
-        );
-      if (user.getSingUpUsers().filter((v) => v.token === token))
-        try {
-          jsonwebtoken.verify(token, process.env.JWT_TOKEN);
-          userData = await user.findOne(
-            user.getSingUpUsers().filter((v) => v.token === token)[0].username
-          );
-          delete userData.userSecurityCode;
-          delete userData.password;
-          permissions = await modules.findUserModules(
-            userData.roleCode,
-            userData.jobPositionCode,
-            userData.departamentCode
-          );
-          io.to(socket.id).emit("getUserData", {
-            userData: userData,
-            permissions: permissions,
-          });
-        } catch (err) {
-          console.log(err);
-          user.setRegisterUsers(
-            user.getSingUpUsers().splice(
-              user.getSingUpUsers().findIndex((v) => v.token === token),
-              1
-            )
-          );
-        }
-      io.to(socket.id).emit("verifyToken", errors);
-    });
-  });
-}
+// function socketRoutes(io, socket) {
+//   model.io(socket, (socket) => {
+//     socket.on("verifyToken", async (token) => {
+//       let permissions;
+//       let userData;
+//       let errors = false;
+//       if (
+//         user.getSingUpUsers().filter((v) => v.token === token) &&
+//         user.getSingUpUsers().filter((v) => v.socketID === null)
+//       )
+//         user.setRegisterUsers(
+//           user.getSingUpUsers().map((value) => {
+//             if (value.token === token && value.socketID === null)
+//               value.socketID = socket.id;
+//             return value;
+//           })
+//         );
+//       if (user.getSingUpUsers().filter((v) => v.token === token))
+//         try {
+//           jsonwebtoken.verify(token, process.env.JWT_TOKEN);
+//           userData = await user.findOne(
+//             user.getSingUpUsers().filter((v) => v.token === token)[0].username
+//           );
+//           delete userData.userSecurityCode;
+//           delete userData.password;
+//           permissions = await modules.findUserModules(
+//             userData.roleCode,
+//             userData.jobPositionCode,
+//             userData.departamentCode
+//           );
+//           io.to(socket.id).emit("getUserData", {
+//             userData: userData,
+//             permissions: permissions,
+//           });
+//         } catch (err) {
+//           console.log(err);
+//           user.setRegisterUsers(
+//             user.getSingUpUsers().splice(
+//               user.getSingUpUsers().findIndex((v) => v.token === token),
+//               1
+//             )
+//           );
+//         }
+//       io.to(socket.id).emit("verifyToken", errors);
+//     });
+//   });
+// }
 model.getUserData(async (req, resp) => {
   let permissions;
   let userData;
@@ -124,4 +124,4 @@ model.singIn(async (req, response) => {
 
 let apiRoutes = model.router();
 
-export { apiRoutes, socketRoutes };
+export { apiRoutes };

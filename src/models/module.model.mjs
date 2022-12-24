@@ -15,7 +15,7 @@ export default class Module extends Model {
       response = await this.DB.select(
         "*",
         "view_permissions",
-        `"jobPositionCode" = '${jobPositionCode}' and "departamentCode" = '${departamentCode}'`
+        `"jobPositionCode" = '${jobPositionCode}' and "departamentCode" = '${departamentCode}' and "show" = true`
       )
         .then((res) => {
           return res.rows;
@@ -27,7 +27,7 @@ export default class Module extends Model {
       response = await this.DB.select(
         "*",
         "view_permissions",
-        `"roleCode" = '${roleCode}'`
+        `"roleCode" = '${roleCode}' and "show" = true`
       )
         .then((res) => {
           return res.rows;
