@@ -85,7 +85,7 @@ model.getUserData(async (req, resp) => {
 model.singIn(async (req, response) => {
   const { username, password } = req.body.params;
   let validate = userRequestValidate.getResult(req.body.params);
-  if (validate.status === 0) {
+  if (!Object.values(validate).find((v) => v.status === 1)) {
     // let ip = req.header("x-forwarded-for") || req.ip;
     let userData;
     // search the existen of user
@@ -117,7 +117,7 @@ model.singIn(async (req, response) => {
       process.env.JWT_TOKEN
     );
     return response.status(200).json({ token: token });
-  } else if (validate.status === "error") {
+  } else {
     return response.status(401).json(validate);
   }
 });

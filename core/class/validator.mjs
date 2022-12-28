@@ -21,14 +21,20 @@ export class RequestValidator {
         return this.#findValidator(temKey, temValues, queryValues[key]);
       }
     });
-    let index = result.findIndex((value) => {
-      return value.status == 1;
-    });
-    if (index > -1)
-      return result.find((value) => {
-        return value.status == 1;
-      });
-    else return { status: 0 };
+    return Object.fromEntries(
+      queryKeys.map((v, i) => {
+        return [v, result[i]];
+      })
+    );
+
+    // let index = result.findIndex((value) => {
+    //   return (value.status = 1);
+    // });
+    // if (index > -1)
+    //   return result.find((value) => {
+    //     return (value.status = 1);
+    //   });
+    // else return { status: 0 };
   }
   #findValidator(type, rules, str) {
     let validate = true;
@@ -61,8 +67,15 @@ export class RequestValidator {
                   "el campo solo debe contener letras y numeros",
             };
           case "notNull":
+            if (typeof str === "boolean")
+              return {
+                valid: true,
+                messaje: str
+                  ? "success"
+                  : this.message.notNull || "el campo es obligatorio",
+              };
             return {
-              valid: str ? true : false,
+              valid: !str ? false : true,
               messaje: str
                 ? "success"
                 : this.message.notNull || "el campo es obligatorio",
@@ -73,8 +86,8 @@ export class RequestValidator {
       else console.log("error the typeof no is sting");
     });
     result.forEach((value) => {
-      if (!value.valid) validate = { status: "error", messaje: value.messaje };
-      else validate = { status: "ok" };
+      if (!value.valid) validate = { status: 1, messaje: value.messaje };
+      else validate = { status: 0 };
     });
     return validate;
   }
