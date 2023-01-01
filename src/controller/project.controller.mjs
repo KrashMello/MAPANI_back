@@ -27,17 +27,34 @@ const model = new Project();
  */
 model.get(async (req, res) => {
   let searchOption = req.query;
+  let project = [];
+  let sponsorsByProject;
   await DB.select(
     "*",
     "view_project",
-    `"acronym" like '%${searchOption.acronym}%' and "name" like '%${searchOption.name}%' and "startDate"::text like '%${searchOption.startDate}%' and "dueDate"::text like '${searchOption.dueDate}' and "minYearsOld"::text like '%${searchOption.minYearsOld}%' and "maxYearsOld"::text like '%${searchOption.maxYearsOld}%' and "fromDay" like '%${searchOption.fromDay}%' and  "toDay" like '%${searchOption.toDay}%'`
+    `"acronym" like '%${searchOption.acronym}%' and "name" like '%${searchOption.name}%' and "startDate"::character varying like '%${searchOption.startDate}%' and "dueDate"::character varying like '%${searchOption.dueDate}%' and "minYearsOld"::character varying like '%${searchOption.minYearsOld}%' and "maxYearsOld"::character varying like '%${searchOption.maxYearsOld}%' and "fromDay"::character like '%${searchOption.fromDay}%'::character and  "toDay"::character like '%${searchOption.toDay}%'::character`
   )
     .then((resp) => {
-      res.status(200).json(resp.rows);
+      project = resp.rows;
     })
     .catch((err) => {
       console.log(err);
+      return res.status(401).json({ error: "ah ocurrido un error!!" });
     });
+  await DB.select("*", "view_sponsor_by_project")
+    .then((response) => {
+      sponsorsByProject = response.rows;
+    })
+    .catch((error) => {
+      console.log(error);
+      return res.status(401).json({ error: "Ah ocurrido un error!! " });
+    });
+  return res.status(200).json(
+    project.map((v) => {
+      v.sponsors = sponsorsByProject.filter((va) => va.projectCode === v.code);
+      return v;
+    })
+  );
 });
 
 model.created(async (req, res) => {
