@@ -1,6 +1,9 @@
 import Project from "#Models/project";
 // import { modelRequestValidate } from "#Request/users";
-import { projectRequestValidate } from "#Request/project";
+import {
+  projectRequestValidate,
+  projectUpdateRequestValidate,
+} from "#Request/project";
 import dbpg from "#Class/database";
 // import bcrypt from "bcrypt";
 
@@ -110,8 +113,58 @@ model.created(async (req, res) => {
  *
  *
  */
-model.updated(async (_req, res) => {
-  await res.json("update an model");
+model.updated(async (req, res) => {
+  //  CALL public.update_project(
+  // 	<_name character varying>,
+  // 	<_acronym character varying>,
+  // 	<"_startDate" date>,
+  // 	<"_dueDate" date>,
+  // 	<"_minYearsOlds" character varying>,
+  // 	<"_maxYearsOlds" character varying>,
+  // 	<"_fromDay" character>,
+  // 	<"_toDay" character>,
+  // 	<"_oneDay" boolean>
+  // )
+  let validate = projectUpdateRequestValidate.getResult(req.body.params);
+  if (!Object.values(validate).find((v) => v.status === 1)) {
+    let requestValues = req.body.params;
+    let queryOptions = [
+      `'${requestValues.code}'::character varying`,
+      `'${requestValues.name}'::character varying`,
+      `'${requestValues.acronym}'::character varying`,
+      `'${requestValues.startDate}'::DATE`,
+      `'${requestValues.dueDate}'::DATE`,
+      `'${requestValues.minYearsOld}'::character varying`,
+      `'${requestValues.maxYearsOld}'::character varying`,
+      `'${requestValues.fromDay}'::character`,
+      `'${requestValues.toDay}'::character`,
+      `'${requestValues.isJustOneDay}'::boolean`,
+      `'{${requestValues.sponsors
+        .map((v) => {
+          return v.code;
+        })
+        .toString()}}'::character varying[]`,
+      `'{${requestValues.sponsors
+        .map((v) => {
+          return v.delete;
+        })
+        .toString()}}'::Boolean[]`,
+    ];
+
+    await DB.call("update_project", queryOptions.toString())
+      .then((response) => {
+        res.status(200).json({
+          status: 0,
+          message: "proyecto agregado exitosamente",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(401).json({ status: 1, message: "Ah ocurrido un error!! " });
+      });
+  } else {
+    return res.status(401).json(validate);
+  }
 });
 
 /**
