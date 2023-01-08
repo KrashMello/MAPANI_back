@@ -17,7 +17,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server.js",
     "build": "webpack --mode production",
-    "production": "node src/server.js",
     "eslint:init": "eslint --init"
   },
   "repository": "https://github.com/KrashMello/MAPANI_back.git",

@@ -7,7 +7,7 @@ import bcrypt from "bcrypt";
 import jsonwebtoken from "jsonwebtoken";
 
 const DB = new dbpg();
-const user = new Users(DB);
+const user = new Users();
 const model = new Auth();
 const modules = new Modules();
 
