@@ -11,55 +11,64 @@ const model = new receptionAgenga();
  *
  *
  */
-function socketRoutes(io,socket){
-  model.io(socket,async (socket)=>{
-    let searchOption = {
-      code : '',
-      representativeFirstName: '',
-      representativeLastName : '',
-      patientFirstName: '',
-      patientLastName: '',
-      appointmentDate: '',
-    }
-      socket.on("getAppointment",async (resp)=>{
-        resp = await DB.select("*", "view_appointment")
-        socket.emit('getAppointment',resp)
-      })
-      socket.on("searchAppointment",(data) =>{
-        searchOption = data
-      })
-      setInterval(async () => {
-        await DB.select("*", "view_appointment",`code like '%${searchOption.code}%' and "representativeFirstName" like '%${searchOption.representativeFirstName}%' and "representativeLastName" like '%${searchOption.representativeLastName}%' and "patientFirstName" like '%${searchOption.patientFirstName}%' and "patientLastName" like '%${searchOption.patientLastName}%' and "patientBornDate"::character varying like '%${searchOption.appointmentDate}%'`).then(re =>{
-        io.to(socket.id).emit("getAppointments",re)
-      })
-      }, 10000);
-      
-  })
-}
-
+// function socketRoutes(io,socket){
+//   model.io(socket,async (socket)=>{
+//     let searchOption = {
+//       code : '',
+//       representativeFirstName: '',
+//       representativeLastName : '',
+//       patientFirstName: '',
+//       patientLastName: '',
+//       appointmentDate: '',
+//     }
+//       socket.on("getAppointment",async (resp)=>{
+//         resp = await DB.select("*", "view_appointment")
+//         socket.emit('getAppointment',resp)
+//       })
+//       socket.on("searchAppointment",(data) =>{
+//         searchOption = data
+//       })
+//       setInterval(async () => {
+//         await DB.select("*", "view_appointment",`code like '%${searchOption.code}%' and "representativeFirstName" like '%${searchOption.representativeFirstName}%' and "representativeLastName" like '%${searchOption.representativeLastName}%' and "patientFirstName" like '%${searchOption.patientFirstName}%' and "patientLastName" like '%${searchOption.patientLastName}%' and "patientBornDate"::character varying like '%${searchOption.appointmentDate}%'`).then(re =>{
+//         io.to(socket.id).emit("getAppointments",re)
+//       })
+//       }, 10000);
+//
+//   })
+// }
+model.get(async (req, resp) => {
+  let searchOption = req.query;
+  await DB.select(
+    "*",
+    "view_appointment",
+    `code like '%${searchOption.code}%' and "representativeFirstName" like '%${searchOption.representativeFirstName}%' and "representativeLastName" like '%${searchOption.representativeLastName}%' and "patientFirstName" like '%${searchOption.patientFirstName}%' and "patientLastName" like '%${searchOption.patientLastName}%' and "patientBornDate"::character varying like '%${searchOption.appointmentDate}%'`
+  ).then((re) => {
+    return resp.status(200).json(re.rows);
+  });
+});
 /**
  * metodo crear usuario
  *
  *
  */
 model.created(async (_req, res) => {
-//   CALL public.add_appointment(
-// 	<_pediatrics boolean>, 
-// 	<_nutritionist boolean>, 
-// 	<_psychiatry boolean>, 
-// 	<_breastfeeding_advice boolean>, 
-// 	<_advocacy boolean>, 
-// 	<_social_psychology boolean>, 
-// 	<_clinical_psychology boolean>, 
-// 	<_clinic_history_code character varying>, 
-// 	<"_representative_firstName" character varying>, 
-// 	<"_representative_lastName" character varying>, 
-// 	<"_representative_numberPhone" character varying>, 
-// 	<_representative_direction character varying>, 
-// 	<"_patient_firstName" character varying>, 
-// 	<"_patient_lastName" character varying>, 
-// 	<"_patient_bornDate" date>
-// )
+  //   CALL public.add_appointment(
+  // 	<_pediatrics boolean>,
+  // 	<_nutritionist boolean>,
+  // 	<_psychiatry boolean>,
+  // 	<_breastfeeding_advice boolean>,
+  // 	<_advocacy boolean>,
+  // 	<_social_psychology boolean>,
+  // 	<_clinical_psychology boolean>,
+  // 	<_clinic_history_code character varying>,
+  // 	<"_representative_firstName" character varying>,
+  // 	<"_representative_lastName" character varying>,
+  // 	<"_representative_numberPhone" character varying>,
+  // 	<_representative_direction character varying>,
+  // 	<"_patient_firstName" character varying>,
+  // 	<"_patient_lastName" character varying>,
+  // 	<"_patient_bornDate" date>
+  // )
   let requestValues = _req.body.params;
   let queryOptions = [
     requestValues.pediatrics,
@@ -69,7 +78,9 @@ model.created(async (_req, res) => {
     requestValues.advocacy,
     requestValues.socialPsychology,
     requestValues.clinicalPsychology,
-    requestValues.clinicHistoryCode === null ? "NULL::character varying" : "'" + requestValues.clinicHistroryCode + "'::character varying",
+    requestValues.clinicHistoryCode === null
+      ? "NULL::character varying"
+      : "'" + requestValues.clinicHistroryCode + "'::character varying",
     "'" + requestValues.representativeFirstName + "'::character varying",
     "'" + requestValues.representativeLastName + "'::character varying",
     "'" + requestValues.representativeNumberPhone + "'::character varying",
@@ -100,27 +111,27 @@ model.created(async (_req, res) => {
  *
  */
 model.updated(async (_req, res) => {
-//   CALL public.update_appointment(
-// 	<_code character varying>, 
-// 	<"_appointmentDate" date>, 
-// 	<_pediatrics boolean>, 
-// 	<_nutritionist boolean>, 
-// 	<_psychiatry boolean>, 
-// 	<"_breastfeedingAdvice" boolean>, 
-// 	<_advocacy boolean>, 
-// 	<"_socialPsychology" boolean>, 
-// 	<"_clinicalPsychology" boolean>, 
-// 	<"_clinicHistoryCode" character varying>, 
-// 	<"_representativeFirstName" character varying>, 
-// 	<"_representativeLastName" character varying>, 
-// 	<"_representativeNumberPhone" character varying>, 
-// 	<"_representativeDirection" character varying>, 
-// 	<"_patientFirstName" character varying>, 
-// 	<"_patientLastName" character varying>, 
-// 	<"_patientBornDate" date>, 
-// 	<_status integer>
-// )
-  
+  //   CALL public.update_appointment(
+  // 	<_code character varying>,
+  // 	<"_appointmentDate" date>,
+  // 	<_pediatrics boolean>,
+  // 	<_nutritionist boolean>,
+  // 	<_psychiatry boolean>,
+  // 	<"_breastfeedingAdvice" boolean>,
+  // 	<_advocacy boolean>,
+  // 	<"_socialPsychology" boolean>,
+  // 	<"_clinicalPsychology" boolean>,
+  // 	<"_clinicHistoryCode" character varying>,
+  // 	<"_representativeFirstName" character varying>,
+  // 	<"_representativeLastName" character varying>,
+  // 	<"_representativeNumberPhone" character varying>,
+  // 	<"_representativeDirection" character varying>,
+  // 	<"_patientFirstName" character varying>,
+  // 	<"_patientLastName" character varying>,
+  // 	<"_patientBornDate" date>,
+  // 	<_status integer>
+  // )
+
   let requestValues = _req.body.params;
   let queryOptions = [
     "'" + requestValues.code + "'::character varying",
@@ -133,7 +144,9 @@ model.updated(async (_req, res) => {
     requestValues.advocacy,
     requestValues.socialPsychology,
     requestValues.clinicalPsychology,
-    requestValues.clinicHistoryCode === null ? "NULL::character varying" : "'" + requestValues.clinicHistroryCode + "'::character varying",
+    requestValues.clinicHistoryCode === null
+      ? "NULL::character varying"
+      : "'" + requestValues.clinicHistroryCode + "'::character varying",
     "'" + requestValues.representativeFirstName + "'::character varying",
     "'" + requestValues.representativeLastName + "'::character varying",
     "'" + requestValues.representativeNumberPhone + "'::character varying",
@@ -141,9 +154,9 @@ model.updated(async (_req, res) => {
     "'" + requestValues.patientFirstName + "'::character varying",
     "'" + requestValues.patientLastName + "'::character varying",
     "'" + requestValues.patientBornDate + "'::DATE",
-    requestValues.status
+    requestValues.status,
   ];
-  
+
   // console.log(queryOptions)
   await DB.call("update_appointment", queryOptions.toString())
     .then((response) => {
@@ -157,7 +170,6 @@ model.updated(async (_req, res) => {
         .status(401)
         .json({ status: "error", message: "Ah ocurrido un error!! " });
     });
-
 });
 
 /**
@@ -168,9 +180,6 @@ model.updated(async (_req, res) => {
 model.delete(async (_req, res) => {
   await res.json("delete an model");
 });
-let apiRoutes = model.router()
+let apiRoutes = model.router();
 
-export {
-  apiRoutes,
-  socketRoutes
-}
+export { apiRoutes, socketRoutes };
