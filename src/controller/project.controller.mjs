@@ -150,7 +150,7 @@ model.updated(async (req, res) => {
         })
         .toString()}}'::Boolean[]`,
     ];
-    // return res.status(200).json(queryOptions)
+
     await DB.call("update_project", queryOptions.toString())
       .then((response) => {
         res.status(200).json({

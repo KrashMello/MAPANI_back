@@ -90,14 +90,9 @@ model.singIn(async (req, response) => {
     let userData;
     // search the existen of user
 
-    await user
-      .findOne(username)
-      .then((res) => {
-        userData = res.rows[0];
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    userData = await user.findOne(username).then((res) => {
+      return res;
+    });
     if (userData === undefined)
       return response
         .status(401)

@@ -16,8 +16,21 @@ export default class Users extends Model {
       "*",
       "view_users",
       `username = '${username}'`
+    )
+      .then((response) => {
+        return response.rows[0];
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    return new Promise(
+      (resolve) => {
+        resolve(searchUsername);
+      },
+      (reject) => {
+        reject({ mesaje: "a ocurrido un error" });
+      }
     );
-    return searchUsername;
   }
   //extra method
 
