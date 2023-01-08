@@ -1,26 +1,20 @@
 import pg from "pg";
 
 class Postgres {
-  #config = !process.env.DB_EXTERNAL_CONNECTION
-    ? {
-        host: process.env.DB_HOST || "localhost",
-        port: process.env.DB_PORT || 5432,
-        database: process.env.DB_DATABASE || "postges",
-        user: process.env.DB_USERNAME || "postgre",
-        password: process.env.DB_PASSWORD || "",
-        ssl: {
-          rejectUnauthorized: false,
-        },
-      }
-    : {
-        connectionString: process.env.DB_EXTERNAL_CONNECTION,
-        ssl: {
-          rejectUnauthorized: false,
-        },
-      };
-
+  #config = process.env.DB_EXTERNAL_CONNECTION === "" ? {
+    host: process.env.DB_HOST || "localhost",
+    port: process.env.DB_PORT || 5432,
+    database: process.env.DB_DATABASE || "postges",
+    user: process.env.DB_USERNAME || "postgre",
+    password: process.env.DB_PASSWORD || "",
+    ssl: {
+      rejectUnauthorized:false,
+    }
+  } : { connectionString: process.env.DB_EXTERNAL_CONNECTION };
+  
   #DATE_OID = 1082;
   #parseDate = (value) => value;
+
 
   constructor() {
     this.Pool = pg.Pool;
@@ -57,18 +51,21 @@ class Postgres {
   }
 
   call(procedureName = "", values = "") {
-    if (typeof values === "string" && typeof procedureName === "string") {
+    if (
+      typeof values === "string" &&
+      typeof procedureName === "string"
+    ) {
       let result = null;
       if (values !== "" && procedureName !== "") {
-        let query = "CALL " + procedureName + "(" + values + ")";
+        let query = "CALL " + procedureName + "("+ values +")";
         result = this.pool.query(query);
-      }
-      return result;
-    } else {
-      console.log(
-        "Error al ingrezar atributos en la funcion call los typeof no coinciden"
-      );
+      } 
+    return result;
     }
+    else
+    {
+      console.log("Error al ingrezar atributos en la funcion call los typeof no coinciden");
+      }
   }
 }
 
