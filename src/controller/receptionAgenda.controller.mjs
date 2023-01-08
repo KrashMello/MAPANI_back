@@ -182,4 +182,4 @@ model.delete(async (_req, res) => {
 });
 let apiRoutes = model.router();
 
-export { apiRoutes, socketRoutes };
+export { apiRoutes };
