@@ -4,7 +4,7 @@ import dbpg from "#Class/database";
 import bcrypt from "bcrypt";
 
 const DB = new dbpg();
-const model = new Users();
+const model = new Users(DB);
 
 /**
  * metodo optener usuario

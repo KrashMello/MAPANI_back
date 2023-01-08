@@ -1,23 +1,24 @@
 import pg from "pg";
 
 class Postgres {
-  #config = !process.env.DB_EXTERNAL_CONNECTION
-    ? {
-        host: process.env.DB_HOST || "localhost",
-        port: process.env.DB_PORT || 5432,
-        database: process.env.DB_DATABASE || "postges",
-        user: process.env.DB_USERNAME || "postgre",
-        password: process.env.DB_PASSWORD || "",
-        ssl: {
-          rejectUnauthorized: false,
-        },
-      }
-    : {
-        connectionString: process.env.DB_EXTERNAL_CONNECTION,
-        ssl: {
-          rejectUnauthorized: false,
-        },
-      };
+  #config =
+    process.env.DB_EXTERNAL_CONNECTION === "null"
+      ? {
+          host: process.env.DB_HOST || "localhost",
+          port: process.env.DB_PORT || 5432,
+          database: process.env.DB_DATABASE || "postges",
+          user: process.env.DB_USERNAME || "postgre",
+          password: process.env.DB_PASSWORD || "",
+          ssl: {
+            rejectUnauthorized: false,
+          },
+        }
+      : {
+          connectionString: process.env.DB_EXTERNAL_CONNECTION,
+          ssl: {
+            rejectUnauthorized: false,
+          },
+        };
 
   #DATE_OID = 1082;
   #parseDate = (value) => value;
