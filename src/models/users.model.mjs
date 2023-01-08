@@ -6,14 +6,13 @@ export default class Users extends Model {
   //the constructor
   constructor() {
     super();
+    this.DB = new dbpg();
     this.middelwareExepction = [];
   }
 
-  #DB = new dbpg();
-
   //method for search a user in the data base
   async findOne(username) {
-    let searchUsername = await this.#DB.select(
+    let searchUsername = await this.DB.select(
       "*",
       "view_users",
       `username = '${username}'`
