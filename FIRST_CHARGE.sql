@@ -1,4 +1,4 @@
-/*
+
 INSERT INTO public.region ("code","name") VALUES
 	 ('REG-001','ANDINA'),
 	 ('REG-002','CENTRAL'),
@@ -1592,19 +1592,20 @@ INSERT INTO public.parrish ("code","name","municipality_code") VALUES
 	 ('PAR-1777','MARAWAKA','MUN-194'),
 	 ('PAR-1778','MAVACA','MUN-194');
 
-
-CALL public.add_module('INICIO'::character varying,'/panel/'::character varying,'mdi-home'::character varying,false);
-CALL public.add_module('CITAS'::character varying,'/panel/citas'::character varying,'mdi-account-group'::character varying,false);
-CALL public.add_module('PACIENTES'::character varying,'/panel/pacientes'::character varying,'mdi-account-injury'::character varying,false);
-CALL public.add_module('PROYECTOS'::character varying,'/panel/proyectos'::character varying,'mdi-list-box-outline'::character varying,false);
-CALL public.add_module('EMPLEADOS'::character varying,'/panel/empleados'::character varying,'mdi-account-hard-hat'::character varying,false);
-CALL public.add_module('USUARIOS'::character varying,'/panel/usuarios'::character varying,'mdi-account'::character varying,false);
-CALL public.add_module('PERMISOS DE USUARIO'::character varying,'/panel/permisos_departamento'::character varying,'mdi-lock-open-variant'::character varying,false);
-CALL public.add_module('PERMISOS DE ROLES'::character varying,'/panel/permisos_roles'::character varying,'mdi-lock-open-variant'::character varying,false);
+	
+CALL public.add_module('INICIO'::character varying,'/panel/'::character varying,'mdi-home'::character varying,'0'::integer,false,false,null::character varying);
+CALL public.add_module('CITAS'::character varying,'/panel/citas'::character varying,'mdi-account-group'::character varying,'1'::integer,false,false,null::character varying);
+CALL public.add_module('PACIENTES'::character varying,'/panel/pacientes'::character varying,'mdi-account-injury'::character varying,'2'::integer,false,false,null::character varying);
+CALL public.add_module('PROYECTOS'::character varying,'/panel/proyectos'::character varying,'mdi-list-box-outline'::character varying,'3'::integer,false,false,null::character varying);
+CALL public.add_module('EMPLEADOS'::character varying,'/panel/empleados'::character varying,'mdi-account-hard-hat'::character varying,'4'::integer,false,false,null::character varying);
+CALL public.add_module('USUARIOS'::character varying,'/panel/usuarios'::character varying,'mdi-account'::character varying,'5'::integer,false,true,null::character varying);
+CALL public.add_module('PERMISOS DE USUARIO'::character varying,'/panel/permisos_departamento'::character varying,'mdi-lock-open-variant'::character varying,'0'::integer,false,false,'MOD-0006'::character varying);
+CALL public.add_module('PERMISOS DE ROLES'::character varying,'/panel/permisos_roles'::character varying,'mdi-lock-open-variant'::character varying,'0'::integer,false,false,'MOD-0006'::character varying);
+CALL public.add_module('MODULOS'::character varying, '/panel/modulos'::character varying, 'mdi-view-module'::character varying, '6'::integer,false,false,NULL::character varying);
 
 CALL public.add_user_role(
 'MIEMBRO',
-'{"MOD-0001"}'::chacracter varying[],
+'{"MOD-0001"}'::character varying[],
 '{true}'::boolean[],
 '{true}'::boolean[],
 '{true}'::boolean[],
@@ -1620,10 +1621,10 @@ CALL public.add_gender('MASCULINO');
 CALL public.add_gender('FEMENINIO');
 CALL public.add_gender('OTRO');
 
-CALL public.add_document_type('V'::bpchar,'VENEZOLANO');
-CALL public.add_document_type('J'::bpchar,'JURIDICO');
-CALL public.add_document_type('E'::bpchar,'EXTRANJERO');
-CALL public.add_document_type('G'::bpchar,'GUBERNAMENTAL');
+CALL public.add_document_type('V'::character,'VENEZOLANO');
+CALL public.add_document_type('J'::character,'JURIDICO');
+CALL public.add_document_type('E'::character,'EXTRANJERO');
+CALL public.add_document_type('G'::character,'GUBERNAMENTAL');
 
 call public.add_martial_status('SOLTERO/A');
 call public.add_martial_status('CASADO/A');
@@ -1632,16 +1633,17 @@ call public.add_martial_status('DIVORCIADO/A');
 
 
 CALL public.add_user(
+null::character varying,
 'JESOTELDO'::character varying,
 '$2b$11$PsPQl2FwvWpIIGxjudbs1OyADW2QOYQjB1ccyQNbD2TvmoejdW5jS'::character varying,
 'joelenrikesoteldo@gmail.com'::character varying,
 '$2b$11$wmueLizuxbIMWGg/fsqOmOMMzIIz9/DE67IuA5/mWt58UWFDfh5Fy'::character varying,
-'stts-0002'::character varying,
-'rol-0001'::character varying,
+'STTS-0002'::character varying,
+'ROL-0001'::character varying,
 'JOEL ENRIQUE'::character varying,
 'SOTELDO SIVIRA'::character varying,
-'gndr-01'::character varying,
-'DTYPE-0001'::character varying,
+'GNDR-01'::character varying,
+'DTYPE-01'::character varying,
 '22194872'::character varying,
 '2022-07-31'::date,
 'MSTTS-0001'::character varying,
@@ -1674,13 +1676,25 @@ call public.add_permission_modules_by_departament(
 );
 
 call public.add_employed(
-	'upd-0001',
+	'UPD-0001',
+	'JBPST-0001',
+	'DPTMT-0001',
 	'2022-10-01'::date,
 	null::date,
-	'JBPST-0001',
-	'DPTMT-0001'
+	null::character varying,
+	null::character varying,
+	null::character varying,
+	null::character varying,
+	null::character varying,
+	null::date,
+	null::character varying,
+	null::boolean,
+	null::character varying,
+	null::boolean,
+	null::character varying,
+	null::character varying,
+	null::character varying,
+	null::character varying
 );
-
-*/
-select * from view_modules;
-select * from view_users vu ;
+insert into public.modules_by_job_position_departament(module_code,job_position_code,departament_code,"show","create","update",print,report)
+select code,'JBPST-0001'::character varying, 'DPTMT-0001'::character varying, true,true,true,true,true from modules;

@@ -1,0 +1,53 @@
+{
+  "compilerOptions": {
+    "checkJs": false,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "target": "ES2016",
+    "module": "es2015",
+    "baseUrl": ".",
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "paths": {
+      "#src/*": [
+        "./src/*"
+      ],
+      "#Controller/*": [
+        "./src/controller/*.controller.mjs"
+      ],
+      "#Routes/*": [
+        "./src/routes/*"
+      ],
+      "#Request/*": [
+        "./src/controller/request/*.request.mjs"
+      ],
+      "#Models/*": [
+        "./src/models/*.model.mjs"
+      ],
+      "#Middelware/*": [
+        "./core/middelware/*"
+      ],
+      "#DB": [
+        "./core/class/database.mjs"
+      ],
+      "#Class/*": [
+        "./core/class/*"
+      ]
+    }
+  },
+  "exclude": [
+    "dist",
+    "node_modules",
+    "build",
+    ".vscode",
+    "coverage",
+    ".npm",
+    ".yarn"
+  ],
+  "typeAcquisition": {
+    "enable": true,
+    "include": [
+      "node"
+    ]
+  }
+}
