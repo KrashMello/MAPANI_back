@@ -1,5 +1,5 @@
 import validator from "validator";
-import { isAlphanumericSimbols, isAlphaSimbols } from "./service";
+import { isAlpha, isAlphanumericSimbols, isAlphaSimbols } from "./service";
 import {
   Message,
   IsLengthOptions,
@@ -68,14 +68,14 @@ export class RequestValidator {
           case "alpha":
             if (str)
               response = {
-                status: validator.isAlpha(
+                status: isAlpha(
                   str as string,
                   this.locale,
                   rules[key] as IsAlphaOptions
                 )
                   ? 0
                   : 1,
-                message: validator.isAlpha(
+                message: isAlpha(
                   str as string,
                   this.locale,
                   rules[key] as IsAlphaOptions
@@ -152,7 +152,7 @@ export class RequestValidator {
               };
             else response = { status: 0, message: "success" };
             break;
-          case "alphanumericsimbols":
+          case "alphanumericSimbols":
             if (str)
               response = {
                 status: isAlphanumericSimbols(
@@ -180,14 +180,16 @@ export class RequestValidator {
                 status: 0,
                 message: "success",
               };
-            response = {
-              status: !str ? 1 : 0,
-              message: str
-                ? "notNull"
-                : this.message.notNull || "el campo es obligatorio",
-            };
+            else
+              response = {
+                status: !str ? 1 : 0,
+                message: str
+                  ? "notNull"
+                  : this.message.notNull || "el campo es obligatorio",
+              };
             break;
           case "numeric":
+            str = String(str);
             response = {
               status: validator.isNumeric(
                 str as string,

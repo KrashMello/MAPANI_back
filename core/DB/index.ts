@@ -107,7 +107,8 @@ export class DB {
       throw new Error(
         "no se puede ejecutar este comando por que no existe una consulta"
       );
-
-    return this.pool.query(this.query);
+    let query = this.query;
+    this.query = "";
+    return this.pool.query(query);
   }
 }

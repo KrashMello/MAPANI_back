@@ -20,8 +20,13 @@ export class Employed {
       parrishCode,
       stadeCode,
       municipalityCode,
+      limit,
     } = req.query;
-    await this.DB.view("*", "view_employed")
+    let result: any = {
+      pagination: 0,
+      employed: [],
+    };
+    await this.DB.view(`count(*)::int as "paginationCount"`, "view_employed")
       .where([
         `"jobPositionCode" like '%${jobPositionCode}%'`,
         `"departamentCode" like '%${departamentCode}%'`,
@@ -34,8 +39,28 @@ export class Employed {
       ])
       .exec()
       .then((re) => {
-        return res.status(200).json(re.rows);
+        let limitPage =
+          limit !== undefined || (limit !== null && typeof limit === "number")
+            ? Number(limit)
+            : 5;
+        result.pagination = Math.ceil(re.rows[0].paginationCount / limitPage);
       });
+    await this.DB.view(`*`, "view_employed")
+      .where([
+        `"jobPositionCode" like '%${jobPositionCode}%'`,
+        `"departamentCode" like '%${departamentCode}%'`,
+        `"dateOfEntry"::character varying like '%${dateOfEntry}%'::character varying`,
+        `"dateOfDischarge" is null or "dateOfDischarge"::character varying like '%${dateOfDischarge}%'::character varying`,
+        `"dni" like '%${dni}%'`,
+        `"parrishCode" like '%${parrishCode}%'`,
+        `"stadeCode" like '%${stadeCode}%'`,
+        `"municipalityCode" like '%${municipalityCode}%'`,
+      ])
+      .exec()
+      .then((re) => {
+        result.employed = re.rows;
+      });
+    return res.status(200).json(result);
   }
   @Post("")
   async create(req: Request, res: Response) {

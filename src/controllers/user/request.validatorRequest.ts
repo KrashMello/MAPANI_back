@@ -190,11 +190,11 @@ const ruleAddUserDepartamentPermissons = {
   },
   departamentCode: {
     notNull: {},
-    alphanumericsimbols: {},
+    alphanumericSimbols: {},
   },
   jobPositionCode: {
     notNull: {},
-    alphanumericsimbols: {},
+    alphanumericSimbols: {},
   },
   show: {
     isArray: {},

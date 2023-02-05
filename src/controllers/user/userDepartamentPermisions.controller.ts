@@ -171,6 +171,7 @@ export class UserDepartamentPermissions {
         `'{${print.toString()}}'::boolean[]`,
         `'{${report.toString()}}'::boolean[]`,
       ];
+      console.log(queryOptions);
       // return res.status(200).json(queryOptions.toString());
       // console.log(queryOptions);
       // return res.status(401).json("error");

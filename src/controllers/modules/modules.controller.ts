@@ -13,8 +13,12 @@ export class Modules {
 
   @Get("")
   async get(req: Request, res: Response) {
-    let { code, name, unabled, fatherCode } = req.query;
-    await this.DB.view("*", "view_modules")
+    let { code, name, unabled, fatherCode, limit, page } = req.query;
+    let result: any = {
+      pagination: 0,
+      modules: [],
+    };
+    await this.DB.view(`count(*)::int as "paginationCount"`, "view_modules")
       .where([
         `"code" like '%${code}%'`,
         `"name" like '%${name}%'`,
@@ -23,12 +27,32 @@ export class Modules {
       ])
       .exec()
       .then((re) => {
-        return res.status(200).json(re.rows);
+        let limitPage =
+          limit !== undefined || (limit !== null && typeof limit === "number")
+            ? Number(limit)
+            : 5;
+        result.pagination = Math.ceil(re.rows[0].paginationCount / limitPage);
       });
+
+    await this.DB.view("*", "view_modules")
+      .where([
+        `"code" like '%${code}%'`,
+        `"name" like '%${name}%'`,
+        `"unabled" = '${unabled}'::boolean`,
+        `coalesce("fatherCode",'')  like '%${fatherCode}%'`,
+      ])
+      .limit(Number(limit))
+      .offset((Number(page) - 1) * Number(limit))
+      .exec()
+      .then((re) => {
+        result.modules = re.rows;
+      });
+    return res.status(200).json(result);
   }
 
   @Post("")
   async create(req: Request, res: Response) {
+    console.log(req.body.params);
     let validate = ModuleAddRequestValidate.getResult(req.body.params);
     if (Object.values(validate).length === 0) {
       let { name, src, icon, order, unabled, hasChildren, fatherCode } =
@@ -51,13 +75,21 @@ export class Modules {
         .then(() => {
           return res
             .status(200)
-            .json({ status: 0, message: "Modulo agregado exitosamente" });
+            .json({
+              model: true,
+              status: 0,
+              message: "Modulo agregado exitosamente",
+            });
         })
         .catch((error) => {
           console.log(error);
           return res
             .status(401)
-            .json({ status: 1, message: "Ah ocurrido un error!! " });
+            .json({
+              model: true,
+              status: 1,
+              message: "Ah ocurrido un error!! ",
+            });
         });
     } else {
       return res.status(401).json(validate);

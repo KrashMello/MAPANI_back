@@ -7,18 +7,18 @@ const ruleAdd = {
     length: { min: 4, max: 50 },
   },
   src: {
-    alphanumericSimbol: {},
+    alphanumericSimbols: {},
     notNull: {},
     length: { min: 4, max: 50 },
   },
   icon: {
-    alphaSimbol: {},
+    alphaSimbols: {},
     notNull: {},
-    length: { min: 7, max: 15 },
+    length: { min: 7, max: 50 },
   },
   order: {
     notNull: {},
-    number: {},
+    numeric: {},
     length: { min: 1, max: 2 },
   },
   unabled: {
@@ -30,13 +30,13 @@ const ruleAdd = {
     notNull: {},
   },
   fatherCode: {
-    alphanumericSimbol: {},
+    alphanumericSimbols: {},
     length: { min: 8, max: 15 },
   },
 };
 const ruleUpdate = {
   code: {
-    alphanumericSimbol: {},
+    alphanumericSimbols: {},
     notNull: {},
     length: { min: 8, max: 15 },
   },
@@ -46,18 +46,18 @@ const ruleUpdate = {
     length: { min: 4, max: 50 },
   },
   src: {
-    alphanumericSimbol: {},
+    alphanumericSimbols: {},
     notNull: {},
     length: { min: 4, max: 50 },
   },
   icon: {
-    alphaSimbol: {},
+    alphaSimbols: {},
     notNull: {},
-    length: { min: 7, max: 15 },
+    length: { min: 7, max: 50 },
   },
   order: {
     notNull: {},
-    number: {},
+    numeric: {},
     length: { min: 1, max: 2 },
   },
   unabled: {
@@ -69,7 +69,7 @@ const ruleUpdate = {
     notNull: {},
   },
   fatherCode: {
-    alphanumericSimbol: {},
+    alphanumericSimbols: {},
     length: { min: 8, max: 15 },
   },
 };
