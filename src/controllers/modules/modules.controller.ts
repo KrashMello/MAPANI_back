@@ -1,6 +1,5 @@
 import { Controller, Get, Post, Put } from "@Controller/decorators";
 import { Request, Response } from "express";
-// import { UserValidate } from "./request.validatorRequest";
 import { DB } from "@DB/index";
 import {
   ModuleAddRequestValidate,
@@ -52,7 +51,6 @@ export class Modules {
 
   @Post("")
   async create(req: Request, res: Response) {
-    console.log(req.body.params);
     let validate = ModuleAddRequestValidate.getResult(req.body.params);
     if (Object.values(validate).length === 0) {
       let { name, src, icon, order, unabled, hasChildren, fatherCode } =
@@ -68,28 +66,22 @@ export class Modules {
           ? `NULL::character varying`
           : `'${fatherCode}'::character varying`,
       ];
-      // console.log(queryOptions);
-      // return res.status(401).json("error");
       await this.DB.call("add_module", queryOptions.toString())
         .exec()
         .then(() => {
-          return res
-            .status(200)
-            .json({
-              model: true,
-              status: 0,
-              message: "Modulo agregado exitosamente",
-            });
+          return res.status(200).json({
+            model: true,
+            status: 0,
+            message: "Modulo agregado exitosamente",
+          });
         })
         .catch((error) => {
           console.log(error);
-          return res
-            .status(401)
-            .json({
-              model: true,
-              status: 1,
-              message: "Ah ocurrido un error!! ",
-            });
+          return res.status(401).json({
+            model: true,
+            status: 1,
+            message: "Ah ocurrido un error!! ",
+          });
         });
     } else {
       return res.status(401).json(validate);

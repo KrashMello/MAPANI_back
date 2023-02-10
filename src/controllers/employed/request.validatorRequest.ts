@@ -148,7 +148,29 @@ const ruleUpdate = {
     alpha: {},
   },
 };
+
+const ruleAddDepartament = {
+  name: {
+    alpha: {},
+    length: { min: 4, max: 20 },
+    notNull: {},
+  },
+};
+const ruleUpdateDepartament = {
+  code: {
+    alphanumericSimbol: {},
+    notNull: {},
+    length: { min: 8, max: 15 },
+  },
+  name: {
+    alpha: {},
+    length: { min: 4, max: 20 },
+    notNull: {},
+  },
+};
+
 const message = {};
+
 export const EmployedAddRequestValidate = new RequestValidator(
   "en-US",
   ruleAdd,
@@ -157,5 +179,15 @@ export const EmployedAddRequestValidate = new RequestValidator(
 export const EmployedUpdateRequestValidate = new RequestValidator(
   "en-US",
   ruleUpdate,
+  message
+);
+export const DepartamentAddRequestValidate = new RequestValidator(
+  "en-US",
+  ruleAddDepartament,
+  message
+);
+export const DepartamentUpdateRequestValidate = new RequestValidator(
+  "en-US",
+  ruleUpdateDepartament,
   message
 );
